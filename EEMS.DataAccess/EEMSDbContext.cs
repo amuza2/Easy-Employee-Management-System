@@ -15,7 +15,18 @@ namespace EEMS.DataAccess
         public DbSet<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; }
         public DbSet<JobNature> JobNatures { get; set; }
 
+        public EEMSDbContext() { }
+
         public EEMSDbContext(DbContextOptions<EEMSDbContext> options) : base(options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if(!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(ConfigHelper.GetConnectionString());
+            }
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
