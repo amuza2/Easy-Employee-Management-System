@@ -14,33 +14,40 @@ namespace EEMS.BusinessLogic.Services
             _context = context;
         }
 
-        public async Task<List<Employee>> GetEmployeesAsync()
+        public async Task<IEnumerable<Employee>> GetAsync()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.jobNature.ToListAsync();
         }
-        public async Task<Employee> GetEmployeeByIdAsync(int id)
+
+        public async Task<Employee> GetAsync(int id)
         {
-            return await _context.Employees.FindAsync(id);
+            return await _context.jobNature.FindAsync(id);
         }
-        public async Task AddEmployeeAsync(Employee employee)
+
+        public async Task<int> AddAsync(Employee employee)
         {
-            _context.Employees.Add(employee);
+            var added = _context.jobNature.Add(employee);
+            await _context.SaveChangesAsync();
+
+            return added.Entity.Id;
+        }
+
+        public async Task UpdateAsync(Employee employee)
+        {
+            _context.jobNature.Update(employee);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateEmployeeAsync(Employee employee)
+
+        public async Task DeleteAsync(int id)
         {
-            _context.Employees.Update(employee);
-            await _context.SaveChangesAsync();
-        }
-        public async Task DeleteEmployeeAsync(int id)
-        {
-            var emp = await GetEmployeeByIdAsync(id);
+            var emp = await GetAsync(id);
             if (emp != null)
             {
-                _context.Employees.Remove(emp);
+                _context.jobNature.Remove(emp);
                 await _context.SaveChangesAsync();
             }
         }
 
+        // 
     }
 }
