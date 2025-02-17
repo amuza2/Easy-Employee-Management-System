@@ -6,7 +6,7 @@ namespace EEMS.DataAccess
 {
     public class EEMSDbContext : DbContext
     {
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> jobNature { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Absence> Absences { get; set; }

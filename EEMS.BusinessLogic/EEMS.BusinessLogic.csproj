@@ -7,4 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EEMS.DataAccess\EEMS.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
