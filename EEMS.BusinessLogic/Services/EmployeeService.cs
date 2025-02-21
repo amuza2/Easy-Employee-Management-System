@@ -16,17 +16,17 @@ namespace EEMS.BusinessLogic.Services
 
         public async Task<IEnumerable<Employee>> GetAsync()
         {
-            return await _context.jobNature.ToListAsync();
+            return await _context.Employees.ToListAsync();
         }
 
         public async Task<Employee> GetAsync(int id)
         {
-            return await _context.jobNature.FindAsync(id);
+            return await _context.Employees.FindAsync(id);
         }
 
         public async Task<int> AddAsync(Employee employee)
         {
-            var added = _context.jobNature.Add(employee);
+            var added = _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
 
             return added.Entity.Id;
@@ -34,7 +34,7 @@ namespace EEMS.BusinessLogic.Services
 
         public async Task UpdateAsync(Employee employee)
         {
-            _context.jobNature.Update(employee);
+            _context.Employees.Update(employee);
             await _context.SaveChangesAsync();
         }
 
@@ -43,7 +43,7 @@ namespace EEMS.BusinessLogic.Services
             var emp = await GetAsync(id);
             if (emp != null)
             {
-                _context.jobNature.Remove(emp);
+                _context.Employees.Remove(emp);
                 await _context.SaveChangesAsync();
             }
         }
