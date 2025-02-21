@@ -7,9 +7,12 @@
     xmlns:local="clr-namespace:EEMS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="800"
-    Height="650"
-    mc:Ignorable="d">
+    Width="1200"
+    Height="800"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -156,12 +159,36 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
+                <!--  exit window  -->
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button
+                        x:Name="btnMinimize"
+                        Margin="0,0,10,0"
+                        Click="btnMinimize_Click"
+                        FontSize="20"
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Minus" />
+                    </Button>
+
+                    <Button
+                        x:Name="btnExit"
+                        Click="btnExit_Click"
+                        FontSize="20"
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Xamarin" />
+                    </Button>
+
+                </StackPanel>
                 <!--  Search Textbox  -->
-                <Grid Width="300" HorizontalAlignment="Left">
+                <Grid
+                    Grid.Row="1"
+                    Width="300"
+                    HorizontalAlignment="Left">
                     <TextBlock
                         Margin="20,0"
                         VerticalAlignment="Center"
@@ -183,24 +210,26 @@
                 </Grid>
 
                 <!--  Top Buttons  -->
-                <Button
-                    Margin="0,0,20,0"
+                <StackPanel
+                    Grid.Row="1"
                     HorizontalAlignment="Right"
-                    Background="#dcdcdc"
-                    Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Cog" />
-                </Button>
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="0,0,20,0"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Bell" />
+                    </Button>
 
-                <Button
-                    Margin="0,0,55,0"
-                    HorizontalAlignment="Right"
-                    Style="{StaticResource topButton}">
-                    <Icon:PackIconMaterial Kind="Bell" />
-                </Button>
+                    <Button HorizontalAlignment="Right" Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Cog" />
+                    </Button>
+
+                </StackPanel>
 
                 <!--  Page Title  -->
                 <TextBlock
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Margin="0,20,0,0"
                     HorizontalAlignment="Left"
                     FontSize="32"
@@ -209,7 +238,7 @@
                     Text="Members" />
 
                 <!--  Add Button  -->
-                <Button Style="{StaticResource addButton}">
+                <Button Grid.Row="2" Style="{StaticResource addButton}">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial
                             Width="11"
@@ -223,14 +252,14 @@
 
                 <!--  Separator  -->
                 <Separator
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Height="1"
                     Margin="0,-1,0,10"
                     Background="#dae2ea" />
 
                 <!--  Tab Button  -->
                 <StackPanel
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Margin="0,10,0,0"
                     Orientation="Horizontal">
                     <Button
@@ -243,7 +272,7 @@
 
                 <!--  Counter Title  -->
                 <TextBlock
-                    Grid.Row="4"
+                    Grid.Row="5"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontSize="18"
@@ -252,7 +281,7 @@
                     Text="68 Club Staff" />
 
                 <TextBlock
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Margin="0,0,215,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
@@ -263,7 +292,7 @@
 
                 <!--  Filter Textbox  -->
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Width="200"
                     HorizontalAlignment="Right">
                     <TextBlock
@@ -289,7 +318,7 @@
                 <!--  Members Datagrid  -->
                 <DataGrid
                     x:Name="membersDataGrid"
-                    Grid.Row="5"
+                    Grid.Row="6"
                     CellStyle="{DynamicResource DataGridCellStyle1}"
                     ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                     RowStyle="{DynamicResource DataGridRowStyle1}"
@@ -387,7 +416,7 @@
 
                 <!--  Pagination Section  -->
                 <Border
-                    Grid.Row="6"
+                    Grid.Row="7"
                     Margin="0,10,10,10"
                     Padding="5"
                     HorizontalAlignment="Right"

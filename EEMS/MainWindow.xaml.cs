@@ -91,21 +91,24 @@ InitializeComponent();
             if (IsMaximized)
             {
                 this.WindowState = WindowState.Normal;
-                Width = 1600;
-                Height = 900;
-
                 IsMaximized = false;
             }
             else
             {
-                WindowState = WindowState.Normal;
+                this.WindowState = WindowState.Maximized;
+                IsMaximized = true;
             }
         }
     }
 
-    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    private void btnExit_Click(object sender, RoutedEventArgs e)
     {
+        Application.Current.Shutdown();
+    }
 
+    private void btnMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
     }
 }
 
