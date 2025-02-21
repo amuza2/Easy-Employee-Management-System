@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +29,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EEMS.DataAccess\EEMS.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+    <Folder Include="Views\Absence\" />
+    <Folder Include="Views\Department\" />
+    <Folder Include="Views\DrivingLicenseType\" />
+    <Folder Include="Views\JobNature\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Project\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
 
 </Project>

@@ -28,6 +28,7 @@ namespace EEMS.DataAccess
             base.OnConfiguring(optionsBuilder);
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
