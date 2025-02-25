@@ -28,21 +28,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EEMS.DataAccess\EEMS.DataAccess.csproj" />
+    <ProjectReference Include="..\EEMS.BusinessLogic\EEMS.BusinessLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserControls\" />
     <Folder Include="Views\Absence\" />
     <Folder Include="Views\Department\" />
     <Folder Include="Views\DrivingLicenseType\" />
     <Folder Include="Views\JobNature\" />
-    <Folder Include="Views\Shared\" />
     <Folder Include="Views\Project\" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
