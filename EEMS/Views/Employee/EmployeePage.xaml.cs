@@ -7,9 +7,10 @@ namespace EEMS.UI.Views.Employee
     /// </summary>
     public partial class EmployeePage : Page
     {
-        public EmployeePage()
+        public EmployeePage(EmployeeViewModel employeeViewModel)
         {
             InitializeComponent();
+            DataContext = employeeViewModel;
         }
 
         
