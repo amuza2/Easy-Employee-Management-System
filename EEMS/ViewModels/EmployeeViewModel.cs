@@ -1,31 +1,38 @@
 ﻿using EEMS.BusinessLogic.DTOs;
 using EEMS.BusinessLogic.Interfaces;
+using EEMS.UI.ViewModels;
+using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
-using System.Windows;
+using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace EEMS.UI.Views.Employee
 {
     public class EmployeeViewModel
     {
-        private IEmployeeService _employeeService;
+        private readonly IEmployeeService _employeeService;
+        private readonly AddAndEditEmployeeViewModel _addAndEditEmployeeViewModel;
         public ObservableCollection<EmployeeDTO> Employees { get; set; }
-        BrushConverter converter;
+        
         public ICommand AddEmployeeCommand { get; }
 
-        public EmployeeViewModel(IEmployeeService employeeService)
+        
+        public EmployeeViewModel(IEmployeeService employeeService, AddAndEditEmployeeViewModel addAndEditEmployeeViewModel)
         {
+            _addAndEditEmployeeViewModel = addAndEditEmployeeViewModel;
             _employeeService = employeeService;
-            converter = new BrushConverter();
+            
             Employees = new ObservableCollection<EmployeeDTO>();
-            AddEmployeeCommand = new RelayCommand(AddEmployee);
+            AddEmployeeCommand = new RelayCommand(OpenAddEmployeeForm);
             LoadMembers();
         }
 
-        private void AddEmployee()
+
+        private void OpenAddEmployeeForm()
         {
-            MessageBox.Show("Add Employee Form");
+            var addEmployeePage = new AddAndEditEmployeePage(_addAndEditEmployeeViewModel);
+            var sharedWindow = new sharedWindow(addEmployeePage);
+            sharedWindow.ShowDialog();
         }
 
         private async void LoadMembers()
@@ -45,5 +52,7 @@ namespace EEMS.UI.Views.Employee
             }
 
         }
+
+        
     }
 }

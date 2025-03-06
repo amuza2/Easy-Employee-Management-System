@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace EEMS.UI
+namespace EEMS.UI.Views.Shared
 {
     public class RelayCommand : ICommand
     {
