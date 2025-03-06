@@ -1,10 +1,9 @@
 ﻿using EEMS.UI.Views.Employee;
 using EEMS.UI.Views.Shared;
-using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.Intrinsics.X86;
+using EEMS.UI.ViewModels;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+
 
 namespace EEMS;
 
@@ -13,12 +12,13 @@ namespace EEMS;
 /// </summary>
 public partial class MainWindow : Window
 {
+
     public MainWindow(INavigationService navigationService)
     {
         InitializeComponent();
         navigationService.SetFrame(MainFrame);
-
         navigationService.NavigateTo<EmployeePage>();
+        DataContext = new MainWindowViewModel();
     }
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,15 +53,4 @@ public partial class MainWindow : Window
     {
         this.WindowState = WindowState.Minimized;
     }
-}
-
-public class Member
-{
-    public string Character { get; set; }
-    public string Number { get; set; }
-    public string Name { get; set; }
-    public string Position { get; set; }
-    public string Email { get; set; }
-    public string Phone { get; set; }
-    public Brush BgColor { get; set; }
 }

@@ -45,11 +45,13 @@
             Margin="0,10,0,0"
             Orientation="Horizontal">
             <Button
-                BorderBrush="#784ff2"
+                BorderBrush="{StaticResource PrimaryColor}"
                 Content="All"
                 Style="{StaticResource tabButton}" />
             <Button Content="Absence" Style="{StaticResource tabButton}" />
-            <Button Content="Project" Style="{StaticResource tabButton}" />
+            <Button Content="Training" Style="{StaticResource tabButton}" />
+            <Button Content="Vacation" Style="{StaticResource tabButton}" />
+            <Button Content="Sanction" Style="{StaticResource tabButton}" />
         </StackPanel>
 
         <!--  filter by name label  -->

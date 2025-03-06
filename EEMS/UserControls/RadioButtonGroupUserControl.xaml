@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="EEMS.UI.UserControls.RadioButtonGroupUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="myRadioButtonGroup"
+    d:DesignHeight="100"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <StackPanel Margin="20,10">
+        <!--  Caption  -->
+        <TextBlock
+            Margin="0,0,0,8"
+            FontSize="13"
+            Foreground="#97a5b4"
+            Text="{Binding ElementName=myRadioButtonGroup, Path=Caption}" />
+
+        <!--  Radio Buttons  -->
+        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+            <RadioButton
+                x:Name="MaleRadioButton"
+                Margin="0,0,50,0"
+                BorderBrush="#cfd7de"
+                BorderThickness="2"
+                Content="Male"
+                Foreground="#868686"
+                GroupName="GenderGroup"
+                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsMaleSelected, Mode=TwoWay}" />
+            <RadioButton
+                x:Name="FemaleRadioButton"
+                BorderBrush="#cfd7de"
+                BorderThickness="2"
+                Content="Female"
+                Foreground="#868686"
+                GroupName="GenderGroup"
+                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsFemaleSelected, Mode=TwoWay}" />
+        </StackPanel>
+
+
+    </StackPanel>
+</UserControl>
