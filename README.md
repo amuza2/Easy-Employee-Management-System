@@ -6,6 +6,12 @@
 
 The Easy Employee Management System EEMS) is a desktop application designed to manage employee-related operations in an organization. It will provide features such as adding employees, tracking absences, managing departments, assigning projects, and handling vacations, sanctions, training, and leaves.
 
+## Screenshots
+
+<img src="https://github.com/user-attachments/assets/d9f09ced-cb96-40d3-bae9-3f277f1e149f" width=80% height="auto">
+
+<img src="https://github.com/user-attachments/assets/be010574-cd29-4694-b4d7-52231863afd8" width=80% height="auto">
+
 
 ## Features
 
@@ -64,7 +70,7 @@ The project follows a **layered architecture** with the following layers:
 ### Prerequisites
 
 - [.NET 9 SDK ](https://dotnet.microsoft.com/download)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) (Recommended IDE)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) (or alternative)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (or another database supported by EF Core)
 
 ### Installation
