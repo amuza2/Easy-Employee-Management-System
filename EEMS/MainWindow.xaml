@@ -16,6 +16,11 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+
     <Border
         Background="#eff2f7"
         CornerRadius="30"
@@ -24,7 +29,7 @@
 
         <Grid Margin="0,4,0,-4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="{Binding MenuWidth}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -36,7 +41,10 @@
                 </Grid.RowDefinitions>
 
                 <!--  Manu Icon  -->
-                <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
+                <Button
+                    Margin="20,28,0,35"
+                    Command="{Binding ToggleMenuCommand}"
+                    Style="{StaticResource topButton}">
                     <Icon:PackIconMaterial
                         Width="15"
                         Height="15"
@@ -46,27 +54,9 @@
                 <Border
                     Grid.Row="1"
                     Margin="0,6,0,-6"
-                    Background="#623ed0"
+                    Background="#4880ff"
                     CornerRadius="0 50 0 30">
                     <DockPanel>
-                        <!--  Menu Logo  -->
-                        <!--
-                        <Border
-                        Width="80"
-                        Height="80"
-                        Margin="20,-30,0,0"
-                        Padding="3"
-                        HorizontalAlignment="Left"
-                        Background="White"
-                        CornerRadius="100"
-                        DockPanel.Dock="Top">
-                        <Ellipse>
-                        <Ellipse.Fill>
-                        <ImageBrush ImageSource="/Resources/Images/user.png" />
-                        </Ellipse.Fill>
-                        </Ellipse>
-                        </Border>-->
-
                         <!--  Manu Titles  -->
                         <TextBlock
                             Height="29"
@@ -74,7 +64,7 @@
                             DockPanel.Dock="Top"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Foreground="White"
+                            Foreground="{Binding SetColor}"
                             Text="Company Name"
                             TextAlignment="Left" />
                         <TextBlock
@@ -82,7 +72,7 @@
                             DockPanel.Dock="Top"
                             FontSize="14"
                             FontWeight="SemiBold"
-                            Foreground="#d0bfff"
+                            Foreground="{Binding SetColor}"
                             Text="Bousmail"
                             TextAlignment="Left" />
 
@@ -90,7 +80,7 @@
                         <Separator
                             Height="0.8"
                             Margin="25"
-                            Background="#7e5fdc"
+                            Background="{Binding SeparatorColor}"
                             DockPanel.Dock="Top" />
 
                         <!--  Manu Button  -->
@@ -98,38 +88,38 @@
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Dashboard" />
+                                    <TextBlock Text="Dashboard" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Projects" />
+                                    <TextBlock Text="Projects" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
                             <Button
-                                Background="#7b5cd6"
+                                Background="#6895ff"
                                 Foreground="White"
                                 Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Employees" />
+                                    <TextBlock Text="Employees" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="CashMultiple" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Salary" />
+                                    <TextBlock Text="Salary" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Condidates" />
+                                    <TextBlock Text="Condidates" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
@@ -142,7 +132,7 @@
                             Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}" />
-                                <TextBlock Text="Logout" />
+                                <TextBlock Text="Logout" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </StackPanel>
                         </Button>
                     </DockPanel>
@@ -150,7 +140,7 @@
             </Grid>
 
             <!--  Main Section  -->
-            <Grid Grid.Column="1" Margin="30,20,20,20">
+            <Grid Grid.Column="1" Margin="10,20,20,20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />

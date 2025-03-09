@@ -1,6 +1,7 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
 using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess;
+using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Employee;
 using EEMS.UI.Views.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -42,12 +43,15 @@ public partial class App : Application
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();
+        service.AddTransient<AddAndEditEmployeeViewModel>();
 
         // Register pages
         service.AddTransient<EmployeePage>();
+        service.AddTransient<AddAndEditEmployeePage>();
 
         //Register Views
         service.AddTransient<MainWindow>();
+        service.AddTransient<sharedWindow>();
 
         // Register Navigation Service
         service.AddTransient<INavigationService, NavigationService>();
