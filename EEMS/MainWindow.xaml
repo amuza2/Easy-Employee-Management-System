@@ -126,7 +126,7 @@
                         </StackPanel>
 
                         <Button
-                            Margin="15,0,15,20"
+                            Margin="0,0,0,20"
                             VerticalAlignment="Bottom"
                             DockPanel.Dock="Bottom"
                             Style="{StaticResource menuButton}">

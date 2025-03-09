@@ -23,8 +23,6 @@ namespace EEMS.UI.ViewModels
                 OnPropertyChanged(nameof(MenuWidth));
                 SetColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#4880ff");
                 SeparatorColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#6895ff");
-                
-                
             }
         }
 

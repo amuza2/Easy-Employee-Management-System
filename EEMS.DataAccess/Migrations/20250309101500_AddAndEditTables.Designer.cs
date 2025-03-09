@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EEMS.DataAccess.Migrations
 {
     [DbContext(typeof(EEMSDbContext))]
-    partial class EEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250309101500_AddAndEditTables")]
+    partial class AddAndEditTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,23 +111,6 @@ namespace EEMS.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Human Resources"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Budget and Accounting"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "General Administration"
-                        });
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Diploma", b =>
@@ -266,113 +252,6 @@ namespace EEMS.DataAccess.Migrations
                         .HasFilter("[LeaveId] IS NOT NULL");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "123 Main St, New York, USA",
-                            BirthLocation = "New York, USA",
-                            DateOfBirth = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 1,
-                            Email = "john.doe@example.com",
-                            FamilySituation = "Single",
-                            FirstName = "John",
-                            Gender = 0,
-                            IsActive = true,
-                            IsDeleted = false,
-                            JobNatureId = 1,
-                            JobTitle = "Software Engineer",
-                            LastName = "Doe",
-                            Phone = "123-456-7890",
-                            RecruitmentDate = new DateTime(2020, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "New York, USA",
-                            Training = "C#, .NET, SQL"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "456 Elm St, Los Angeles, USA",
-                            BirthLocation = "Los Angeles, USA",
-                            DateOfBirth = new DateTime(1985, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 2,
-                            Email = "jane.smith@example.com",
-                            FamilySituation = "Married",
-                            FirstName = "Jane",
-                            Gender = 1,
-                            IsActive = true,
-                            IsDeleted = false,
-                            JobNatureId = 2,
-                            JobTitle = "Project Manager",
-                            LastName = "Smith",
-                            Phone = "987-654-3210",
-                            RecruitmentDate = new DateTime(2018, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "Los Angeles, USA",
-                            Training = "PMP, Agile, Scrum"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "789 Oak St, Chicago, USA",
-                            BirthLocation = "Chicago, USA",
-                            DateOfBirth = new DateTime(1992, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 1,
-                            Email = "alice.johnson@example.com",
-                            FamilySituation = "Single",
-                            FirstName = "Alice",
-                            Gender = 1,
-                            IsActive = true,
-                            IsDeleted = false,
-                            JobNatureId = 3,
-                            JobTitle = "QA Engineer",
-                            LastName = "Johnson",
-                            Phone = "555-123-4567",
-                            RecruitmentDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "Chicago, USA",
-                            Training = "Selenium, Manual Testing"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "321 Pine St, Houston, USA",
-                            BirthLocation = "Houston, USA",
-                            DateOfBirth = new DateTime(1988, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 3,
-                            Email = "bob.brown@example.com",
-                            FamilySituation = "Married",
-                            FirstName = "Bob",
-                            Gender = 0,
-                            IsActive = true,
-                            IsDeleted = false,
-                            JobNatureId = 1,
-                            JobTitle = "DevOps Engineer",
-                            LastName = "Brown",
-                            Phone = "444-555-6666",
-                            RecruitmentDate = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "Houston, USA",
-                            Training = "Docker, Kubernetes, Azure"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "654 Beach St, Miami, USA",
-                            BirthLocation = "Miami, USA",
-                            DateOfBirth = new DateTime(1995, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 2,
-                            Email = "charlie.davis@example.com",
-                            FamilySituation = "Single",
-                            FirstName = "Charlie",
-                            Gender = 0,
-                            IsActive = true,
-                            IsDeleted = false,
-                            JobNatureId = 3,
-                            JobTitle = "UI/UX Designer",
-                            LastName = "Davis",
-                            Phone = "777-888-9999",
-                            RecruitmentDate = new DateTime(2022, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "Miami, USA",
-                            Training = "Figma, Adobe XD, Sketch"
-                        });
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.EmployeeDrivingLicense", b =>
@@ -420,23 +299,6 @@ namespace EEMS.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobNatures");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Full-time Work"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Part-time Work"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Temporary Work"
-                        });
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Leave", b =>
@@ -530,7 +392,7 @@ namespace EEMS.DataAccess.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("StartDate")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Type")

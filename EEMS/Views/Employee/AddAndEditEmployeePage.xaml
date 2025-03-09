@@ -24,7 +24,10 @@
             Background="#4880ff"
             CornerRadius="0 0 5 0">
             <StackPanel Margin="60,0,10,0">
-                <Grid Width="80" Height="80">
+                <Grid
+                    Width="80"
+                    Height="80"
+                    Margin="0,20,0,0">
                     <Border Background="#fff" CornerRadius="40" />
                     <Icon:PackIconMaterial
                         Width="40"
@@ -36,39 +39,22 @@
                 </Grid>
 
                 <TextBlock
+                    Margin="40,5,40,20"
                     FontSize="20"
                     FontWeight="SemiBold"
                     Foreground="#fff"
-                    Text="Business Details"
+                    Text="Employee Informations"
                     TextAlignment="Center" />
 
-                <TextBlock
-                    Margin="40,15,40,20"
-                    FontSize="13"
-                    FontWeight="Light"
-                    Foreground="#e6e8ec"
-                    LineHeight="24"
-                    Text="Business Details"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap" />
-
                 <UC:CardUserControl
-                    Title="Personel Informations"
+                    Title="Personel Information"
                     IsActive="True"
                     Number="1"
                     Time="3 min" />
                 <UC:CardUserControl
-                    Title="Inergration"
+                    Title="Job Information"
                     Number="2"
                     Time="5 min" />
-                <UC:CardUserControl
-                    Title="Policies"
-                    Number="3"
-                    Time="1 min" />
-                <UC:CardUserControl
-                    Title="Shipping"
-                    Number="4"
-                    Time="1 min" />
 
             </StackPanel>
         </Border>
@@ -134,7 +120,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Foreground="#c2ddfc"
-                                    Kind="Abacus" />
+                                    Kind="FaceManProfile" />
                             </Grid>
                             <TextBlock
                                 Margin="15,0,0,0"
@@ -176,7 +162,7 @@
                             Grid.Row="6"
                             Grid.Column="0"
                             Caption="Gender"
-                            Hint="Enter your gender"
+                            Hint="Choose your gender"
                             IsFemaleSelected="{Binding IsFemaleSelected, Mode=TwoWay}"
                             IsMaleSelected="{Binding IsMaleSelected, Mode=TwoWay}" />
                         <UC:TextBoxUserControl
@@ -187,6 +173,8 @@
                         <UC:DatePickerUserControl
                             Grid.Row="3"
                             Grid.Column="1"
+                            Margin="0,0,0,10"
+                            Caption="Data of Birth"
                             SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
                         <UC:TextBoxUserControl
                             Grid.Row="4"

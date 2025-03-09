@@ -13,10 +13,6 @@ namespace EEMS.UI.UserControls
             InitializeComponent();
         }
 
-
-
-
-
         public string Hint
         {
             get { return (string)GetValue(HintProperty); }
@@ -27,9 +23,6 @@ namespace EEMS.UI.UserControls
         public static readonly DependencyProperty HintProperty =
             DependencyProperty.Register("Hint", typeof(string), typeof(TextBoxUserControl));
 
-
-
-
         public string Caption
         {
             get { return (string)GetValue(CaptionProperty); }
@@ -39,9 +32,5 @@ namespace EEMS.UI.UserControls
         // Using a DependencyProperty as the backing store for Caption.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CaptionProperty =
             DependencyProperty.Register("Caption", typeof(string), typeof(TextBoxUserControl));
-
-
-
-
     }
 }
