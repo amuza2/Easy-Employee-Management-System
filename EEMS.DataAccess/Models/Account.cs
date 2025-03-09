@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace EEMS.DataAccess.Models;
 
-public class Project
+public class Account
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Place { get; set; }
-
-    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public string Username { get; set; }
+    public string Password { get; set; }
 }

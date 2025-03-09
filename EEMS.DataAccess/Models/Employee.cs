@@ -30,16 +30,21 @@ namespace EEMS.DataAccess.Models
         public bool IsDeleted { get; set; }
 
         public int? DepartmentId { get; set; }
-        public Department Department { get; set; }
-
-        public int? ProjectId { get; set; }
-        public Project Project { get; set; }
+        public virtual Department Department { get; set; }
 
         public int? JobNatureId { get; set; }
-        public JobNature JobNature { get; set; }
+        public virtual JobNature JobNature { get; set; }
 
-        public ICollection<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; }
-        public ICollection<Absence> Absences { get; set; }
+        public int? LeaveId { get; set; }
+        public virtual Leave Leave { get; set; }
+
+
+        public virtual ICollection<Vacation> Vacations { get; set; } = new List<Vacation>();
+        public virtual ICollection<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; } = new List<EmployeeDrivingLicense>();
+        public virtual ICollection<Absence> Absences { get; set; } = new List<Absence>();
+        public virtual ICollection<EmployeeTraining> EmployeesTraining { get; set; } = new List<EmployeeTraining>();
+        public virtual ICollection<Diploma> Diplomas { get; set; } = new List<Diploma>();
+        public virtual ICollection<Sanction> Sanctions { get; set; } = new List<Sanction>();
 
     }
 }

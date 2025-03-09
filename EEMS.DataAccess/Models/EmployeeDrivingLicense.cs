@@ -1,11 +1,10 @@
-﻿namespace EEMS.DataAccess.Models
-{
-    public class EmployeeDrivingLicense
-    {
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+﻿namespace EEMS.DataAccess.Models;
 
-        public int DrivingLicenseTypeId { get; set; }
-        public DrivingLicenseType DrivingLicenseType { get; set; }
-    }
+public class EmployeeDrivingLicense
+{
+    public int EmployeeId { get; set; }
+    public virtual Employee Employee { get; set; }
+
+    public int DrivingLicenseTypeId { get; set; }
+    public virtual DrivingLicenseType DrivingLicenseType { get; set; }
 }
