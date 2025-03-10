@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="EEMS.UI.UserControls.PersonalInformationUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UC="clr-namespace:EEMS.UI.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="personalInfoControl">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <UC:TextBoxUserControl
+            Grid.Column="0"
+            Caption="First Name"
+            Hint="Enter your first name" />
+        <UC:TextBoxUserControl
+            Grid.Row="1"
+            Grid.Column="0"
+            Caption="Last Name"
+            Hint="Enter your last name" />
+        <UC:TextBoxUserControl
+            Grid.Row="2"
+            Grid.Column="0"
+            Caption="Phone"
+            Hint="Enter your phone" />
+        <UC:TextBoxUserControl
+            Grid.Row="3"
+            Grid.Column="0"
+            Caption="Address"
+            Hint="Enter your Address" />
+        <UC:RadioButtonGroupUserControl
+            Grid.Row="4"
+            Grid.Column="0"
+            Caption="Gender"
+            Hint="Choose your gender"
+            IsFemaleSelected="{Binding IsFemaleSelected, Mode=TwoWay}"
+            IsMaleSelected="{Binding IsMaleSelected, Mode=TwoWay}" />
+        <UC:TextBoxUserControl
+            Grid.Row="0"
+            Grid.Column="1"
+            Caption="Email"
+            Hint="Enter your email" />
+        <UC:DatePickerUserControl
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            HorizontalAlignment="left"
+            Caption="Data of Birth"
+            SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+        <UC:TextBoxUserControl
+            Grid.Row="2"
+            Grid.Column="1"
+            Caption="Birth Location"
+            Hint="Enter your birth location" />
+        <UC:ComboBoxUserControl
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Caption="Family Situation"
+            Items="{Binding FamilySituation}" />
+        <UC:TextBoxUserControl
+            Grid.Row="4"
+            Grid.Column="1"
+            Caption="Residence"
+            Hint="Enter your Residence place" />
+
+    </Grid>
+</UserControl>
