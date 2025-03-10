@@ -42,7 +42,7 @@ The Easy Employee Management System EEMS) is a desktop application designed to m
 - **Back End**: .NET Core
 - **Database**: SQL Server
 - **ORM**: Entity Framework Core (Code-First Approach)
-- **Architecture**: Layered Architecture (UI, Business Logic, Data Access)
+- **Architecture**: Layered Architecture (UI, Business Logic, Data Access) and MVVM
 - **Tools**: Visual Studio, SQL Server Management Studio (SSMS)
 
 
