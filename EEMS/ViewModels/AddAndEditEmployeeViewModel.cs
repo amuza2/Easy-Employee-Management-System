@@ -1,9 +1,23 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EEMS.UI.ViewModels
 {
     public class AddAndEditEmployeeViewModel : INotifyPropertyChanged
     {
+        private List<string> _familySituation;
+
+        public List<string> FamilySituation
+        {
+            get { return _familySituation; }
+            set
+            {
+                _familySituation = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private DateTime? _selectDate;
 
         public DateTime? SelectedDate
@@ -44,7 +58,12 @@ namespace EEMS.UI.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnPropertyChanged(string propertyName)
+        public AddAndEditEmployeeViewModel()
+        {
+            FamilySituation = new List<string> { "Married", "Single" };
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

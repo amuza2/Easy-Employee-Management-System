@@ -13,5 +13,8 @@ namespace EEMS.UI.Views.Employee
             InitializeComponent();
             DataContext = addAndEditEmployeeViewModel;
         }
+
+
+
     }
 }
