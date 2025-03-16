@@ -24,18 +24,18 @@
                 Margin="0,0,50,0"
                 BorderBrush="#cfd7de"
                 BorderThickness="2"
-                Content="Male"
+                Content="{Binding Option1Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Foreground="#868686"
-                GroupName="GenderGroup"
-                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsMaleSelected, Mode=TwoWay}" />
+                GroupName="RadioGroup"
+                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsOption1Selected, Mode=TwoWay}" />
             <RadioButton
                 x:Name="FemaleRadioButton"
                 BorderBrush="#cfd7de"
                 BorderThickness="2"
-                Content="Female"
+                Content="{Binding Option2Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Foreground="#868686"
-                GroupName="GenderGroup"
-                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsFemaleSelected, Mode=TwoWay}" />
+                GroupName="RadioGroup"
+                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsOption2Selected, Mode=TwoWay}" />
         </StackPanel>
 
 

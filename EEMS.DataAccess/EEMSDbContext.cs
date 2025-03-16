@@ -1,4 +1,4 @@
-﻿using EEMS.DataAccess.Enums;
+﻿using EEMS.Utilities.Enums;
 using EEMS.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

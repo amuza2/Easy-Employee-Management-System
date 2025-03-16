@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EEMS.DataAccess.Enums
+namespace EEMS.Utilities.Enums;
+
+public enum Status
 {
-    public enum Gender
-    {
-        Male, Female
-    }
+    Active, Inactive
 }

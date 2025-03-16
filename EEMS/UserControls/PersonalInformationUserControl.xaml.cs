@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace EEMS.UI.UserControls
@@ -13,15 +14,15 @@ namespace EEMS.UI.UserControls
             InitializeComponent();
         }
 
-        public IEnumerable<string> FamilySituation
+        public ObservableCollection<string> FamilySituation
         {
-            get { return (IEnumerable<string>)GetValue(ItemsProperty); }
+            get { return (ObservableCollection<string>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsProperty =
-            DependencyProperty.Register("FamilySituation", typeof(IEnumerable<string>), typeof(PersonalInformationUserControl), new PropertyMetadata(new List<string>()));
+            DependencyProperty.Register("FamilySituation", typeof(ObservableCollection<string>), typeof(PersonalInformationUserControl), new PropertyMetadata(new ObservableCollection<string>()));
 
 
         public DateTime? SelectedDate
@@ -36,28 +37,30 @@ namespace EEMS.UI.UserControls
 
 
 
-
-        public bool IsFemaleSelected
+        public string SelectedItem
         {
-            get { return (bool)GetValue(IsFemaleSelectedProperty); }
-            set { SetValue(IsFemaleSelectedProperty, value); }
+            get { return (string)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsFemaleSelected.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsFemaleSelectedProperty =
-            DependencyProperty.Register("IsFemaleSelected", typeof(bool), typeof(PersonalInformationUserControl), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(string), typeof(PersonalInformationUserControl), new PropertyMetadata(string.Empty));
 
 
 
-        public bool IsMaleSelected
+        public object SelectedGender
         {
-            get { return (bool)GetValue(IsMaleSelectedProperty); }
-            set { SetValue(IsMaleSelectedProperty, value); }
+            get { return (object)GetValue(SelectedGenderProperty); }
+            set { SetValue(SelectedGenderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsMaleSelected.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsMaleSelectedProperty =
-            DependencyProperty.Register("IsMaleSelected", typeof(bool), typeof(PersonalInformationUserControl), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for SelectedGender.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedGenderProperty =
+            DependencyProperty.Register("SelectedGender", typeof(object), typeof(RadioButtonGroupUserControl), new PropertyMetadata(null));
+
+
+
 
     }
 }

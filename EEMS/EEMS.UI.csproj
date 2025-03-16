@@ -36,6 +36,7 @@
     <Folder Include="Views\Department\" />
     <Folder Include="Views\DrivingLicenseType\" />
     <Folder Include="Views\JobNature\" />
+    <Folder Include="Views\Account\" />
     <Folder Include="Views\Project\" />
   </ItemGroup>
 

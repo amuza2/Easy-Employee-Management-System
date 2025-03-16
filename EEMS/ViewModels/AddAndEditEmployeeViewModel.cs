@@ -1,13 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace EEMS.UI.ViewModels
 {
     public class AddAndEditEmployeeViewModel : INotifyPropertyChanged
     {
-        private List<string> _familySituation;
+        private ObservableCollection<string> _familySituation;
 
-        public List<string> FamilySituation
+        public ObservableCollection<string> FamilySituation
         {
             get { return _familySituation; }
             set
@@ -17,6 +18,31 @@ namespace EEMS.UI.ViewModels
             }
         }
 
+        private object _selectedItem;
+
+        public object SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _SelectedGender;
+
+        public string SelectedGender
+        {
+            get { return _SelectedGender; }
+            set
+            { 
+                _SelectedGender = value;
+                OnPropertyChanged();
+            }
+        }
+
+        
 
         private DateTime? _selectDate;
 
@@ -31,36 +57,12 @@ namespace EEMS.UI.ViewModels
         }
 
 
-        private bool _isMaleSelected;
-        private bool _isFemaleSelected;
-
-        public bool IsMaleSelected
-        {
-            get => _isMaleSelected;
-            set
-            {
-                _isMaleSelected = value;
-                OnPropertyChanged(nameof(IsMaleSelected));
-                if (value) _isFemaleSelected = false;
-            }
-        }
-
-        public bool IsFemaleSelected
-        {
-            get => _isFemaleSelected;
-            set
-            {
-                _isFemaleSelected = value;
-                OnPropertyChanged(nameof(IsFemaleSelected));
-                if (value) _isMaleSelected = false;
-            }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public AddAndEditEmployeeViewModel()
         {
-            FamilySituation = new List<string> { "Married", "Single" };
+            FamilySituation = new ObservableCollection<string>() { "Married", "Single" };
+            SelectedItem = FamilySituation.FirstOrDefault();
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

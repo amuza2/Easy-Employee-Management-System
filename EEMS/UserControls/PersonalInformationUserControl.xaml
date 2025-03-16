@@ -43,9 +43,9 @@
             Grid.Row="4"
             Grid.Column="0"
             Caption="Gender"
-            Hint="Choose your gender"
-            IsFemaleSelected="{Binding IsFemaleSelected, Mode=TwoWay}"
-            IsMaleSelected="{Binding IsMaleSelected, Mode=TwoWay}" />
+            Option1Text="Male"
+            Option2Text="Female"
+            SelectedValue="{Binding SelectedGender, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="0"
             Grid.Column="1"
@@ -54,8 +54,7 @@
         <UC:DatePickerUserControl
             Grid.Row="1"
             Grid.Column="1"
-            Margin="0,0,0,10"
-            HorizontalAlignment="left"
+            HorizontalAlignment="Left"
             Caption="Data of Birth"
             SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
         <UC:TextBoxUserControl
@@ -68,7 +67,8 @@
             Grid.Column="1"
             HorizontalAlignment="Left"
             Caption="Family Situation"
-            Items="{Binding FamilySituation}" />
+            Items="{Binding FamilySituation}"
+            SelectedItem="{Binding SelectedItem}" />
         <UC:TextBoxUserControl
             Grid.Row="4"
             Grid.Column="1"
