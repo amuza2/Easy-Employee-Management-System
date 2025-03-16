@@ -19,13 +19,13 @@
 
         <Grid>
             <ComboBox
-                x:Name="ComboBoxUC"
                 Width="200"
                 Height="30"
                 BorderBrush="#97a5b4"
                 FontSize="14"
                 Foreground="#868686"
-                ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}" />
         </Grid>
     </StackPanel>
 

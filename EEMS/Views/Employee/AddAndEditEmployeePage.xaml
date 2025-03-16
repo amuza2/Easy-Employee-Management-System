@@ -95,6 +95,10 @@
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
@@ -134,16 +138,64 @@
                             Background="#e1e6eb" />
 
                         <!--  inputs  -->
-                        <UC:PersonalInformationUserControl
+                        <UC:TextBoxUserControl
                             Grid.Row="2"
-                            Grid.ColumnSpan="2"
-                            IsFemaleSelected="{Binding IsFemaleSelected}"
-                            IsMaleSelected="{Binding IsMaleSelected}"
-                            FamilySituation="{Binding FamilySituation}"
-                            SelectedDate="{Binding SelectData}" />
+                            Grid.Column="0"
+                            Caption="First Name"
+                            Hint="Enter your first name" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Caption="Last Name"
+                            Hint="Enter your last name" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Caption="Phone"
+                            Hint="Enter your phone" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Caption="Address"
+                            Hint="Enter your Address" />
+                        <UC:RadioButtonGroupUserControl
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Caption="Gender"
+                            Option1Text="Male"
+                            Option2Text="Female"
+                            SelectedValue="{Binding SelectedGender, Mode=TwoWay}" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Caption="Email"
+                            Hint="Enter your email" />
+                        <UC:DatePickerUserControl
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Caption="Data of Birth"
+                            SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Caption="Birth Location"
+                            Hint="Enter your birth location" />
+                        <UC:ComboBoxUserControl
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            Caption="Family Situation"
+                            Items="{Binding FamilySituation}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                        <UC:TextBoxUserControl
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Caption="Residence"
+                            Hint="Enter your Residence place" />
                         <!--  Form Bottom Background  -->
                         <Border
-                            Grid.Row="3"
+                            Grid.Row="7"
                             Grid.ColumnSpan="2"
                             Height="80"
                             Margin="-20,40,-20,0"
@@ -152,7 +204,7 @@
 
                         <!--  Main button  -->
                         <Button
-                            Grid.Row="3"
+                            Grid.Row="8"
                             Grid.Column="1"
                             Margin="0,40,20,0"
                             HorizontalAlignment="Right"
@@ -170,7 +222,7 @@
 
                         <!--  Secondary button  -->
                         <Button
-                            Grid.Row="3"
+                            Grid.Row="8"
                             Width="150"
                             Margin="20,40,0,0"
                             HorizontalAlignment="Left"
