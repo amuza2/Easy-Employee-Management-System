@@ -23,22 +23,26 @@
         <UC:TextBoxUserControl
             Grid.Column="0"
             Caption="First Name"
-            Hint="Enter your first name" />
+            Hint="Enter your first name"
+            Text="{Binding FirstName, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="1"
             Grid.Column="0"
             Caption="Last Name"
-            Hint="Enter your last name" />
+            Hint="Enter your last name"
+            Text="{Binding LastName, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="2"
             Grid.Column="0"
             Caption="Phone"
-            Hint="Enter your phone" />
+            Hint="Enter your phone"
+            Text="{Binding Phone, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="3"
             Grid.Column="0"
             Caption="Address"
-            Hint="Enter your Address" />
+            Hint="Enter your Address"
+            Text="{Binding Address, Mode=TwoWay}" />
         <UC:RadioButtonGroupUserControl
             Grid.Row="4"
             Grid.Column="0"
@@ -50,7 +54,8 @@
             Grid.Row="0"
             Grid.Column="1"
             Caption="Email"
-            Hint="Enter your email" />
+            Hint="Enter your email"
+            Text="{Binding Email, Mode=TwoWay}" />
         <UC:DatePickerUserControl
             Grid.Row="1"
             Grid.Column="1"
@@ -61,19 +66,21 @@
             Grid.Row="2"
             Grid.Column="1"
             Caption="Birth Location"
-            Hint="Enter your birth location" />
+            Hint="Enter your birth location"
+            Text="{Binding BirthLocation, Mode=TwoWay}" />
         <UC:ComboBoxUserControl
             Grid.Row="3"
             Grid.Column="1"
             HorizontalAlignment="Left"
             Caption="Family Situation"
-            Items="{Binding FamilySituation}"
-            SelectedItem="{Binding SelectedItem}" />
+            Items="{Binding FamilySituation, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="4"
             Grid.Column="1"
             Caption="Residence"
-            Hint="Enter your Residence place" />
+            Hint="Enter your Residence place"
+            Text="{Binding Residence, Mode=TwoWay}" />
 
     </Grid>
 </UserControl>

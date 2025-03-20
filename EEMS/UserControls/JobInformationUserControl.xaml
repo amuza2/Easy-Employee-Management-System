@@ -25,37 +25,46 @@
         <UC:TextBoxUserControl
             Grid.Column="0"
             Caption="Job Title"
-            Hint="Enter your job title" />
+            Hint="Enter your job title"
+            Text="{Binding JobTitle, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="1"
             Grid.Column="0"
             Caption="Essential Training"
-            Hint="Enter your Essential Training" />
+            Hint="Enter your Essential Training"
+            Text="{Binding EssentialTraining, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="2"
             Grid.Column="0"
             Caption="Language Spoken"
-            Hint="Enter your spoken language" />
-        <UC:TextBoxUserControl
+            Hint="Enter your spoken language"
+            Text="{Binding SpokenLanguages, Mode=TwoWay}" />
+        <UC:NumericUpDownUserControl
             Grid.Row="3"
             Grid.Column="0"
+            HorizontalAlignment="Left"
             Caption="Experience"
-            Hint="Enter your experience" />
+            Value="{Binding Experience, Mode=TwoWay}" />
         <UC:DatePickerUserControl
             Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Left"
-            Caption="RecrutmentDate" />
+            Caption="RecrutmentDate"
+            SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
         <UC:ComboBoxUserControl
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Left"
-            Caption="Department" />
+            Caption="Department"
+            Items="{Binding DepartmentItems}"
+            SelectedItem="{Binding SelectedDeparment, Mode=TwoWay}" />
         <UC:ComboBoxUserControl
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="left"
-            Caption="Job Nature" />
+            Caption="Job Nature"
+            Items="{Binding JobNatureItems}"
+            SelectedItem="{Binding SelectedJobNature, Mode=TwoWay}" />
         <UC:RadioButtonGroupUserControl
             Grid.Row="2"
             Grid.Column="1"
@@ -63,16 +72,18 @@
             Option1Text="Active"
             Option2Text="Inactive"
             SelectedValue="{Binding SelectedStatus, Mode=TwoWay}" />
-        <UC:ComboBoxUserControl
+        <!--<UC:ComboBoxUserControl
+        Grid.Row="3"
+        Grid.Column="1"
+        HorizontalAlignment="Left"
+        Caption="Family Situation"
+        Items="{Binding FamilySituation}"
+        SelectedItem="{Binding SelectedFamilySituationItem, Mode=TwoWay}" />-->
+        <UC:TextBoxUserControl
             Grid.Row="3"
             Grid.Column="1"
-            HorizontalAlignment="Left"
-            Caption="Family Situation"
-            Items="{Binding FamilySituation}" />
-        <UC:TextBoxUserControl
-            Grid.Row="4"
-            Grid.Column="1"
             Caption="Residence"
-            Hint="Enter your Residence place" />
+            Hint="Enter your Residence place"
+            Text="{Binding Residence, Mode=TwoWay}" />
     </Grid>
 </UserControl>

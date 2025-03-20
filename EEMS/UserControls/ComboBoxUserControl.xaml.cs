@@ -20,6 +20,7 @@ namespace EEMS.UI.UserControls
             set { SetValue(CaptionProperty, value); }
         }
 
+
         // Using a DependencyProperty as the backing store for Caption.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CaptionProperty =
             DependencyProperty.Register("Caption", typeof(string), typeof(ComboBoxUserControl), new PropertyMetadata(string.Empty));
@@ -35,8 +36,6 @@ namespace EEMS.UI.UserControls
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object), typeof(ComboBoxUserControl), new PropertyMetadata(null));
-
-
 
 
         public ObservableCollection<string> Items
