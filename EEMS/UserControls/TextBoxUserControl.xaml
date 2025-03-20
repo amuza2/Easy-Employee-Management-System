@@ -28,7 +28,7 @@
                 Text="{Binding ElementName=myTextbox, Path=Hint}"
                 Visibility="{Binding ElementName=textBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-            <TextBox x:Name="textBox" />
+            <TextBox Text="{Binding Text}" />
         </Grid>
     </StackPanel>
 

@@ -77,10 +77,5 @@
                 Foreground="#dbe9fa"
                 Text="{Binding ElementName=card, Path=Number}" />
         </Grid>
-
-
-
     </Border>
-
-
 </UserControl>
