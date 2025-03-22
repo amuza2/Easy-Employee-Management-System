@@ -74,7 +74,7 @@
             HorizontalAlignment="Left"
             Caption="Family Situation"
             Items="{Binding FamilySituation, Mode=TwoWay}"
-            SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+            SelectedItem="{Binding SelectedFamilySituation, Mode=TwoWay}" />
         <UC:TextBoxUserControl
             Grid.Row="4"
             Grid.Column="1"
