@@ -10,7 +10,8 @@ The Easy Employee Management System EEMS) is a desktop application designed to m
 
 <img src="https://github.com/user-attachments/assets/d9f09ced-cb96-40d3-bae9-3f277f1e149f" width=100% height="auto">
 
-<img src="https://github.com/user-attachments/assets/be010574-cd29-4694-b4d7-52231863afd8" width=100% height="auto">
+<img src="https://github.com/user-attachments/assets/d91830f6-ddd2-4454-8873-ef11a8a53145" width=100% height="auto">
+
 
 
 ## Features
