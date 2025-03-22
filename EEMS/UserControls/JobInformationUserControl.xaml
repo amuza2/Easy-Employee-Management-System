@@ -46,10 +46,10 @@
             Caption="Experience"
             Value="{Binding Experience, Mode=TwoWay}" />
         <UC:DatePickerUserControl
-            Grid.Row="4"
-            Grid.Column="0"
+            Grid.Row="2"
+            Grid.Column="1"
             HorizontalAlignment="Left"
-            Caption="RecrutmentDate"
+            Caption="Recrutment Date"
             SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
         <UC:ComboBoxUserControl
             Grid.Row="0"
@@ -66,7 +66,7 @@
             Items="{Binding JobNatureItems}"
             SelectedItem="{Binding SelectedJobNature, Mode=TwoWay}" />
         <UC:RadioButtonGroupUserControl
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             Caption="Status"
             Option1Text="Active"
@@ -79,11 +79,11 @@
         Caption="Family Situation"
         Items="{Binding FamilySituation}"
         SelectedItem="{Binding SelectedFamilySituationItem, Mode=TwoWay}" />-->
-        <UC:TextBoxUserControl
-            Grid.Row="3"
-            Grid.Column="1"
-            Caption="Residence"
-            Hint="Enter your Residence place"
-            Text="{Binding Residence, Mode=TwoWay}" />
+        <!--<UC:TextBoxUserControl
+        Grid.Row="3"
+        Grid.Column="1"
+        Caption="Residence"
+        Hint="Enter your Residence place"
+        Text="{Binding Residence, Mode=TwoWay}" />-->
     </Grid>
 </UserControl>

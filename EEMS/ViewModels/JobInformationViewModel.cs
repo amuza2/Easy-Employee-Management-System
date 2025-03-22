@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EEMS.BusinessLogic.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace EEMS.UI.ViewModels;
 
 public class JobInformationViewModel : INotifyPropertyChanged
 {
+    private readonly IEmployeeManagementService _employeeManagementService;
     private string _jobTitle;
-
     public string JobTitle
     {
         get { return _jobTitle; }
@@ -43,12 +40,16 @@ public class JobInformationViewModel : INotifyPropertyChanged
         set { _experience = value; OnPropertyChanged(); }
     }
 
-    private DateTime _selectedDate;
+    private DateTime? _selectedDate;
 
-    public DateTime SelectedDate
+    public DateTime? SelectedDate
     {
         get { return _selectedDate; }
-        set { _selectedDate = value; OnPropertyChanged(); }
+        set 
+        { 
+            _selectedDate = value;
+            OnPropertyChanged(nameof(SelectedDate)); 
+        }
     }
 
     private ObservableCollection<string> _departmentItems;
@@ -91,24 +92,46 @@ public class JobInformationViewModel : INotifyPropertyChanged
         set { _selectedStatus = value; OnPropertyChanged(); }
     }
 
-    private string _residence;
-
-    public string Residence
+    public JobInformationViewModel(IEmployeeManagementService employeeManagementService)
     {
-        get { return _residence; }
-        set { _residence = value; OnPropertyChanged(); }
+        _employeeManagementService = employeeManagementService;
+        DepartmentItems = new ObservableCollection<string>();
+        JobNatureItems = new ObservableCollection<string>();
+
+        _ = GetValuesToFillControls(); 
+        SelectedDate = DateTime.Now.Date;
     }
 
-    public JobInformationViewModel()
+    private async Task GetValuesToFillControls()
     {
-        DepartmentItems = new ObservableCollection<string> { "Accounting", "Sales" };
-        JobNatureItems = new ObservableCollection<string> { "Full-time", "Part-time" };
-
-
+        await SetDepartmentNamesToControl();
+        await SetJobNatureNamesToControl();
     }
 
+    private async Task SetJobNatureNamesToControl()
+    {
+        try
+        {
+            var jobNatureNames = await _employeeManagementService.GetJobNaturesAsync();
+            foreach (var item in jobNatureNames)
+            {
+                JobNatureItems.Add(item.Name);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+        }
+    }
 
-
+    private async Task SetDepartmentNamesToControl()
+    {
+        var departments = await _employeeManagementService.GetDepartmentsAsync();
+        foreach (var item in departments)
+        {
+            DepartmentItems.Add(item.Name);
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged([CallerMemberName] string propertyName = null)

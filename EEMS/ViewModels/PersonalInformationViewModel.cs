@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using EEMS.Utilities.Enums;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -12,7 +13,7 @@ public class PersonalInformationViewModel : INotifyPropertyChanged
     {
         get { return _firstName; }
         set
-        { 
+        {
             _firstName = value;
             OnPropertyChanged();
         }
@@ -103,21 +104,21 @@ public class PersonalInformationViewModel : INotifyPropertyChanged
         }
     }
 
-    private object _selectedItem;
+    private object _selectedFamilySituation;
 
-    public object SelectedItem
+    public object SelectedFamilySituation
     {
-        get { return _selectedItem; }
+        get { return _selectedFamilySituation; }
         set
         {
-            _selectedItem = value;
+            _selectedFamilySituation = value;
             OnPropertyChanged();
         }
     }
 
-    private string _SelectedGender;
+    private Gender _SelectedGender;
 
-    public string SelectedGender
+    public Gender SelectedGender
     {
         get { return _SelectedGender; }
         set
@@ -143,7 +144,8 @@ public class PersonalInformationViewModel : INotifyPropertyChanged
     public PersonalInformationViewModel()
     {
         FamilySituation = new ObservableCollection<string>() { "Married", "Single" };
-        SelectedItem = "Select an option";
+        SelectedFamilySituation = "Select an option";
+        SelectedDate = DateTime.Now.Date;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
