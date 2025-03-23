@@ -1,14 +1,11 @@
-﻿using EEMS.UI.Views.Shared;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows;
+﻿using EEMS.UI.MVVM;
+using EEMS.UI.Views.Shared;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace EEMS.UI.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ViewModelBase
     {
         public ICommand ToggleMenuCommand { get; }
 
@@ -60,13 +57,6 @@ namespace EEMS.UI.ViewModels
         private void ToggleMenu()
         {
             IsMenuExpanded = !IsMenuExpanded;
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

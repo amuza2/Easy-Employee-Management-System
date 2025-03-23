@@ -15,7 +15,9 @@ namespace EEMS.UI.Views.Employee
         
         public ICommand AddEmployeeCommand { get; }
         
-        public EmployeeViewModel(IEmployeeService employeeService,IEmployeeManagementService employeeManagementService, PersonalInformationViewModel personalInformationViewModel)
+        public EmployeeViewModel(IEmployeeService employeeService,
+                                IEmployeeManagementService employeeManagementService,
+                                PersonalInformationViewModel personalInformationViewModel)
         {
             _employeeManagementService = employeeManagementService;
             Employees = new ObservableCollection<EmployeeDTO>();
@@ -28,7 +30,9 @@ namespace EEMS.UI.Views.Employee
             var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(),
                                                           new JobInformationViewModel(_employeeManagementService),
                                                           _employeeManagementService);
-            
+
+            viewModel.UpdateGridWindowData = LoadMembers;
+
             var AddAndEditWindow = new AddAndEditWindow(viewModel);
             AddAndEditWindow.ShowDialog();
         }
@@ -36,8 +40,8 @@ namespace EEMS.UI.Views.Employee
 
         private async void LoadMembers()
         {
+            Employees.Clear();
             var employees = await _employeeManagementService.GetAsync();
-
             foreach (var employee in employees)
             {
                 Employees.Add(new EmployeeDTO

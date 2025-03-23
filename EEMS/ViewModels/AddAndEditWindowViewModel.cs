@@ -1,21 +1,22 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
 using EEMS.DataAccess.Models;
+using EEMS.UI.MVVM;
 using EEMS.UI.Views.Shared;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 
 namespace EEMS.UI.ViewModels;
 
-public class AddAndEditWindowViewModel : INotifyPropertyChanged
+public class AddAndEditWindowViewModel : ViewModelBase
 {
 	private readonly IEmployeeManagementService _employeeManagementService;
     public PersonalInformationViewModel _personalInformationVM { get; }
     public JobInformationViewModel _jobInformationVM { get; }
+	public Action CloseWindow { get; set; }
+	public Action UpdateGridWindowData { get; set; }
 
 
-	private Employee _employeeData = new Employee();
+    private Employee _employeeData = new Employee();
 
 	public Employee EmployeeData
 	{
@@ -116,8 +117,15 @@ public class AddAndEditWindowViewModel : INotifyPropertyChanged
 		try
 		{
 			var emp_id = await _employeeManagementService.AddEmployeeAsync(EmployeeData);
-			MessageBox.Show($"Employee with ID: {emp_id} has been added successfully");
-		}
+			var result = MessageBox.Show($"Employee with ID: {emp_id} has been added successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+			if(result == MessageBoxResult.OK || result == MessageBoxResult.None)
+			{
+				UpdateGridWindowData?.Invoke();
+				CloseWindow?.Invoke();
+			}
+
+        }
 		catch (Exception ex)
 		{
 			throw new Exception($"Error: {ex.Message}");
@@ -141,18 +149,12 @@ public class AddAndEditWindowViewModel : INotifyPropertyChanged
     private async Task SaveJobInformation()
     {
         EmployeeData.JobTitle = _jobInformationVM.JobTitle;
-        EmployeeData.Training = _jobInformationVM.EssentialTraining;
-        EmployeeData.RecruitmentDate = DateTime.Now.Date;
         EmployeeData.EssentialTraining = _jobInformationVM.EssentialTraining;
+        EmployeeData.Training = _jobInformationVM.OtherTraining;
+        EmployeeData.RecruitmentDate = DateTime.Now.Date;
         EmployeeData.LanguagesSpoken = _jobInformationVM.SpokenLanguages;
         EmployeeData.Experience = _jobInformationVM.Experience;
         EmployeeData.DepartmentId = await _employeeManagementService.GetDepartmentIdByName(_jobInformationVM.SelectedDeparment);
         EmployeeData.JobNatureId = await _employeeManagementService.GetJobNatureByName(_jobInformationVM.SelectedJobNature);
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
