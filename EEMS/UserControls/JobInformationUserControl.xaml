@@ -36,11 +36,17 @@
         <UC:TextBoxUserControl
             Grid.Row="2"
             Grid.Column="0"
+            Caption="Other Training"
+            Hint="Enter other training"
+            Text="{Binding OtherTraining, Mode=TwoWay}" />
+        <UC:TextBoxUserControl
+            Grid.Row="3"
+            Grid.Column="0"
             Caption="Language Spoken"
             Hint="Enter your spoken language"
             Text="{Binding SpokenLanguages, Mode=TwoWay}" />
         <UC:NumericUpDownUserControl
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Caption="Experience"

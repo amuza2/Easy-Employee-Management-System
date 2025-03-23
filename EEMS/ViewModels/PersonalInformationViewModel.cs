@@ -1,11 +1,9 @@
-﻿using EEMS.Utilities.Enums;
+﻿using EEMS.UI.MVVM;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace EEMS.UI.ViewModels;
 
-public class PersonalInformationViewModel : INotifyPropertyChanged
+public class PersonalInformationViewModel : ViewModelBase
 {
     private string _firstName;
 
@@ -116,9 +114,9 @@ public class PersonalInformationViewModel : INotifyPropertyChanged
         }
     }
 
-    private Gender _SelectedGender;
+    private string _SelectedGender;
 
-    public Gender SelectedGender
+    public string SelectedGender
     {
         get { return _SelectedGender; }
         set
@@ -146,11 +144,5 @@ public class PersonalInformationViewModel : INotifyPropertyChanged
         FamilySituation = new ObservableCollection<string>() { "Married", "Single" };
         SelectedFamilySituation = "Select an option";
         SelectedDate = DateTime.Now.Date;
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

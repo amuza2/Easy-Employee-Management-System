@@ -1,6 +1,4 @@
-﻿using EEMS.Utilities.Enums;
-
-namespace EEMS.DataAccess.Models
+﻿namespace EEMS.DataAccess.Models
 {
     public class Employee
     {

@@ -1,4 +1,5 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
+using EEMS.UI.MVVM;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,7 +7,7 @@ using System.Windows;
 
 namespace EEMS.UI.ViewModels;
 
-public class JobInformationViewModel : INotifyPropertyChanged
+public class JobInformationViewModel : ViewModelBase
 {
     private readonly IEmployeeManagementService _employeeManagementService;
     private string _jobTitle;
@@ -92,6 +93,15 @@ public class JobInformationViewModel : INotifyPropertyChanged
         set { _selectedStatus = value; OnPropertyChanged(); }
     }
 
+    private string _otherTraining;
+
+    public string OtherTraining
+    {
+        get { return _otherTraining; }
+        set { _otherTraining = value; OnPropertyChanged(); }
+    }
+
+
     public JobInformationViewModel(IEmployeeManagementService employeeManagementService)
     {
         _employeeManagementService = employeeManagementService;
@@ -111,7 +121,7 @@ public class JobInformationViewModel : INotifyPropertyChanged
     private async Task SetJobNatureNamesToControl()
     {
         try
-        {
+        {   
             var jobNatureNames = await _employeeManagementService.GetJobNaturesAsync();
             foreach (var item in jobNatureNames)
             {
@@ -126,16 +136,18 @@ public class JobInformationViewModel : INotifyPropertyChanged
 
     private async Task SetDepartmentNamesToControl()
     {
-        var departments = await _employeeManagementService.GetDepartmentsAsync();
-        foreach (var item in departments)
+        try
         {
-            DepartmentItems.Add(item.Name);
+            var departments = await _employeeManagementService.GetDepartmentsAsync();
+            foreach (var item in departments)
+            {
+                DepartmentItems.Add(item.Name);
+            }
         }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+        }
+        
     }
 }
