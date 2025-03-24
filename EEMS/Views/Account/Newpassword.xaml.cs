@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EEMS.UI.UserControls
+namespace EEMS.UI.Views.Account
 {
     /// <summary>
-    /// Interaction logic for NewPassword.xaml
+    /// Interaction logic for Newpassword.xaml
     /// </summary>
-    public partial class NewPassword : UserControl
+    public partial class Newpassword : UserControl
     {
-        public NewPassword()
+        public Newpassword()
         {
             InitializeComponent();
         }

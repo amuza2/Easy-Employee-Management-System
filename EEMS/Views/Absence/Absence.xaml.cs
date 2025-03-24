@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EEMS.UI.UserControls
+namespace EEMS.UI.Views.Absence
 {
     /// <summary>
-    /// Interaction logic for EmailAndVerificationCode.xaml
+    /// Interaction logic for Absence.xaml
     /// </summary>
-    public partial class EmailAndVerificationCode : UserControl
+    public partial class Absence : UserControl
     {
-        public EmailAndVerificationCode()
+        public Absence()
         {
             InitializeComponent();
+        }
+
+        private void VioletButtonFill_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

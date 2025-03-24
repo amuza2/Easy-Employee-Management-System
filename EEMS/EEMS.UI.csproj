@@ -14,7 +14,6 @@
     <None Remove="UserControls\email.png" />
     <None Remove="UserControls\padlock.png" />
     <None Remove="UserControls\password.png" />
-    <None Remove="Views\Account\Sign in-pana.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Absence\" />
     <Folder Include="Views\Department\" />
     <Folder Include="Views\DrivingLicenseType\" />
     <Folder Include="Views\JobNature\" />
@@ -47,11 +45,6 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\user.png" />
-    <Resource Include="UserControls\Email campaign-rafiki.png" />
-    <Resource Include="UserControls\email.png" />
-    <Resource Include="UserControls\padlock.png" />
-    <Resource Include="UserControls\password.png" />
-    <Resource Include="Views\Account\Sign in-pana.png" />
   </ItemGroup>
 
   <ItemGroup>
