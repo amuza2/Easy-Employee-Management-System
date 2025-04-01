@@ -41,10 +41,14 @@ public partial class App : Application
 
         // Register services
         service.AddTransient<IEmployeeService, EmployeeService>();
+        service.AddTransient<IDepartmentService, DepartmentService>();
+        service.AddTransient<IJobNatureService, JobNatureService>();
+        service.AddTransient<IEmployeeManagementService, EmployeeManagementService>();
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();
         service.AddTransient<PersonalInformationViewModel>();
+        service.AddTransient<JobInformationViewModel>();
         service.AddTransient<AddAndEditWindowViewModel>();
         
 

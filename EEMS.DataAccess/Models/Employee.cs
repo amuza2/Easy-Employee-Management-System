@@ -1,6 +1,4 @@
-﻿using EEMS.Utilities.Enums;
-
-namespace EEMS.DataAccess.Models
+﻿namespace EEMS.DataAccess.Models
 {
     public class Employee
     {
@@ -16,7 +14,7 @@ namespace EEMS.DataAccess.Models
         public string Address { get; set; }//
         public string FamilySituation { get; set; }//
         public DateTime RecruitmentDate { get; set; }///
-        public Gender Gender { get; set; }//
+        public int Gender { get; set; }//
         public string? EssentialTraining { get; set; }///
         public string? LanguagesSpoken { get; set; }///
         public int? Experience { get; set; }///

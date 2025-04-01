@@ -8,6 +8,7 @@ namespace EEMS.BusinessLogic.Interfaces
         Task DeleteAsync(int id);
         Task<IEnumerable<JobNature>> GetAsync();
         Task<JobNature> GetAsync(int id);
+        Task<int> GetJobNatureIdByNameAsync(string name);
         Task UpdateAsync(JobNature jobNature);
     }
 }

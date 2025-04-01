@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EEMS.BusinessLogic.Interfaces;
+using EEMS.UI.MVVM;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace EEMS.UI.ViewModels;
 
-public class JobInformationViewModel : INotifyPropertyChanged
+public class JobInformationViewModel : ViewModelBase
 {
+    private readonly IEmployeeManagementService _employeeManagementService;
     private string _jobTitle;
-
     public string JobTitle
     {
         get { return _jobTitle; }
@@ -43,12 +41,16 @@ public class JobInformationViewModel : INotifyPropertyChanged
         set { _experience = value; OnPropertyChanged(); }
     }
 
-    private DateTime _selectedDate;
+    private DateTime? _selectedDate;
 
-    public DateTime SelectedDate
+    public DateTime? SelectedDate
     {
         get { return _selectedDate; }
-        set { _selectedDate = value; OnPropertyChanged(); }
+        set 
+        { 
+            _selectedDate = value;
+            OnPropertyChanged(nameof(SelectedDate)); 
+        }
     }
 
     private ObservableCollection<string> _departmentItems;
@@ -91,28 +93,61 @@ public class JobInformationViewModel : INotifyPropertyChanged
         set { _selectedStatus = value; OnPropertyChanged(); }
     }
 
-    private string _residence;
+    private string _otherTraining;
 
-    public string Residence
+    public string OtherTraining
     {
-        get { return _residence; }
-        set { _residence = value; OnPropertyChanged(); }
-    }
-
-    public JobInformationViewModel()
-    {
-        DepartmentItems = new ObservableCollection<string> { "Accounting", "Sales" };
-        JobNatureItems = new ObservableCollection<string> { "Full-time", "Part-time" };
-
-
+        get { return _otherTraining; }
+        set { _otherTraining = value; OnPropertyChanged(); }
     }
 
 
-
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public JobInformationViewModel(IEmployeeManagementService employeeManagementService)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        _employeeManagementService = employeeManagementService;
+        DepartmentItems = new ObservableCollection<string>();
+        JobNatureItems = new ObservableCollection<string>();
+
+        _ = GetValuesToFillControls(); 
+        SelectedDate = DateTime.Now.Date;
+    }
+
+    private async Task GetValuesToFillControls()
+    {
+        await SetDepartmentNamesToControl();
+        await SetJobNatureNamesToControl();
+    }
+
+    private async Task SetJobNatureNamesToControl()
+    {
+        try
+        {   
+            var jobNatureNames = await _employeeManagementService.GetJobNaturesAsync();
+            foreach (var item in jobNatureNames)
+            {
+                JobNatureItems.Add(item.Name);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+        }
+    }
+
+    private async Task SetDepartmentNamesToControl()
+    {
+        try
+        {
+            var departments = await _employeeManagementService.GetDepartmentsAsync();
+            foreach (var item in departments)
+            {
+                DepartmentItems.Add(item.Name);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error: {ex.Message}");
+        }
+        
     }
 }

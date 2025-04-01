@@ -12,6 +12,8 @@ public partial class AddAndEditWindow : Window
     public AddAndEditWindow(AddAndEditWindowViewModel addAndEditWindowViewModel)
     {
         InitializeComponent();
+        var viewModel = addAndEditWindowViewModel;
+        viewModel.CloseWindow = () => this.Close();
         DataContext = addAndEditWindowViewModel;
     }
 

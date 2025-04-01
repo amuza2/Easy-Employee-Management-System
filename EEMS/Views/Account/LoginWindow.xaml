@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EEMS.UI.Views.Account"
         mc:Ignorable="d"
+
         Title="LoginWindow" Height="740" Width="450" 
           WindowStartupLocation="CenterScreen"
           WindowStyle="None"
@@ -21,5 +22,5 @@
 
         </Grid>
     </Border>
-
+   
 </Window>
