@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EEMS.UI.Views.Account"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Text="Welcome to EEMS" Margin="0,0,0,100"/>
-    </Grid>
+
+        Title="LoginWindow" Height="740" Width="450" 
+          WindowStartupLocation="CenterScreen"
+          WindowStyle="None"
+          Background="Transparent">
+    <Border Background="#eff2f7" CornerRadius="30">
+        <Grid>
+            <Image Margin="0,58,0,432"  Height="250" Source="/Views/Account/Sign in-pana.png"/>
+            <TextBlock Margin="0,323,0,370" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Text="Welcome Back !" />
+            <TextBox  HorizontalAlignment="Center" Margin="0,404,0,0" TextWrapping="Wrap" Text="Enter username" VerticalAlignment="Top" Width="278" Height="47" BorderBrush="#FFC8C8C8" FontSize="17"/>
+            <TextBox  HorizontalAlignment="Center" Margin="0,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" Height="47" BorderBrush="#FFC8C8C8" FontSize="17" Text="Enter password"/>
+            <Button   Background="#4880ff" Content="LOG IN" HorizontalAlignment="Center" Margin="0,552,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.519,-0.763" Width="278" Height="43" Foreground="White" BorderBrush="#FF4880FF" FontWeight="DemiBold" FontSize="16"/>
+            <Button  Background="Transparent"  Content="Create a new account"  HorizontalAlignment="Center" Margin="0,610,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.519,-0.763" Width="186" Height="23" Foreground="DimGray" FontWeight="DemiBold" BorderBrush="Transparent" FontSize="16"/>
+            <Button  Background="Transparent"  Content="I've already have an account and forgot my password"  HorizontalAlignment="Center" Margin="0,641,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.519,-0.763" Width="394" Height="29" Foreground="#4880ff" FontWeight="DemiBold" BorderBrush="Transparent" FontSize="16"/>
+
+        </Grid>
+    </Border>
+   
 </Window>
