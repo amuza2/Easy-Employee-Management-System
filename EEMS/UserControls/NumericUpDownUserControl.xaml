@@ -11,6 +11,18 @@
     Background="#fff"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder />
+                <TextBlock
+                    Margin="20,-10,0,0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
 
     <StackPanel Margin="20,10">
         <TextBlock
@@ -26,7 +38,8 @@
                 BorderBrush="#97a5b4"
                 FontSize="14"
                 Foreground="#868686"
-                Value="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                Value="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </StackPanel>
 </UserControl>

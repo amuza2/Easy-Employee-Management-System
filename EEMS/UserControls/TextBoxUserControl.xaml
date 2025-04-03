@@ -10,6 +10,19 @@
     Background="#fff"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder />
+                <TextBlock
+                    Margin="20,-10,0,0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+
     <StackPanel Margin="20,10">
         <TextBlock
             Margin="0,0,0,8"
@@ -28,7 +41,10 @@
                 Text="{Binding ElementName=myTextbox, Path=Hint}"
                 Visibility="{Binding ElementName=textBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-            <TextBox x:Name="textBox" Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox
+                x:Name="textBox"
+                Text="{Binding Text, ValidatesOnNotifyDataErrors=True, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         </Grid>
     </StackPanel>
 

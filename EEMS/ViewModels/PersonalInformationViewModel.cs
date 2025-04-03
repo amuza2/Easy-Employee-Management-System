@@ -1,5 +1,7 @@
 ﻿using EEMS.UI.MVVM;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Windows.Input;
 
 namespace EEMS.UI.ViewModels;
 
@@ -14,6 +16,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _firstName = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(FirstName));
         }
     }
 
@@ -26,6 +29,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _lastName = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(LastName));
         }
     }
 
@@ -38,6 +42,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _phone = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(Phone));
         }
     }
 
@@ -50,6 +55,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _address = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(Address));
         }
     }
 
@@ -62,6 +68,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _email = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(Email));
         }
     }
 
@@ -74,6 +81,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _birthLocation = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(BirthLocation));
         }
     }
 
@@ -86,6 +94,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _residence = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(Residence));
         }
     }
 
@@ -111,18 +120,23 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _selectedFamilySituation = value;
             OnPropertyChanged();
+            ValidateProperty(nameof(SelectedFamilySituation));
         }
     }
 
-    private string _SelectedGender;
+    private string _selectedGender;
 
     public string SelectedGender
     {
-        get { return _SelectedGender; }
+        get { return _selectedGender; }
         set
         {
-            _SelectedGender = value;
-            OnPropertyChanged();
+            if(_selectedGender != value)
+            {
+                _selectedGender = value;
+                OnPropertyChanged();
+                ValidateProperty(nameof(SelectedGender));
+            }
         }
     }
 
@@ -136,6 +150,7 @@ public class PersonalInformationViewModel : ViewModelBase
         {
             _selectDate = value;
             OnPropertyChanged(nameof(SelectedDate));
+            ValidateProperty(nameof(SelectedDate));
         }
     }
 
@@ -143,6 +158,153 @@ public class PersonalInformationViewModel : ViewModelBase
     {
         FamilySituation = new ObservableCollection<string>() { "Married", "Single" };
         SelectedFamilySituation = "Select an option";
-        SelectedDate = DateTime.Now.Date;
+    }
+
+    public void ValidateAllProperties()
+    {
+        ValidateProperty(nameof(FirstName));
+        ValidateProperty(nameof(LastName));
+        ValidateProperty(nameof(Email));
+        ValidateProperty(nameof(Phone));
+        ValidateProperty(nameof(Residence));
+        ValidateProperty(nameof(BirthLocation));
+        ValidateProperty(nameof(Address));
+        ValidateProperty(nameof(SelectedFamilySituation));
+        ValidateProperty(nameof(SelectedGender));
+        ValidateProperty(nameof(SelectedDate));
+    }
+
+    public bool AreRequiredFieldsFilled()
+    {
+        // Check if all are valid
+        return !string.IsNullOrWhiteSpace(FirstName) &&
+               !string.IsNullOrWhiteSpace(LastName) &&
+               !string.IsNullOrWhiteSpace(Email) &&
+               !string.IsNullOrWhiteSpace(Phone) &&
+               !string.IsNullOrWhiteSpace(BirthLocation) &&
+               !string.IsNullOrWhiteSpace(Residence) &&
+               !string.IsNullOrWhiteSpace(Address) &&
+               SelectedFamilySituation != null &&
+               !string.IsNullOrWhiteSpace(SelectedGender) &&
+               SelectedDate.HasValue;
+    }
+
+
+    // Override the validation method
+    protected override void ValidateProperty(string propertyName)
+    {
+        // Clear existing errors for this property
+        RemoveError(propertyName);
+
+        switch (propertyName)
+        {
+            case nameof(FirstName):
+                if (string.IsNullOrWhiteSpace(FirstName))
+                    AddError(propertyName, "First Name is required.");
+                else if (FirstName.Length < 3)
+                    AddError(propertyName, "First Name must be at least 3 characters.");
+                break;
+
+            case nameof(LastName):
+                if (string.IsNullOrWhiteSpace(LastName))
+                    AddError(propertyName, "Last Name is required.");
+                else if (LastName.Length < 3)
+                    AddError(propertyName, "Last Name must be at least 3 characters.");
+                break;
+
+            case nameof(Phone):
+                if (string.IsNullOrWhiteSpace(Phone))
+                    AddError(propertyName, "Phone is required.");
+                else if(!IsValidPhone(Phone))
+                    AddError(propertyName, "Please add a valid Phone number.");
+                else if (Phone.Length < 8)
+                    AddError(propertyName, "Phone must be at least 8 numbers.");
+                break;
+
+            case nameof(Address):
+                if (string.IsNullOrWhiteSpace(Address))
+                    AddError(propertyName, "Address is required.");
+                else if (Address.Length < 3)
+                    AddError(propertyName, "Address must be at least 3 characters.");
+                break;
+
+            case nameof(BirthLocation):
+                if (string.IsNullOrWhiteSpace(BirthLocation))
+                    AddError(propertyName, "Birth Location is required.");
+                else if (BirthLocation.Length < 3)
+                    AddError(propertyName, "Birth Location must be at least 3 characters.");
+                break;
+
+            case nameof(Residence):
+                if (string.IsNullOrWhiteSpace(Residence))
+                    AddError(propertyName, "Residence is required.");
+                else if (Residence.Length < 3)
+                    AddError(propertyName, "Residence must be at least 3 characters.");
+                break;
+
+            case nameof(Email):
+                if (string.IsNullOrWhiteSpace(Email))
+                    AddError(propertyName, "Email is required.");
+                else if (!IsValidEmail(Email))
+                    AddError(propertyName, "Please enter a valid email address.");
+                break;
+
+            case nameof(SelectedFamilySituation):
+                if (string.IsNullOrWhiteSpace(SelectedFamilySituation?.ToString()))
+                    AddError(propertyName, "Selected Family Situation is required.");
+                break;
+
+            case nameof(SelectedGender):
+                if (string.IsNullOrWhiteSpace(SelectedGender.ToString()))
+                    AddError(propertyName, "Selected Gender is required.");
+                break;
+
+            case nameof(SelectedDate):
+                if (isValidDate(SelectedDate.Value))
+                    AddError(propertyName, "Please enter a valid date.");
+                break;
+        }
+
+        // Notify that CanExecute may have changed
+        CommandManager.InvalidateRequerySuggested();
+    }
+
+    // Helper method to validate email format
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private bool IsValidPhone(string number)
+    {
+        try
+        {
+            var isConverted = int.TryParse(number, out int trueNumber);
+            return isConverted;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private bool isValidDate(DateTime date)
+    {
+        try
+        {
+            return DateTime.Now.Year == date.Year;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

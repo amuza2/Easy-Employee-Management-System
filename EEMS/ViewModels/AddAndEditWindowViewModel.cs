@@ -2,6 +2,7 @@
 using EEMS.DataAccess.Models;
 using EEMS.UI.MVVM;
 using EEMS.UI.Views.Shared;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -34,6 +35,7 @@ public class AddAndEditWindowViewModel : ViewModelBase
 		{ 
 			_currentView = value;
 			OnPropertyChanged();
+			CommandManager.InvalidateRequerySuggested();
             UpdateNextButtonContent();
         }
 	}
@@ -91,22 +93,43 @@ public class AddAndEditWindowViewModel : ViewModelBase
         _personalInformationVM = personalInfoVM;
 		_jobInformationVM = jobInfoVM;
 
+		_personalInformationVM.ErrorsChanged += ChildViewModel_ErrorsChanged;
+		_jobInformationVM.ErrorsChanged += ChildViewModel_ErrorsChanged;
 		CurrentView = _personalInformationVM;
+
+		
 		_nextBtnContent = "Save & Next";
 
-		NextBtnCommand = new RelayCommand(HandleNextOrSubmit);
+		NextBtnCommand = new RelayCommand(HandleNextOrSubmit, CanProceed);
 		BackBtnCommand = new RelayCommand(() => CurrentView = _personalInformationVM);
 	}
 
-	private async void HandleNextOrSubmit()
+    private void ChildViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+    {
+        // Propagate the error state change to update command availability
+        CommandManager.InvalidateRequerySuggested();
+    }
+
+    private async void HandleNextOrSubmit()
 	{
 		if (CurrentView == _personalInformationVM)
 		{
-			SavePersonalInformation();
+            // Validate all properties in the personal information view model
+            _personalInformationVM.ValidateAllProperties();
+
+			if (_personalInformationVM.HasErrors)
+				return;
+
+            SavePersonalInformation();
 			CurrentView = _jobInformationVM;
 		}
 		else if (CurrentView == _jobInformationVM)
 		{
+			_jobInformationVM.ValidateAllProperties();
+
+			if (_jobInformationVM.HasErrors)
+				return;
+
 			await SaveJobInformation();
 			_ = AddEmployeeToDatabase();
 		}
@@ -131,6 +154,22 @@ public class AddAndEditWindowViewModel : ViewModelBase
 			throw new Exception($"Error: {ex.Message}");
         }
     }
+
+    private bool CanProceed()
+    {
+        if (CurrentView == _personalInformationVM)
+        {
+            // Only check if required fields are filled and no errors
+            return _personalInformationVM.AreRequiredFieldsFilled() && !_personalInformationVM.HasErrors;
+        }
+		else if (CurrentView == _jobInformationVM)
+		{
+			return _jobInformationVM.AreRequiredFieldsFilled() && !_jobInformationVM.HasErrors;
+		}
+
+		return false;
+    }
+
 
     private void SavePersonalInformation()
     {
@@ -157,4 +196,7 @@ public class AddAndEditWindowViewModel : ViewModelBase
         EmployeeData.DepartmentId = await _employeeManagementService.GetDepartmentIdByName(_jobInformationVM.SelectedDeparment);
         EmployeeData.JobNatureId = await _employeeManagementService.GetJobNatureByName(_jobInformationVM.SelectedJobNature);
     }
+
+
+
 }

@@ -10,6 +10,18 @@
     Background="#fff"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder />
+                <TextBlock
+                    Margin="20,-10,0,0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
     <!--  DataContext="{Binding RelativeSource={RelativeSource Self}}"  -->
     <StackPanel Margin="20,10">
         <TextBlock
@@ -29,8 +41,9 @@
                 IsEditable="True"
                 IsReadOnly="True"
                 ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
-                Text="-- Select an option --" />
+                SelectedItem="{Binding SelectedItem, ValidatesOnNotifyDataErrors=True, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Text="-- Select an option --"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
 
 
 
