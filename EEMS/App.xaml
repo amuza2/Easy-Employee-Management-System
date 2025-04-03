@@ -112,6 +112,7 @@
 
 
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
         <Style x:Key="topButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#6e7783" />

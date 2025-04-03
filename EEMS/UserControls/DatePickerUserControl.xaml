@@ -5,9 +5,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EEMS.UI.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="60"
+    d:DesignHeight="80"
     d:DesignWidth="300"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder />
+                <TextBlock
+                    Margin="20,-10,0,0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+
     <StackPanel Margin="20,10">
         <TextBlock
             Margin="0,0,0,8"
@@ -21,7 +35,9 @@
             Height="30"
             FontSize="14"
             Foreground="#868686"
-            SelectedDate="{Binding SelectedDate, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            SelectedDate="{Binding SelectedDate, ValidatesOnNotifyDataErrors=True, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+            Text="--Select Date--"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
     </StackPanel>
 
 </UserControl>

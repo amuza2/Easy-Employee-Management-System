@@ -9,6 +9,16 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder x:Name="textBox" />
+                <TextBlock Foreground="Red" Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -26,58 +36,67 @@
             Grid.Column="0"
             Caption="Job Title"
             Hint="Enter your job title"
-            Text="{Binding JobTitle, Mode=TwoWay}" />
+            Text="{Binding JobTitle, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:TextBoxUserControl
             Grid.Row="1"
             Grid.Column="0"
             Caption="Essential Training"
             Hint="Enter your Essential Training"
-            Text="{Binding EssentialTraining, Mode=TwoWay}" />
+            Text="{Binding EssentialTraining, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:TextBoxUserControl
             Grid.Row="2"
             Grid.Column="0"
             Caption="Other Training"
             Hint="Enter other training"
-            Text="{Binding OtherTraining, Mode=TwoWay}" />
+            Text="{Binding OtherTraining, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:TextBoxUserControl
             Grid.Row="3"
             Grid.Column="0"
             Caption="Language Spoken"
             Hint="Enter your spoken language"
-            Text="{Binding SpokenLanguages, Mode=TwoWay}" />
+            Text="{Binding SpokenLanguages, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:NumericUpDownUserControl
             Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Left"
             Caption="Experience"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
             Value="{Binding Experience, Mode=TwoWay}" />
         <UC:DatePickerUserControl
             Grid.Row="2"
             Grid.Column="1"
             HorizontalAlignment="Left"
             Caption="Recrutment Date"
-            SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+            SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:ComboBoxUserControl
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Left"
             Caption="Department"
             Items="{Binding DepartmentItems}"
-            SelectedItem="{Binding SelectedDeparment, Mode=TwoWay}" />
+            SelectedItem="{Binding SelectedDeparment, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:ComboBoxUserControl
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="left"
             Caption="Job Nature"
-            Items="{Binding JobNatureItems}"
-            SelectedItem="{Binding SelectedJobNature, Mode=TwoWay}" />
+            Items="{Binding JobNatureItems, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedJobNature, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <UC:RadioButtonGroupUserControl
             Grid.Row="3"
             Grid.Column="1"
             Caption="Status"
             Option1Text="Active"
             Option2Text="Inactive"
-            SelectedValue="{Binding SelectedStatus, Mode=TwoWay}" />
+            SelectedValue="{Binding SelectedStatus, Mode=TwoWay}"
+            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
         <!--<UC:ComboBoxUserControl
         Grid.Row="3"
         Grid.Column="1"
