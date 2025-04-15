@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace EEMS.UI.Views.Employee;
+namespace EEMS.UI.Views.Employees;
 
 /// <summary>
 /// Interaction logic for AddAndEditWindow.xaml

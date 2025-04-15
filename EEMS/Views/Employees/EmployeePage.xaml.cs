@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace EEMS.UI.Views.Employee
+namespace EEMS.UI.Views.Employees
 {
     /// <summary>
     /// Interaction logic for EmployeePage.xaml

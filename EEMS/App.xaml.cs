@@ -3,7 +3,7 @@ using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess;
 using EEMS.UI.UserControls;
 using EEMS.UI.ViewModels;
-using EEMS.UI.Views.Employee;
+using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
