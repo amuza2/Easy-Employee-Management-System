@@ -1,4 +1,4 @@
-﻿using EEMS.UI.Views.Employee;
+﻿using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
 using EEMS.UI.ViewModels;
 using System.Windows;

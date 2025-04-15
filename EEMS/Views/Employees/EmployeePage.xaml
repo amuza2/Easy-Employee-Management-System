@@ -1,11 +1,11 @@
 ﻿<Page
-    x:Class="EEMS.UI.Views.Employee.EmployeePage"
+    x:Class="EEMS.UI.Views.Employees.EmployeePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:UC="clr-namespace:EEMS.UI.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:EEMS.UI.Views.Employee"
+    xmlns:local="clr-namespace:EEMS.UI.Views.Employees"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="EmployeePage"
     d:DesignHeight="450"
@@ -82,7 +82,7 @@
             Margin="0,-1,0,10"
             Background="#dae2ea" />
 
-        <!--  Members Datagrid  -->
+        <!--  Employees Datagrid  -->
         <DataGrid
             x:Name="membersDataGrid"
             Grid.Row="3"
@@ -90,7 +90,17 @@
             ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
             ItemsSource="{Binding Employees}"
             RowStyle="{DynamicResource DataGridRowStyle1}"
+            SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
             Style="{DynamicResource DataGridStyle1}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding ViewEmployeeCommand}" Header="Afficher" />
+                    <MenuItem Command="{Binding EditEmployeeCommand}" Header="Editer" />
+                    <MenuItem Command="{Binding DeleteEmployeeCommand}" Header="Archiver" />
+                    <MenuItem Command="{Binding DeleteEmployeeCommand}" Header="Supprimer" />
+                    <MenuItem Command="{Binding PrintEmployeeCommand}" Header="Imprimer" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="auto"
@@ -100,12 +110,16 @@
                     IsReadOnly="True" />
                 <DataGridTemplateColumn
                     Width="*"
-                    Header=" Full name"
+                    Header=" Nom et Prenom"
                     IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center" Text="{Binding FullName}" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding FirstName}" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding LastName}" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -129,29 +143,16 @@
                     Width="*"
                     Binding="{Binding Phone}"
                     CanUserResize="False"
-                    Header="Phone Number"
+                    Header="Numero de telephone"
                     IsReadOnly="True" />
 
-                <DataGridTemplateColumn
-                    Width="auto"
-                    Header=" Operations"
-                    IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridViewButton}">
-                                    <Icon:PackIconMaterial Kind="EyeOutline" Style="{StaticResource gridButtonIcon}" />
-                                </Button>
-                                <Button Margin="5,0,0,0" Style="{StaticResource gridEditButton}">
-                                    <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}" />
-                                </Button>
-                                <Button Margin="5,0,0,0" Style="{StaticResource gridRemoveButton}">
-                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}" />
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding IsActive}"
+                    CanUserResize="False"
+                    Header="En travaille"
+                    IsReadOnly="True" />
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

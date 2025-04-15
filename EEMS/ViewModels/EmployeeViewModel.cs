@@ -1,61 +1,91 @@
-﻿using EEMS.BusinessLogic.DTOs;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using EEMS.BusinessLogic.DTOs;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.BusinessLogic.Services;
+using EEMS.UI.MVVM;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
-namespace EEMS.UI.Views.Employee
+namespace EEMS.UI.Views.Employees;
+
+public partial class EmployeeViewModel : ObservableObject
 {
-    public class EmployeeViewModel
+    private readonly IEmployeeManagementService _employeeManagementService;
+    public ObservableCollection<DataAccess.Models.Employee> Employees { get; set; }
+
+    //[NotifyCanExecuteChangedFor(nameof(ViewEmployeeCommand))]
+    [ObservableProperty]
+    private DataAccess.Models.Employee _selectedEmployee;
+
+    [ObservableProperty]
+    private bool _isEditing;
+    
+    public bool IsNotEditing => !IsEditing;
+
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private void ViewEmployee(object obj)
     {
-        private readonly IEmployeeManagementService _employeeManagementService;
-        public ObservableCollection<EmployeeDTO> Employees { get; set; }
-        
-        public ICommand AddEmployeeCommand { get; }
-        
-        public EmployeeViewModel(IEmployeeService employeeService,
-                                IEmployeeManagementService employeeManagementService,
-                                PersonalInformationViewModel personalInformationViewModel)
+        if (SelectedEmployee != null)
         {
-            _employeeManagementService = employeeManagementService;
-            Employees = new ObservableCollection<EmployeeDTO>();
-            AddEmployeeCommand = new RelayCommand(OpenAddEmployeeForm);
-            LoadMembers();
+            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee);
+            var viewEmployeeDetailsWindow = new ViewEmployeeDetails(employeeDetails);
+            viewEmployeeDetailsWindow.ShowDialog();
+            SelectedEmployee = null;
         }
-
-        private void OpenAddEmployeeForm()
-        {
-            var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(),
-                                                          new JobInformationViewModel(_employeeManagementService),
-                                                          _employeeManagementService);
-
-            viewModel.UpdateGridWindowData = LoadMembers;
-
-            var AddAndEditWindow = new AddAndEditWindow(viewModel);
-            AddAndEditWindow.ShowDialog();
-        }
-        
-
-        private async void LoadMembers()
-        {
-            Employees.Clear();
-            var employees = await _employeeManagementService.GetAsync();
-            foreach (var employee in employees)
-            {
-                Employees.Add(new EmployeeDTO
-                {
-                    Id = employee.Id,
-                    FullName = $"{employee.FirstName} {employee.LastName}",
-                    JobTitle = employee.JobTitle,
-                    Email = employee.Email,
-                    Phone = employee.Phone
-                });
-            }
-
-        }
-
-        
     }
+
+    private bool CanPerformUserAction(object obj)
+    {
+        return SelectedEmployee != null && !IsEditing;
+    }
+
+    partial void OnIsEditingChanged(bool value)
+    {
+        OnPropertyChanged(nameof(IsNotEditing));
+        ViewEmployeeCommand.NotifyCanExecuteChanged();
+    }
+
+    partial void OnSelectedEmployeeChanged(DataAccess.Models.Employee value)
+    {
+        ViewEmployeeCommand.NotifyCanExecuteChanged();
+    }
+
+
+    public EmployeeViewModel(IEmployeeManagementService employeeManagementService)
+    {
+        _employeeManagementService = employeeManagementService;
+        Employees = new ObservableCollection<DataAccess.Models.Employee>();
+        IsEditing = false;
+        LoadEmployees();
+    }
+
+    [RelayCommand]
+    private void AddEmployee()
+    {
+        var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(),
+                                                      new JobInformationViewModel(_employeeManagementService),
+                                                      _employeeManagementService);
+
+        viewModel.UpdateGridWindowData = LoadEmployees;
+
+        var AddAndEditWindow = new AddAndEditWindow(viewModel);
+        AddAndEditWindow.ShowDialog();
+    }
+    
+
+    private async void LoadEmployees()
+    {
+        Employees.Clear();
+        var employees = await _employeeManagementService.GetAsync();
+        foreach (var employee in employees)
+        {
+            Employees.Add(employee);
+        }
+
+    }
+
+    
 }
