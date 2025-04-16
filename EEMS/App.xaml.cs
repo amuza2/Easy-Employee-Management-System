@@ -50,6 +50,7 @@ public partial class App : Application
         service.AddTransient<PersonalInformationViewModel>();
         service.AddTransient<JobInformationViewModel>();
         service.AddTransient<AddAndEditWindowViewModel>();
+        service.AddTransient<ViewEmployeeDetailsViewModel>();
         
 
         // Register pages
@@ -63,6 +64,7 @@ public partial class App : Application
         //Register Views
         service.AddTransient<MainWindow>();
         service.AddTransient<AddAndEditWindow>();
+        service.AddTransient<ViewEmployeeDetails>();
 
         // Register Navigation Service
         service.AddTransient<INavigationService, NavigationService>();

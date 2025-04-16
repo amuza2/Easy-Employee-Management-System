@@ -39,8 +39,8 @@ namespace EEMS.UI.ViewModels
         public Brush SeparatorColor
         {
             get { return _separatorColor; }
-            set 
-            { 
+            set
+            {
                 _separatorColor = value;
                 OnPropertyChanged(nameof(SeparatorColor));
             }

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.DTOs;
 using EEMS.BusinessLogic.Interfaces;
+using EEMS.BusinessLogic.Services;
 using EEMS.UI.MVVM;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Shared;
@@ -30,7 +31,7 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (SelectedEmployee != null)
         {
-            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee);
+            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee, _employeeManagementService);
             var viewEmployeeDetailsWindow = new ViewEmployeeDetails(employeeDetails);
             viewEmployeeDetailsWindow.ShowDialog();
             SelectedEmployee = null;
