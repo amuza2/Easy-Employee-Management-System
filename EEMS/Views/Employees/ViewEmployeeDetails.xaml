@@ -16,6 +16,7 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
+
     <Border
         Background="#f2f5f8"
         CornerRadius="10"
@@ -160,7 +161,7 @@
                             <TextBlock
                                 Margin="0,0,0,10"
                                 FontSize="16"
-                                Text="{Binding DateOfBirth}" />
+                                Text="{Binding DateOfBirth, StringFormat='{}{0:MM/dd/yyyy}'}" />
 
                             <TextBlock
                                 FontSize="16"
@@ -214,7 +215,7 @@
                             <TextBlock
                                 Margin="0,0,0,10"
                                 FontSize="16"
-                                Text="{Binding RecruitmentDate}" />
+                                Text="{Binding RecruitmentDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                         </StackPanel>
                     </Grid>
 

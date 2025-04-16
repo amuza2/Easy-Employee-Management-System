@@ -22,6 +22,10 @@ public class EmployeeManagementService : IEmployeeManagementService
     {
         return await _departmentService.GetDepartmentIdByNameAsync(deparmtentName);
     }
+    public Task<Department> GetAsync(int id)
+    {
+        return _departmentService.GetAsync(id);
+    }
 
     public async Task<int> GetJobNatureByName(string jobNatureName)
     {
