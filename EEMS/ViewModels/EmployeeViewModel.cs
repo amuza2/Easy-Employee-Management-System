@@ -8,6 +8,8 @@ using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace EEMS.UI.Views.Employees;
@@ -64,6 +66,12 @@ public partial class EmployeeViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void GetAllEmployee()
+    {
+        LoadEmployees();
+    }
+
+    [RelayCommand]
     private void AddEmployee()
     {
         var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(),
@@ -75,7 +83,46 @@ public partial class EmployeeViewModel : ObservableObject
         var AddAndEditWindow = new AddAndEditWindow(viewModel);
         AddAndEditWindow.ShowDialog();
     }
-    
+
+    [RelayCommand]
+    private async void DeleteEmployee()
+    {
+        if (SelectedEmployee != null)
+        {
+            var result = MessageBox.Show($"Are you sure you want to delete {SelectedEmployee.FirstName} {SelectedEmployee.LastName}?", "Delete Employee", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                var success = await _employeeManagementService.DeleteEmployeeByIdAsync(SelectedEmployee.Id);
+                if(success)
+                {
+                    Employees.Remove(SelectedEmployee);
+                    SelectedEmployee = null;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to delete the employee.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+    }
+
+    [RelayCommand]
+    private void PrintEmployee()
+    {
+        if (SelectedEmployee != null)
+        {
+            var printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                var document = new FlowDocument();
+                var paragraph = new Paragraph(new Run($"First name: {SelectedEmployee.FirstName}\nLast name: {SelectedEmployee.LastName}"));
+                document.Blocks.Add(paragraph);
+
+                var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
+                printDialog.PrintDocument(paginator, "Employee Details");
+            }
+        }
+    }
 
     private async void LoadEmployees()
     {
