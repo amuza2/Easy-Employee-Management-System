@@ -38,14 +38,16 @@ public class EmployeeService : IEmployeeService
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         var emp = await GetAsync(id);
         if (emp != null)
         {
             _context.Employees.Remove(emp);
             await _context.SaveChangesAsync();
+            return true;
         }
+        return false;
     }
 
     // 

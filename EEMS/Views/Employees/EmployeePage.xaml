@@ -46,6 +46,7 @@
             Orientation="Horizontal">
             <Button
                 BorderBrush="{StaticResource PrimaryColor}"
+                Command="{Binding GetAllEmployeeCommand}"
                 Content="All"
                 Style="{StaticResource tabButton}" />
             <Button Content="Absence" Style="{StaticResource tabButton}" />
@@ -96,7 +97,7 @@
                 <ContextMenu>
                     <MenuItem Command="{Binding ViewEmployeeCommand}" Header="Afficher" />
                     <MenuItem Command="{Binding EditEmployeeCommand}" Header="Editer" />
-                    <MenuItem Command="{Binding DeleteEmployeeCommand}" Header="Archiver" />
+                    <MenuItem Command="{Binding ArchiveEmployeeCommand}" Header="Archiver" />
                     <MenuItem Command="{Binding DeleteEmployeeCommand}" Header="Supprimer" />
                     <MenuItem Command="{Binding PrintEmployeeCommand}" Header="Imprimer" />
                 </ContextMenu>

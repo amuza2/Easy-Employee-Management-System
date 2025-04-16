@@ -51,4 +51,9 @@ public class EmployeeManagementService : IEmployeeManagementService
     {
         return await _employeeService.GetAsync();
     }
+
+    public async Task<bool> DeleteEmployeeByIdAsync(int id)
+    {
+        return await _employeeService.DeleteAsync(id);
+    }
 }

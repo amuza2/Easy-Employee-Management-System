@@ -11,4 +11,5 @@ public interface IEmployeeManagementService
     Task<IEnumerable<JobNature>> GetJobNaturesAsync();
     Task<int> AddEmployeeAsync(Employee employee);
     Task<IEnumerable<Employee>> GetAsync();
+    Task<bool> DeleteEmployeeByIdAsync(int id);
 }
