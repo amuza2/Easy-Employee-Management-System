@@ -21,12 +21,16 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private Brush _separatorColor;
 
+    [ObservableProperty]
+    private string _activePage;
+
 
     public double MenuWidth => IsMenuExpanded ? 200 : 50;
 
     public MainWindowViewModel(INavigationService navigationService)
     {
         _navigationService = navigationService;
+        ActivePage = "Dashboard";
         NavigateToDashboardPage();
     }
 
@@ -35,24 +39,27 @@ public partial class MainWindowViewModel : ObservableObject
     {
         IsMenuExpanded = !IsMenuExpanded;
         UpdateColors();
+        OnPropertyChanged(nameof(MenuWidth));
     }
 
     private void UpdateColors()
     {
         SetColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#4880ff");
         SeparatorColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#6895ff");
-
-    }
-
-    [RelayCommand]
-    private void NavigateToEmployeePage()
-    {
-        _navigationService.NavigateTo<EmployeePage>();
     }
 
     [RelayCommand]
     private void NavigateToDashboardPage()
     {
+        ActivePage = "Dashboard";
         _navigationService.NavigateTo<DashboardPage>();
     }
+
+    [RelayCommand]
+    private void NavigateToEmployeePage()
+    {
+        ActivePage = "Employee";
+        _navigationService.NavigateTo<EmployeePage>();
+    }
+
 }
