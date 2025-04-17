@@ -18,6 +18,22 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <Storyboard x:Key="ExpandMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="Sidebar"
+                Storyboard.TargetProperty="Width"
+                To="200"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Key="CollapseMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="Sidebar"
+                Storyboard.TargetProperty="Width"
+                To="50"
+                Duration="0:0:0.2" />
+        </Storyboard>
     </Window.Resources>
 
 
@@ -52,7 +68,9 @@
                 </Button>
 
                 <Border
+                    x:Name="Sidebar"
                     Grid.Row="1"
+                    Width="{Binding MenuWidth}"
                     Margin="0,6,0,-6"
                     Background="#4880ff"
                     CornerRadius="0 50 0 30">
@@ -85,28 +103,87 @@
 
                         <!--  Manu Button  -->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Command="{Binding NavigateToDashboardPageCommand}" Style="{StaticResource menuButton}">
+                            <Button Command="{Binding NavigateToDashboardPageCommand}">
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource menuButton}" TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ActivePage}" Value="Dashboard">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="#6895ff"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="Transparent"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Background>
+                                    <SolidColorBrush Color="Transparent" />
+                                </Button.Background>
+
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}" />
                                     <TextBlock Text="Dashboard" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
-                            <Button
-                                Background="#6895ff"
-                                Command="{Binding NavigateToEmployeePageCommand}"
-                                Foreground="White"
-                                Style="{StaticResource menuButton}">
+                            <Button Command="{Binding NavigateToEmployeePageCommand}">
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource menuButton}" TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ActivePage}" Value="Employee">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="#6895ff"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="Transparent"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Background>
+                                    <SolidColorBrush Color="Transparent" />
+                                </Button.Background>
+
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Employees" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </StackPanel>
-                            </Button>
-
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="CashMultiple" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Salary" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <TextBlock Text="Employee" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
@@ -116,6 +193,25 @@
                                     <TextBlock Text="Condidates" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
+
+                            <!--<Button Command="{Binding NavigateToEmployeePageCommand}">
+                            <Button.Style>
+                            <Style BasedOn="{StaticResource menuButton}" TargetType="Button">
+                            <Style.Triggers>
+                            <DataTrigger Binding="{Binding ActivePage}" Value="Employee">
+                            <Setter Property="Background" Value="#6895ff" />
+                            <Setter Property="Foreground" Value="White" />
+                            </DataTrigger>
+                            </Style.Triggers>
+                            </Style>
+                            </Button.Style>
+                            <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Employees" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                            </Button>-->
+
+
 
                         </StackPanel>
 
@@ -131,6 +227,7 @@
                         </Button>
                     </DockPanel>
                 </Border>
+
             </Grid>
 
             <!--  Main Section  -->
