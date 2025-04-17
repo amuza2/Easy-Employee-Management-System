@@ -3,6 +3,7 @@ using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess;
 using EEMS.UI.UserControls;
 using EEMS.UI.ViewModels;
+using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -55,10 +56,12 @@ public partial class App : Application
 
         // Register pages
         service.AddTransient<EmployeePage>();
+        service.AddTransient<DashboardPage>();
 
 
         //Resigter User Control
         service.AddTransient<PersonalInformationUserControl>();
+        service.AddTransient<JobInformationUserControl>();
 
 
         //Register Views

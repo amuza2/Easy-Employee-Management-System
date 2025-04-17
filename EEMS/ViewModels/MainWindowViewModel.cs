@@ -1,62 +1,58 @@
-﻿using EEMS.UI.MVVM;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using EEMS.UI.MVVM;
+using EEMS.UI.Views.Dashboard;
+using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
-using System.Windows.Input;
 using System.Windows.Media;
 
-namespace EEMS.UI.ViewModels
+namespace EEMS.UI.ViewModels;
+
+public partial class MainWindowViewModel : ObservableObject
 {
-    public class MainWindowViewModel : ViewModelBase
+    private readonly INavigationService _navigationService;
+
+    [ObservableProperty]
+    private bool _isMenuExpanded = true;
+    
+    [ObservableProperty]
+    private Brush _setColor = Brushes.White;
+
+    [ObservableProperty]
+    private Brush _separatorColor;
+
+
+    public double MenuWidth => IsMenuExpanded ? 200 : 50;
+
+    public MainWindowViewModel(INavigationService navigationService)
     {
-        public ICommand ToggleMenuCommand { get; }
+        _navigationService = navigationService;
+        NavigateToDashboardPage();
+    }
 
-        private bool _isMenuExpanded = true;
-        public bool IsMenuExpanded
-        {
-            get => _isMenuExpanded;
-            set
-            {
-                _isMenuExpanded = value;
-                OnPropertyChanged(nameof(IsMenuExpanded));
-                OnPropertyChanged(nameof(MenuWidth));
-                SetColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#4880ff");
-                SeparatorColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#6895ff");
-            }
-        }
+    [RelayCommand]
+    private void ToggleMenu()
+    {
+        IsMenuExpanded = !IsMenuExpanded;
+        UpdateColors();
+    }
 
-        private Brush _setColor = Brushes.White;
-        public Brush SetColor
-        {
-            get => _setColor;
-            set
-            {
-                _setColor = value;
-                OnPropertyChanged(nameof(SetColor));
-            }
-        }
+    private void UpdateColors()
+    {
+        SetColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#4880ff");
+        SeparatorColor = IsMenuExpanded ? Brushes.White : (Brush)new BrushConverter().ConvertFromString("#6895ff");
 
-        private Brush _separatorColor;
+    }
 
-        public Brush SeparatorColor
-        {
-            get { return _separatorColor; }
-            set
-            {
-                _separatorColor = value;
-                OnPropertyChanged(nameof(SeparatorColor));
-            }
-        }
+    [RelayCommand]
+    private void NavigateToEmployeePage()
+    {
+        _navigationService.NavigateTo<EmployeePage>();
+    }
 
-
-        public double MenuWidth => IsMenuExpanded ? 200 : 50;
-
-        public MainWindowViewModel()
-        {
-            ToggleMenuCommand = new RelayCommand(ToggleMenu);
-        }
-
-        private void ToggleMenu()
-        {
-            IsMenuExpanded = !IsMenuExpanded;
-        }
+    [RelayCommand]
+    private void NavigateToDashboardPage()
+    {
+        _navigationService.NavigateTo<DashboardPage>();
     }
 }

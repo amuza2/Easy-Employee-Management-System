@@ -85,22 +85,16 @@
 
                         <!--  Manu Button  -->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Command="{Binding NavigateToDashboardPageCommand}" Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}" />
                                     <TextBlock Text="Dashboard" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Projects" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </StackPanel>
-                            </Button>
-
                             <Button
                                 Background="#6895ff"
+                                Command="{Binding NavigateToEmployeePageCommand}"
                                 Foreground="White"
                                 Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">

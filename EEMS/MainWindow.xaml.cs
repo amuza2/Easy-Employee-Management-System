@@ -17,8 +17,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         navigationService.SetFrame(MainFrame);
-        navigationService.NavigateTo<EmployeePage>();
-        DataContext = new MainWindowViewModel();
+        DataContext = new MainWindowViewModel(navigationService);
     }
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)

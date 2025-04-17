@@ -85,6 +85,20 @@ public partial class EmployeeViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void EditEmployee()
+    {
+        if (SelectedEmployee != null)
+        {
+            var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(_employeeManagementService, SelectedEmployee),
+                                                          new JobInformationViewModel(_employeeManagementService, SelectedEmployee),
+                                                          _employeeManagementService);
+            //viewModel.UpdateGridWindowData = LoadEmployees;
+            var addAndEditWindow = new AddAndEditWindow(viewModel);
+            addAndEditWindow.ShowDialog();
+        }
+    }
+
+    [RelayCommand]
     private async void DeleteEmployee()
     {
         if (SelectedEmployee != null)
