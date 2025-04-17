@@ -1,4 +1,7 @@
-﻿using EEMS.UI.MVVM;
+﻿using EEMS.BusinessLogic.Interfaces;
+using EEMS.DataAccess.Models;
+using EEMS.UI.MVVM;
+using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
@@ -7,6 +10,8 @@ namespace EEMS.UI.ViewModels;
 
 public class PersonalInformationViewModel : ViewModelBase
 {
+    private readonly IEmployeeManagementService _employeeManagementService;
+
     private string _firstName;
 
     public string FirstName
@@ -158,6 +163,21 @@ public class PersonalInformationViewModel : ViewModelBase
     {
         FamilySituation = new ObservableCollection<string>() { "Married", "Single" };
         SelectedFamilySituation = "Select an option";
+    }
+
+    public PersonalInformationViewModel(IEmployeeManagementService employeeManagementService, Employee employee)
+    {
+        _employeeManagementService = employeeManagementService;
+        FirstName = employee.FirstName;
+        LastName = employee.LastName;
+        Phone = employee.Phone.ToString();
+        Email = employee.Email;
+        Address = employee.Address;
+        BirthLocation = employee.BirthLocation;
+        Residence = employee.Residence;
+        SelectedFamilySituation = employee.FamilySituation;
+        SelectedDate = employee.DateOfBirth.Date;
+        //SelectedGender = employee.Gender;
     }
 
     public void ValidateAllProperties()

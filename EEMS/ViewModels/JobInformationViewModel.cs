@@ -1,5 +1,7 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
+using EEMS.DataAccess.Models;
 using EEMS.UI.MVVM;
+using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
@@ -152,6 +154,21 @@ public class JobInformationViewModel : ViewModelBase
 
         _ = GetValuesToFillControls(); 
         SelectedDate = DateTime.Now.Date;
+    }
+
+    public JobInformationViewModel(IEmployeeManagementService employeeManagementService, Employee employee)
+    {
+        _employeeManagementService = employeeManagementService;
+
+        JobTitle = employee.JobTitle;
+        EssentialTraining = employee.EssentialTraining;
+        OtherTraining = employee.Training;
+        SpokenLanguages = employee.LanguagesSpoken;
+        Experience = employee.Experience ?? 0;
+        SelectedDeparment = "IT";
+        SelectedJobNature = "Full-time";
+        SelectedDate = employee.RecruitmentDate.Date;
+        SelectedStatus = employee.IsActive ? "Active" : "Inactive";
     }
 
     private async Task GetValuesToFillControls()
