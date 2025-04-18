@@ -24,6 +24,9 @@ namespace EEMS.UI.Views.Shared
             this.WindowState = WindowState.Minimized;
         }
 
+        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
 
+        }
     }
 }
