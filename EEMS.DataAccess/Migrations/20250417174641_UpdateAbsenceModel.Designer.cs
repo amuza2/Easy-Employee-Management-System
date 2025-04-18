@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EEMS.DataAccess.Migrations
 {
     [DbContext(typeof(EEMSDbContext))]
-    partial class EEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250417174641_UpdateAbsenceModel")]
+    partial class UpdateAbsenceModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

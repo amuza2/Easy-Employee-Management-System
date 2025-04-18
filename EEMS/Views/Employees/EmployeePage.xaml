@@ -45,11 +45,35 @@
             Margin="0,10,0,0"
             Orientation="Horizontal">
             <Button
-                BorderBrush="{StaticResource PrimaryColor}"
-                Command="{Binding GetAllEmployeeCommand}"
-                Content="All"
-                Style="{StaticResource tabButton}" />
-            <Button Content="Absence" Style="{StaticResource tabButton}" />
+                BorderBrush="{Binding SelectedTab, Converter={StaticResource TabSelectedToBrushConverter}, ConverterParameter=All}"
+                Command="{Binding SelectTabCommand}"
+                CommandParameter="All"
+                Content="All">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource tabButton}" TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedTab}" Value="All">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                BorderBrush="{Binding SelectedTab, Converter={StaticResource TabSelectedToBrushConverter}, ConverterParameter=Absence}"
+                Command="{Binding SelectTabCommand}"
+                CommandParameter="Absence"
+                Content="Absence">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource tabButton}" TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedTab}" Value="Absence">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Training" Style="{StaticResource tabButton}" />
             <Button Content="Vacation" Style="{StaticResource tabButton}" />
             <Button Content="Sanction" Style="{StaticResource tabButton}" />
@@ -97,6 +121,7 @@
                 <ContextMenu>
                     <MenuItem Command="{Binding ViewEmployeeCommand}" Header="Afficher" />
                     <MenuItem Command="{Binding EditEmployeeCommand}" Header="Editer" />
+                    <MenuItem Command="{Binding EmployeeAbsenceCommand}" Header="Absence" />
                     <MenuItem Command="{Binding ArchiveEmployeeCommand}" Header="Archiver" />
                     <MenuItem Command="{Binding DeleteEmployeeCommand}" Header="Supprimer" />
                     <MenuItem Command="{Binding PrintEmployeeCommand}" Header="Imprimer" />

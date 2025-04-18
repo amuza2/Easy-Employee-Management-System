@@ -52,11 +52,11 @@ namespace EEMS.DataAccess
                 .WithMany(e => e.Absences)
                 .HasForeignKey(a => a.EmployeeId);
 
-            // One to Many: AbsenceType -> Absence
-            modelBuilder.Entity<Absence>()
-                .HasOne(a => a.AbsenceType)
-                .WithMany(ab => ab.Absences)
-                .HasForeignKey(a => a.AbsenceTypeId);
+            //// One to Many: AbsenceType -> Absence
+            //modelBuilder.Entity<Absence>()
+            //    .HasOne(a => a.AbsenceType)
+            //    .WithMany(ab => ab.Absences)
+            //    .HasForeignKey(a => a.AbsenceTypeId);
 
             // Many to Many: Employee -> EmployeeDrivingLicense
             modelBuilder.Entity<EmployeeDrivingLicense>()

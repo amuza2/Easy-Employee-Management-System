@@ -1,16 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EEMS.BusinessLogic.DTOs;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.BusinessLogic.Services;
-using EEMS.UI.MVVM;
+using EEMS.UI.Enums;
 using EEMS.UI.ViewModels;
+using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 
 namespace EEMS.UI.Views.Employees;
 
@@ -19,12 +18,12 @@ public partial class EmployeeViewModel : ObservableObject
     private readonly IEmployeeManagementService _employeeManagementService;
     public ObservableCollection<DataAccess.Models.Employee> Employees { get; set; }
 
-    //[NotifyCanExecuteChangedFor(nameof(ViewEmployeeCommand))]
     [ObservableProperty]
     private DataAccess.Models.Employee _selectedEmployee;
 
-    [ObservableProperty]
-    private bool _isEditing;
+    [ObservableProperty] private string _selectedTab = "All";
+
+    [ObservableProperty] private bool _isEditing;
     
     public bool IsNotEditing => !IsEditing;
 
@@ -39,6 +38,14 @@ public partial class EmployeeViewModel : ObservableObject
             SelectedEmployee = null;
         }
     }
+
+    [RelayCommand]
+    private void SelectTab(string tabName)
+    {
+        //Debug.WriteLine($"Selected tab: {tabName}");
+        SelectedTab = tabName;
+    }
+
 
     private bool CanPerformUserAction(object obj)
     {
@@ -62,13 +69,25 @@ public partial class EmployeeViewModel : ObservableObject
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<DataAccess.Models.Employee>();
         IsEditing = false;
-        LoadEmployees();
+        SelectedTab = "All";
+        LoadDataForTab("All");
     }
 
-    [RelayCommand]
-    private void GetAllEmployee()
+    partial void OnSelectedTabChanged(string value)
     {
-        LoadEmployees();
+        LoadDataForTab(value);
+    }
+
+    private async void LoadDataForTab(string tab)
+    {
+        if (tab == "All")
+        {
+            GetAllEmployees();
+        }
+        else if (tab == "Absence")
+        {
+            GetAllAbsence();
+        }
     }
 
     [RelayCommand]
@@ -78,7 +97,7 @@ public partial class EmployeeViewModel : ObservableObject
                                                       new JobInformationViewModel(_employeeManagementService),
                                                       _employeeManagementService);
 
-        viewModel.UpdateGridWindowData = LoadEmployees;
+        viewModel.UpdateGridWindowData = GetAllEmployees;
 
         var AddAndEditWindow = new AddAndEditWindow(viewModel);
         AddAndEditWindow.ShowDialog();
@@ -103,20 +122,31 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (SelectedEmployee != null)
         {
-            var result = MessageBox.Show($"Are you sure you want to delete {SelectedEmployee.FirstName} {SelectedEmployee.LastName}?", "Delete Employee", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
+            var result = await DialogService.ShowTwoButtonMessageBoxAsync(
+            $"Are you sure you want to delete {SelectedEmployee.FirstName} {SelectedEmployee.LastName}?",
+            "Delete Employee",
+            "Delete", "Cancel");
+            if (result == CustomMessageBoxResult.Confirmed)
             {
-                var success = await _employeeManagementService.DeleteEmployeeByIdAsync(SelectedEmployee.Id);
-                if(success)
+                var success = await _employeeManagementService.EmployeeService.DeleteAsync(SelectedEmployee.Id);
+                if (success)
                 {
                     Employees.Remove(SelectedEmployee);
                     SelectedEmployee = null;
                 }
                 else
                 {
-                    MessageBox.Show("Failed to delete the employee.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    await DialogService.ShowSingleButtonMessageBoxAsync("Failed to delete the employee.", "Error", "Ok");
                 }
             }
+            else
+            {
+                return;
+            }
+            await DialogService.ShowSingleButtonMessageBoxAsync(
+                $"Employee {SelectedEmployee.FirstName} {SelectedEmployee.LastName} has been deleted successfully.",
+                "Success",
+                "OK");
         }
     }
 
@@ -138,10 +168,10 @@ public partial class EmployeeViewModel : ObservableObject
         }
     }
 
-    private async void LoadEmployees()
+    private async void GetAllEmployees()
     {
         Employees.Clear();
-        var employees = await _employeeManagementService.GetAsync();
+        var employees = await _employeeManagementService.EmployeeService.GetAsync();
         foreach (var employee in employees)
         {
             Employees.Add(employee);
@@ -149,5 +179,28 @@ public partial class EmployeeViewModel : ObservableObject
 
     }
 
-    
+    [RelayCommand]
+    private void EmployeeAbsence()
+    {
+        if (SelectedEmployee != null)
+        {
+            var employeeAbsenceViewModel = new EmployeeAbsenceViewModel(SelectedEmployee, _employeeManagementService);
+            var employeeAbsenceWindow = new AbsenceWindow(employeeAbsenceViewModel);
+            employeeAbsenceWindow.ShowDialog();
+        }
+    }
+
+    [RelayCommand]
+    private async void GetAllAbsence()
+    {
+        Employees.Clear();
+        var absences = await _employeeManagementService.AbsenceService.GetAsync();
+        foreach (var employee in absences)
+        {
+            Employees.Add(employee.Employee);
+        }
+
+    }
+
+
 }
