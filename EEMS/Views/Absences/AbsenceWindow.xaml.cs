@@ -1,5 +1,6 @@
 ﻿using EEMS.UI.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 
 namespace EEMS.UI.Views.Absences;
 
@@ -12,6 +13,11 @@ public partial class AbsenceWindow : Window
     {
         DataContext = employeeAbsenceViewModel;
         InitializeComponent();
+    }
+
+    private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Left) this.DragMove();
     }
 
     private void btnExit_Click(object sender, RoutedEventArgs e)

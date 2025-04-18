@@ -34,4 +34,9 @@ public partial class SingleButtonMessageBox : Window
     {
         this.WindowState = WindowState.Minimized;
     }
+
+    private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+
+    }
 }
