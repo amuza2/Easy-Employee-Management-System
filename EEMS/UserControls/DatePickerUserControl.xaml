@@ -33,6 +33,7 @@
             Name="dataPicker"
             Width="250"
             Height="30"
+            BorderBrush="LightGray"
             FontSize="14"
             Foreground="#868686"
             SelectedDate="{Binding SelectedDate, ValidatesOnNotifyDataErrors=True, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"

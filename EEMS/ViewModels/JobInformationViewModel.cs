@@ -1,13 +1,7 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
 using EEMS.DataAccess.Models;
 using EEMS.UI.MVVM;
-using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Net;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 
@@ -181,7 +175,7 @@ public class JobInformationViewModel : ViewModelBase
     {
         try
         {   
-            var jobNatureNames = await _employeeManagementService.GetJobNaturesAsync();
+            var jobNatureNames = await _employeeManagementService.JobNatureService.GetAsync();
             foreach (var item in jobNatureNames)
             {
                 JobNatureItems.Add(item.Name);
@@ -197,7 +191,7 @@ public class JobInformationViewModel : ViewModelBase
     {
         try
         {
-            var departments = await _employeeManagementService.GetDepartmentsAsync();
+            var departments = await _employeeManagementService.DepartmentService.GetAsync();
             foreach (var item in departments)
             {
                 DepartmentItems.Add(item.Name);

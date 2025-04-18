@@ -139,7 +139,7 @@ public class AddAndEditWindowViewModel : ViewModelBase
     {
 		try
 		{
-			var emp_id = await _employeeManagementService.AddEmployeeAsync(EmployeeData);
+			var emp_id = await _employeeManagementService.EmployeeService.AddAsync(EmployeeData);
 			var result = MessageBox.Show($"Employee with ID: {emp_id} has been added successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
 			if(result == MessageBoxResult.OK || result == MessageBoxResult.None)
@@ -171,7 +171,7 @@ public class AddAndEditWindowViewModel : ViewModelBase
     }
 
 
-    private void SavePersonalInformation()
+    private async Task SavePersonalInformation()
     {
         EmployeeData.FirstName = _personalInformationVM.FirstName;
         EmployeeData.LastName = _personalInformationVM.LastName;
@@ -193,8 +193,8 @@ public class AddAndEditWindowViewModel : ViewModelBase
         EmployeeData.RecruitmentDate = DateTime.Now.Date;
         EmployeeData.LanguagesSpoken = _jobInformationVM.SpokenLanguages;
         EmployeeData.Experience = _jobInformationVM.Experience;
-        EmployeeData.DepartmentId = await _employeeManagementService.GetDepartmentIdByName(_jobInformationVM.SelectedDeparment);
-        EmployeeData.JobNatureId = await _employeeManagementService.GetJobNatureByName(_jobInformationVM.SelectedJobNature);
+        EmployeeData.DepartmentId = await _employeeManagementService.DepartmentService.GetDepartmentIdByNameAsync(_jobInformationVM.SelectedDeparment);
+        EmployeeData.JobNatureId = await _employeeManagementService.JobNatureService.GetJobNatureIdByNameAsync(_jobInformationVM.SelectedJobNature);
     }
 
 

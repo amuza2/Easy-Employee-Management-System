@@ -34,7 +34,7 @@
             <ComboBox
                 Width="200"
                 Height="30"
-                BorderBrush="#97a5b4"
+                BorderBrush="red"
                 Focusable="False"
                 FontSize="14"
                 Foreground="#868686"

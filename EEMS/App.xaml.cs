@@ -3,6 +3,7 @@ using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess;
 using EEMS.UI.UserControls;
 using EEMS.UI.ViewModels;
+using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
@@ -45,6 +46,7 @@ public partial class App : Application
         service.AddTransient<IDepartmentService, DepartmentService>();
         service.AddTransient<IJobNatureService, JobNatureService>();
         service.AddTransient<IEmployeeManagementService, EmployeeManagementService>();
+        service.AddTransient<IAbsenceService, AbsenceService>();
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();
@@ -52,6 +54,7 @@ public partial class App : Application
         service.AddTransient<JobInformationViewModel>();
         service.AddTransient<AddAndEditWindowViewModel>();
         service.AddTransient<ViewEmployeeDetailsViewModel>();
+        service.AddTransient<EmployeeAbsenceViewModel>();
         
 
         // Register pages
@@ -68,6 +71,7 @@ public partial class App : Application
         service.AddTransient<MainWindow>();
         service.AddTransient<AddAndEditWindow>();
         service.AddTransient<ViewEmployeeDetails>();
+        service.AddTransient<AbsenceWindow>();
 
         // Register Navigation Service
         service.AddTransient<INavigationService, NavigationService>();
