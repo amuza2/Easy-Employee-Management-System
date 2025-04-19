@@ -7,29 +7,32 @@ namespace EEMS.BusinessLogic.Services;
 
 public class DepartmentService : IDepartmentService
 {
-    private readonly EEMSDbContext _context;
+    private readonly IDbContextFactory<EEMSDbContext> _contextFactory;
 
-    public DepartmentService(EEMSDbContext context)
+    public DepartmentService(IDbContextFactory<EEMSDbContext> contextFactory)
     {
-        _context = context;
+        _contextFactory = contextFactory;
     }
 
     public async Task<IEnumerable<Department>> GetAsync()
     {
-        return await _context.Departments.ToListAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Departments.ToListAsync();
     }
 
     public async Task<Department> GetAsync(int id)
     {
-        return await _context.Departments.FindAsync(id);
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Departments.FindAsync(id);
     }
 
     public async Task<int> GetDepartmentIdByNameAsync(string name)
     {
+        await using var context = _contextFactory.CreateDbContext();
         if (string.IsNullOrEmpty(name))
             throw new ArgumentException("Name cannot be null or empty.", nameof(name));
 
-        var departmentId = await _context.Departments
+        var departmentId = await context.Departments
                                         .Where(d => d.Name == name)
                                         .Select(i => i.Id)
                                         .FirstOrDefaultAsync();
@@ -42,25 +45,28 @@ public class DepartmentService : IDepartmentService
 
     public async Task<int> AddAsync(Department department)
     {
-        var added = _context.Departments.Add(department);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        var added = context.Departments.Add(department);
+        await context.SaveChangesAsync();
 
         return added.Entity.Id;
     }
 
     public async Task UpdateAsync(Department department)
     {
-        _context.Departments.Update(department);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        context.Departments.Update(department);
+        await context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
     {
+        await using var context = _contextFactory.CreateDbContext();
         var dep = await GetAsync(id);
         if (dep != null)
         {
-            _context.Departments.Remove(dep);
-            await _context.SaveChangesAsync();
+            context.Departments.Remove(dep);
+            await context.SaveChangesAsync();
         }
     }
 }

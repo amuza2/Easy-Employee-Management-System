@@ -7,44 +7,57 @@ namespace EEMS.BusinessLogic.Services;
 
 public class EmployeeService : IEmployeeService
 {
-    private readonly EEMSDbContext _context;
+    private readonly IDbContextFactory<EEMSDbContext> _contextFactory;
 
-    public EmployeeService(EEMSDbContext context)
+    public EmployeeService(IDbContextFactory<EEMSDbContext> contextFactory)
     {
-        _context = context;
+        _contextFactory = contextFactory;
     }
 
     public async Task<IEnumerable<Employee>> GetAsync()
     {
-        return await _context.Employees.ToListAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .ToListAsync();
     }
 
     public async Task<Employee> GetAsync(int id)
     {
-        return await _context.Employees.FindAsync(id);
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .FirstAsync(e => e.Id == id);
     }
 
     public async Task<int> AddAsync(Employee employee)
     {
-        var added = _context.Employees.Add(employee);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        var added = context.Employees.Add(employee);
+        await context.SaveChangesAsync();
 
         return added.Entity.Id;
     }
 
     public async Task UpdateAsync(Employee employee)
     {
-        _context.Employees.Update(employee);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        context.Employees.Update(employee);
+        await context.SaveChangesAsync();
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
+        await using var context = _contextFactory.CreateDbContext();
         var emp = await GetAsync(id);
         if (emp != null)
         {
-            _context.Employees.Remove(emp);
-            await _context.SaveChangesAsync();
+            context.Employees.Remove(emp);
+            await context.SaveChangesAsync();
             return true;
         }
         return false;

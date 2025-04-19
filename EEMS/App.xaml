@@ -10,6 +10,10 @@
 
         <Converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         <Converters:TabSelectedToBrushConverter x:Key="TabSelectedToBrushConverter" DefaultBrush="Transparent" />
+        <Converters:BooleanToAddEditConverter x:Key="BooleanToAddEditConverter" />
+        <Converters:BoolToRadioButtonConverter x:Key="BoolToRadioButtonConverter" />
+        <Converters:InverseBoolToRadioButtonConverter x:Key="InverseBoolToRadioButtonConverter" />
+
 
 
         <!--  Define SolidColorBrush resources  -->

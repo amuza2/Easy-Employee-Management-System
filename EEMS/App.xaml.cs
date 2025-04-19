@@ -38,7 +38,10 @@ public partial class App : Application
     private void ConfigureServices(ServiceCollection service)
     {
         // Register DbContext
-        service.AddDbContext<EEMSDbContext>(options =>
+        //service.AddDbContext<EEMSDbContext>(options =>
+        //    options.UseSqlServer(ConfigHelper.GetConnectionString()),
+        //    ServiceLifetime.Transient);
+        service.AddDbContextFactory<EEMSDbContext>(options =>
             options.UseSqlServer(ConfigHelper.GetConnectionString()));
 
         // Register services
@@ -54,12 +57,17 @@ public partial class App : Application
         service.AddTransient<JobInformationViewModel>();
         service.AddTransient<AddAndEditWindowViewModel>();
         service.AddTransient<ViewEmployeeDetailsViewModel>();
-        service.AddTransient<EmployeeAbsenceViewModel>();
+        service.AddTransient<AbsenceWindowViewModel>();
+        service.AddTransient<AbsencePageViewModel>();
+        service.AddTransient<ViewAbsenceDetailsViewModel>();
+        service.AddTransient<SingleButtonMessageBoxViewModel>();
+        service.AddTransient<TwoButtonMessageBoxViewModel>();
         
 
         // Register pages
         service.AddTransient<EmployeePage>();
         service.AddTransient<DashboardPage>();
+        service.AddTransient<AbsencePage>();
 
 
         //Resigter User Control
@@ -72,6 +80,9 @@ public partial class App : Application
         service.AddTransient<AddAndEditWindow>();
         service.AddTransient<ViewEmployeeDetails>();
         service.AddTransient<AbsenceWindow>();
+        service.AddTransient<ViewAbsenceDetails>();
+        service.AddTransient<SingleButtonMessageBox>();
+        service.AddTransient<TowButtonMessageBox>();
 
         // Register Navigation Service
         service.AddTransient<INavigationService, NavigationService>();

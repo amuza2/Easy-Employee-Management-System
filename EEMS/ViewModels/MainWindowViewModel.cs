@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EEMS.UI.MVVM;
+using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
@@ -12,18 +12,13 @@ public partial class MainWindowViewModel : ObservableObject
 {
     private readonly INavigationService _navigationService;
 
-    [ObservableProperty]
-    private bool _isMenuExpanded = true;
+    [ObservableProperty] private bool _isMenuExpanded = true;
     
-    [ObservableProperty]
-    private Brush _setColor = Brushes.White;
+    [ObservableProperty] private Brush _setColor = Brushes.White;
 
-    [ObservableProperty]
-    private Brush _separatorColor;
+    [ObservableProperty] private Brush _separatorColor;
 
-    [ObservableProperty]
-    private string _activePage;
-
+    [ObservableProperty] private string _activePage;
 
     public double MenuWidth => IsMenuExpanded ? 200 : 50;
 
@@ -60,6 +55,13 @@ public partial class MainWindowViewModel : ObservableObject
     {
         ActivePage = "Employee";
         _navigationService.NavigateTo<EmployeePage>();
+    }
+
+    [RelayCommand]
+    private void NavigateToAbsencePage()
+    {
+        ActivePage = "Absence";
+        _navigationService.NavigateTo<AbsencePage>();
     }
 
 }

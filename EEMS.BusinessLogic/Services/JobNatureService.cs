@@ -7,29 +7,32 @@ namespace EEMS.BusinessLogic.Services;
 
 public class JobNatureService : IJobNatureService
 {
-    private readonly EEMSDbContext _context;
+    private readonly IDbContextFactory<EEMSDbContext> _contextFactory;
 
-    public JobNatureService(EEMSDbContext context)
+    public JobNatureService(IDbContextFactory<EEMSDbContext> contextFactory)
     {
-        _context = context;
+        _contextFactory = contextFactory;
     }
 
     public async Task<IEnumerable<JobNature>> GetAsync()
     {
-        return await _context.JobNatures.ToListAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.JobNatures.ToListAsync();
     }
 
     public async Task<JobNature> GetAsync(int id)
     {
-        return await _context.JobNatures.FindAsync(id);
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.JobNatures.FindAsync(id);
     }
 
     public async Task<int> GetJobNatureIdByNameAsync(string name)
     {
+        await using var context = _contextFactory.CreateDbContext();
         if (string.IsNullOrEmpty(name))
             throw new ArgumentException("Name cannot be null or empty.", nameof(name));
 
-        var jobNatureId = await _context.JobNatures
+        var jobNatureId = await context.JobNatures
                                 .Where(j => j.Name == name)
                                 .Select(i => i.Id)
                                 .FirstOrDefaultAsync();
@@ -42,25 +45,28 @@ public class JobNatureService : IJobNatureService
 
     public async Task<int> AddAsync(JobNature jobNature)
     {
-        var added = _context.JobNatures.Add(jobNature);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        var added = context.JobNatures.Add(jobNature);
+        await context.SaveChangesAsync();
 
         return added.Entity.Id;
     }
 
     public async Task UpdateAsync(JobNature jobNature)
     {
-        _context.JobNatures.Update(jobNature);
-        await _context.SaveChangesAsync();
+        await using var context = _contextFactory.CreateDbContext();
+        context.JobNatures.Update(jobNature);
+        await context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
     {
+        await using var context = _contextFactory.CreateDbContext();
         var jonNature = await GetAsync(id);
         if (jonNature != null)
         {
-            _context.JobNatures.Remove(jonNature);
-            await _context.SaveChangesAsync();
+            context.JobNatures.Remove(jonNature);
+            await context.SaveChangesAsync();
         }
     }
 }

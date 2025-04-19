@@ -1,19 +1,18 @@
 ﻿using EEMS.UI.ViewModels;
-using System;
 using System.Windows;
 using System.Windows.Input;
 
 namespace EEMS.UI.Views.Absences;
 
 /// <summary>
-/// Interaction logic for Absence.xaml
+/// Interaction logic for ViewAbsenceDetails.xaml
 /// </summary>
-public partial class AbsenceWindow : Window
+public partial class ViewAbsenceDetails : Window
 {
-    public AbsenceWindow(AbsenceWindowViewModel employeeAbsenceViewModel)
+    public ViewAbsenceDetails(ViewAbsenceDetailsViewModel viewAbsenceViewModel)
     {
+        DataContext = viewAbsenceViewModel;
         InitializeComponent();
-        DataContext = employeeAbsenceViewModel;
     }
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -29,10 +28,5 @@ public partial class AbsenceWindow : Window
     private void btnMinimize_Click(object sender, RoutedEventArgs e)
     {
         this.WindowState = WindowState.Minimized;
-    }
-
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        this.Close();
     }
 }

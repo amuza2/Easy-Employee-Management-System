@@ -24,7 +24,7 @@ public class DialogService
 
         vm.CloseRequest.Task.ContinueWith(_ =>
         {
-            window.Dispatcher.Invoke(window.Close);
+            window.Dispatcher.Invoke(() => window.Close);
         });
 
         window.ShowDialog();
@@ -56,10 +56,15 @@ public class DialogService
         // Subscribe to close on result
         vm.CloseRequest.Task.ContinueWith(_ =>
         {
-            window.Dispatcher.Invoke(window.Close);
+            window.Dispatcher.Invoke(() =>
+            {
+                if (window.IsVisible)
+                    window.Close();
+            });
         });
 
         window.ShowDialog();
+
 
         return await vm.CloseRequest.Task;
 

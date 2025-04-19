@@ -6,8 +6,6 @@ using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -46,7 +44,6 @@ public partial class EmployeeViewModel : ObservableObject
         SelectedTab = tabName;
     }
 
-
     private bool CanPerformUserAction(object obj)
     {
         return SelectedEmployee != null && !IsEditing;
@@ -78,15 +75,15 @@ public partial class EmployeeViewModel : ObservableObject
         LoadDataForTab(value);
     }
 
-    private async void LoadDataForTab(string tab)
+    private void LoadDataForTab(string tab)
     {
         if (tab == "All")
         {
-            GetAllEmployees();
+           GetAllEmployees();
         }
         else if (tab == "Absence")
         {
-            GetAllAbsence();
+           GetAllAbsence();
         }
     }
 
@@ -104,7 +101,7 @@ public partial class EmployeeViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void EditEmployee()
+    private void EditEmployee(object obj)
     {
         if (SelectedEmployee != null)
         {
@@ -144,7 +141,7 @@ public partial class EmployeeViewModel : ObservableObject
                 return;
             }
             await DialogService.ShowSingleButtonMessageBoxAsync(
-                $"Employee {SelectedEmployee.FirstName} {SelectedEmployee.LastName} has been deleted successfully.",
+                $"Employee {SelectedEmployee?.FirstName} {SelectedEmployee?.LastName} has been deleted successfully.",
                 "Success",
                 "OK");
         }
@@ -176,7 +173,6 @@ public partial class EmployeeViewModel : ObservableObject
         {
             Employees.Add(employee);
         }
-
     }
 
     [RelayCommand]
@@ -184,7 +180,7 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (SelectedEmployee != null)
         {
-            var employeeAbsenceViewModel = new EmployeeAbsenceViewModel(SelectedEmployee, _employeeManagementService);
+            var employeeAbsenceViewModel = new AbsenceWindowViewModel(SelectedEmployee, _employeeManagementService);
             var employeeAbsenceWindow = new AbsenceWindow(employeeAbsenceViewModel);
             employeeAbsenceWindow.ShowDialog();
         }
@@ -199,7 +195,6 @@ public partial class EmployeeViewModel : ObservableObject
         {
             Employees.Add(employee.Employee);
         }
-
     }
 
 

@@ -10,17 +10,17 @@ namespace EEMS.DataAccess
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Absence> Absences { get; set; }
-        public DbSet<AbsenceType> AbsenceTypes { get; set; }
-        public DbSet<DrivingLicenseType> DrivingLicenseTypes { get; set; }
-        public DbSet<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; }
-        public DbSet<JobNature> JobNatures { get; set; }
-        public DbSet<Vacation> Vacations { get; set; }
-        public DbSet<Leave> Leaves { get; set; }
-        public DbSet<EmployeeTraining> EmployeesTraining { get; set; }
-        public DbSet<Training> Trainings { get; set; }
-        public DbSet<Diploma> Diplomas { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Sanction> Sanctions { get; set; }
+        public DbSet<JobNature> JobNatures { get; set; }
+        //public DbSet<AbsenceType> AbsenceTypes { get; set; }
+        //public DbSet<DrivingLicenseType> DrivingLicenseTypes { get; set; }
+        //public DbSet<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; }
+        //public DbSet<Vacation> Vacations { get; set; }
+        //public DbSet<Leave> Leaves { get; set; }
+        //public DbSet<EmployeeTraining> EmployeesTraining { get; set; }
+        //public DbSet<Training> Trainings { get; set; }
+        //public DbSet<Diploma> Diplomas { get; set; }
+        //public DbSet<Sanction> Sanctions { get; set; }
 
         public EEMSDbContext() { }
 
@@ -32,6 +32,7 @@ namespace EEMS.DataAccess
             {
                 optionsBuilder.UseSqlServer(ConfigHelper.GetConnectionString());
             }
+            optionsBuilder.UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -59,18 +60,18 @@ namespace EEMS.DataAccess
             //    .HasForeignKey(a => a.AbsenceTypeId);
 
             // Many to Many: Employee -> EmployeeDrivingLicense
-            modelBuilder.Entity<EmployeeDrivingLicense>()
-                .HasKey(ed => new { ed.EmployeeId, ed.DrivingLicenseTypeId });
+            //modelBuilder.Entity<EmployeeDrivingLicense>()
+            //    .HasKey(ed => new { ed.EmployeeId, ed.DrivingLicenseTypeId });
 
-            modelBuilder.Entity<EmployeeDrivingLicense>()
-                .HasOne(edl => edl.Employee)
-                .WithMany(e => e.EmployeeDrivingLicenses)
-                .HasForeignKey(edl => edl.EmployeeId);
+            //modelBuilder.Entity<EmployeeDrivingLicense>()
+            //    .HasOne(edl => edl.Employee)
+            //    .WithMany(e => e.EmployeeDrivingLicenses)
+            //    .HasForeignKey(edl => edl.EmployeeId);
 
-            modelBuilder.Entity<EmployeeDrivingLicense>()
-                .HasOne(edl => edl.DrivingLicenseType)
-                .WithMany(dlt => dlt.EmployeeDrivingLicenses)
-                .HasForeignKey(edl => edl.DrivingLicenseTypeId);
+            //modelBuilder.Entity<EmployeeDrivingLicense>()
+            //    .HasOne(edl => edl.DrivingLicenseType)
+            //    .WithMany(dlt => dlt.EmployeeDrivingLicenses)
+            //    .HasForeignKey(edl => edl.DrivingLicenseTypeId);
 
             // One to Many: JobNature -> Employee
             modelBuilder.Entity<Employee>()
@@ -79,66 +80,66 @@ namespace EEMS.DataAccess
                 .HasForeignKey(e => e.JobNatureId);
 
             // One to Many: Employee -> Vacation
-            modelBuilder.Entity<Vacation>()
-                .HasOne(v => v.Employee)
-                .WithMany(e => e.Vacations)
-                .HasForeignKey(v => v.EmployeeId);
+            //modelBuilder.Entity<Vacation>()
+            //    .HasOne(v => v.Employee)
+            //    .WithMany(e => e.Vacations)
+            //    .HasForeignKey(v => v.EmployeeId);
 
-            modelBuilder.Entity<Vacation>()
-                .Property(v => v.StartDate)
-                .HasColumnType("date");
+            //modelBuilder.Entity<Vacation>()
+            //    .Property(v => v.StartDate)
+            //    .HasColumnType("date");
 
             //One to One: Employee->Leave
-            modelBuilder.Entity<Employee>()
-                .HasOne(e => e.Leave)
-                .WithOne(l => l.Employee)
-                .HasForeignKey<Employee>(e => e.LeaveId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+            //modelBuilder.Entity<Employee>()
+            //    .HasOne(e => e.Leave)
+            //    .WithOne(l => l.Employee)
+            //    .HasForeignKey<Employee>(e => e.LeaveId)
+            //    .IsRequired(false)
+            //    .OnDelete(DeleteBehavior.SetNull);
 
             // Many to Many: Employee -> EmployeeTraining
-            modelBuilder.Entity<EmployeeTraining>()
-                .HasKey(et => new { et.EmployeeId, et.TrainingId });
+            //modelBuilder.Entity<EmployeeTraining>()
+            //    .HasKey(et => new { et.EmployeeId, et.TrainingId });
 
-            modelBuilder.Entity<EmployeeTraining>()
-                .HasOne(et => et.Employee)
-                .WithMany(e => e.EmployeesTraining)
-                .HasForeignKey(et => et.EmployeeId);
+            //modelBuilder.Entity<EmployeeTraining>()
+            //    .HasOne(et => et.Employee)
+            //    .WithMany(e => e.EmployeesTraining)
+            //    .HasForeignKey(et => et.EmployeeId);
 
-            modelBuilder.Entity<EmployeeTraining>()
-                .HasOne(et => et.Training)
-                .WithMany(t => t.EmployeesTraining)
-                .HasForeignKey(et => et.TrainingId);
+            //modelBuilder.Entity<EmployeeTraining>()
+            //    .HasOne(et => et.Training)
+            //    .WithMany(t => t.EmployeesTraining)
+            //    .HasForeignKey(et => et.TrainingId);
 
-            modelBuilder.Entity<Training>()
-                .Property(t => t.StartDate)
-                .HasColumnType("date");
+            //modelBuilder.Entity<Training>()
+            //    .Property(t => t.StartDate)
+            //    .HasColumnType("date");
 
             // One to Many: Employee -> Diploma
-            modelBuilder.Entity<Diploma>()
-                .HasOne(d => d.Employee)
-                .WithMany(e => e.Diplomas)
-                .HasForeignKey(d => d.EmployeeId);
+            //modelBuilder.Entity<Diploma>()
+            //    .HasOne(d => d.Employee)
+            //    .WithMany(e => e.Diplomas)
+            //    .HasForeignKey(d => d.EmployeeId);
 
             // One to Many: Training -> Diploma
-            modelBuilder.Entity<Diploma>()
-                .HasOne(d => d.Training)
-                .WithMany(t => t.Diplomas)
-                .HasForeignKey(d => d.TrainingId);
+            //modelBuilder.Entity<Diploma>()
+            //    .HasOne(d => d.Training)
+            //    .WithMany(t => t.Diplomas)
+            //    .HasForeignKey(d => d.TrainingId);
 
-            modelBuilder.Entity<Diploma>()
-                .Property(d => d.DateIssued)
-                .HasColumnType("date");
+            //modelBuilder.Entity<Diploma>()
+            //    .Property(d => d.DateIssued)
+            //    .HasColumnType("date");
 
             // One to Many: Employee -> Senction
-            modelBuilder.Entity<Sanction>()
-                .HasOne(s => s.Employee)
-                .WithMany(e => e.Sanctions)
-                .HasForeignKey(s => s.EmployeeId);
+            //modelBuilder.Entity<Sanction>()
+            //    .HasOne(s => s.Employee)
+            //    .WithMany(e => e.Sanctions)
+            //    .HasForeignKey(s => s.EmployeeId);
 
-            modelBuilder.Entity<Sanction>()
-                .Property(s => s.DateHappened)
-                .HasColumnType("date");
+            //modelBuilder.Entity<Sanction>()
+            //    .Property(s => s.DateHappened)
+            //    .HasColumnType("date");
 
 
             // Data seeding

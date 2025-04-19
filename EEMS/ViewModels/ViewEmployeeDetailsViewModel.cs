@@ -1,59 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace EEMS.UI.ViewModels;
-
+                                                   
 public partial class ViewEmployeeDetailsViewModel : ObservableObject
 {
     private Employee _employee;
-    [ObservableProperty]
-    private string _firstName;
-    [ObservableProperty]
-    private string _lastName;
-    [ObservableProperty]
-    private string _phone;
-    [ObservableProperty]
-    private string _email;
-    [ObservableProperty]
-    private string _jobTitle;
-    [ObservableProperty]
-    private string _department;
-    [ObservableProperty]
-    private string _jobNature;
-    [ObservableProperty]
-    private string _address;
-    [ObservableProperty]
-    private DateTime _dateOfBirth;
-    [ObservableProperty]
-    private string _birthLocation;
-    [ObservableProperty]
-    private string _residence;
-    [ObservableProperty]
-    private string _familySituation;
-    [ObservableProperty]
-    private string _gender;
-    [ObservableProperty]
-    private DateTime _recruitmentDate;
-    [ObservableProperty]
-    private string _essentialTraining;
-    [ObservableProperty]
-    private string _training;
-    [ObservableProperty]
-    private string _languagesSpoken;
-    [ObservableProperty]
-    private int _experience;
-    [ObservableProperty]
-    private string _isActive;
+    [ObservableProperty] private string _firstName;
+    [ObservableProperty] private string _lastName;
+    [ObservableProperty] private string _phone;
+    [ObservableProperty] private string _email;
+    [ObservableProperty] private string _jobTitle;
+    [ObservableProperty] private string _department;
+    [ObservableProperty] private string _jobNature;
+    [ObservableProperty] private string _address;
+    [ObservableProperty] private DateTime _dateOfBirth;
+    [ObservableProperty] private string _birthLocation;
+    [ObservableProperty] private string _residence;
+    [ObservableProperty] private string _familySituation;
+    [ObservableProperty] private string _gender;
+    [ObservableProperty] private DateTime _recruitmentDate;
+    [ObservableProperty] private string _essentialTraining;
+    [ObservableProperty] private string _training;
+    [ObservableProperty] private string _languagesSpoken;
+    [ObservableProperty] private int _experience;
+    [ObservableProperty] private string _isActive;
 
     private readonly IEmployeeManagementService _employeeManagementService;
 
