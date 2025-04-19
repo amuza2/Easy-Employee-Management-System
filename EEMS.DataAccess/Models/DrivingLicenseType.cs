@@ -1,9 +1,9 @@
-﻿namespace EEMS.DataAccess.Models;
+﻿//namespace EEMS.DataAccess.Models;
 
-public class DrivingLicenseType
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
+//public class DrivingLicenseType
+//{
+//    public int Id { get; set; }
+//    public string Name { get; set; }
 
-    public virtual ICollection<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; } = new List<EmployeeDrivingLicense>();
-}
+//    public virtual ICollection<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; } = new List<EmployeeDrivingLicense>();
+//}

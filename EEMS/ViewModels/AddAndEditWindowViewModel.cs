@@ -120,7 +120,7 @@ public class AddAndEditWindowViewModel : ViewModelBase
 			if (_personalInformationVM.HasErrors)
 				return;
 
-            SavePersonalInformation();
+            await SavePersonalInformation();
 			CurrentView = _jobInformationVM;
 		}
 		else if (CurrentView == _jobInformationVM)
