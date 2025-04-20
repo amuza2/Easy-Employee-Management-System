@@ -7,6 +7,7 @@ using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -15,13 +16,16 @@ namespace EEMS.UI.Views.Employees;
 public partial class EmployeeViewModel : ObservableObject
 {
     private readonly IEmployeeManagementService _employeeManagementService;
-    public ObservableCollection<DataAccess.Models.Employee> Employees { get; set; }
+    public ObservableCollection<Employee> Employees { get; set; }
     public ObservableCollection<Department> Departments { get; set; }
 
     [ObservableProperty] private Employee _selectedEmployee;
     [ObservableProperty] private string _selectedTab = "All";
     [ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
+    [ObservableProperty] private string _searchEmployee;
+
+    private List<Employee> _filteredEmployees = new List<Employee>();
 
     public bool IsNotEditing => !IsEditing;
 
@@ -60,13 +64,34 @@ public partial class EmployeeViewModel : ObservableObject
         ViewEmployeeCommand.NotifyCanExecuteChanged();
     }
 
+    // Search Employee textbox
+    partial void OnSearchEmployeeChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            GetEmployeesByDepartmentId(SelectedDepartment.Id);
+        }
+        else
+        {
+            _filteredEmployees = Employees
+                .Where(e => e.FirstName.Contains(value, StringComparison.OrdinalIgnoreCase) ||
+                            e.LastName.Contains(value, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            Employees.Clear();
+
+            foreach (var emp in _filteredEmployees)
+            {
+                Employees.Add(emp);
+            }
+        }
+    }
 
     public EmployeeViewModel(IEmployeeManagementService employeeManagementService)
     {
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
         Departments = new ObservableCollection<Department>();
-        //SelectedDepartment = new Department { Id = 0, Name = "All" };
         IsEditing = false;
         LoadDepartmentsToCombobox();
     }
@@ -106,10 +131,17 @@ public partial class EmployeeViewModel : ObservableObject
     private async void GetEmployeesByDepartmentId(int departmentId)
     {
         Employees.Clear();
-        var employees = await _employeeManagementService.EmployeeService.GetEmployeesByDepartmentId(departmentId);
-        foreach (var employee in employees)
+        if(departmentId == 0)
         {
-            Employees.Add(employee);
+            GetAllEmployees();
+        }
+        else
+        {
+            var employees = await _employeeManagementService.EmployeeService.GetEmployeesByDepartmentId(departmentId);
+            foreach (var employee in employees)
+            {
+                Employees.Add(employee);
+            }
         }
     }
 
