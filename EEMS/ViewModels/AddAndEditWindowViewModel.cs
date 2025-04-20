@@ -140,14 +140,21 @@ public class AddAndEditWindowViewModel : ViewModelBase
 		try
 		{
 			var emp_id = await _employeeManagementService.EmployeeService.AddAsync(EmployeeData);
-			var result = MessageBox.Show($"Employee with ID: {emp_id} has been added successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-			if(result == MessageBoxResult.OK || result == MessageBoxResult.None)
+            if (emp_id < 1)
 			{
-				UpdateGridWindowData?.Invoke();
-				CloseWindow?.Invoke();
-			}
+                await DialogService.ShowSingleButtonMessageBoxAsync(
+                    "Error adding employee. Please try again.",
+                    "Error",
+                    "OK");
+                return;
+            }
+            await DialogService.ShowSingleButtonMessageBoxAsync(
+                $"Employee added successfully.",
+                "Success",
+                "OK");
 
+			UpdateGridWindowData?.Invoke();
+			CloseWindow?.Invoke();			
         }
 		catch (Exception ex)
 		{

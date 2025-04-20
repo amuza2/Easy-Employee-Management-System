@@ -20,7 +20,10 @@
             Text="{Binding PlaceholderText, RelativeSource={RelativeSource AncestorType=UserControl}}"
             Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-        <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}" />
+        <TextBox
+            x:Name="txtSearch"
+            Style="{StaticResource textboxSearch}"
+            Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         <Icon:PackIconMaterial
             Width="15"
             Height="15"
