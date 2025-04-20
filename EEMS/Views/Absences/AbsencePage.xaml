@@ -54,7 +54,6 @@
             Text="Filter by" />
 
         <!--  Filter Textbox  -->
-
         <UC:SearchTextBoxControl
             Grid.Row="1"
             Width="250"
