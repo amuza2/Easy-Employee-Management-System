@@ -59,24 +59,24 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button
-                BorderBrush="{Binding SelectedTab, Converter={StaticResource TabSelectedToBrushConverter}, ConverterParameter=Absence}"
-                Command="{Binding SelectTabCommand}"
-                CommandParameter="Absence"
-                Content="Absence">
-                <Button.Style>
-                    <Style BasedOn="{StaticResource tabButton}" TargetType="Button">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedTab}" Value="Absence">
-                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+            <!--<Button
+            BorderBrush="{Binding SelectedTab, Converter={StaticResource TabSelectedToBrushConverter}, ConverterParameter=Absence}"
+            Command="{Binding SelectTabCommand}"
+            CommandParameter="Absence"
+            Content="Absence">
+            <Button.Style>
+            <Style BasedOn="{StaticResource tabButton}" TargetType="Button">
+            <Style.Triggers>
+            <DataTrigger Binding="{Binding SelectedTab}" Value="Absence">
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
+            </DataTrigger>
+            </Style.Triggers>
+            </Style>
+            </Button.Style>
             </Button>
             <Button Content="Training" Style="{StaticResource tabButton}" />
             <Button Content="Vacation" Style="{StaticResource tabButton}" />
-            <Button Content="Sanction" Style="{StaticResource tabButton}" />
+            <Button Content="Sanction" Style="{StaticResource tabButton}" />-->
         </StackPanel>
 
         <!--  filter by name label  -->
@@ -98,6 +98,19 @@
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 PlaceholderText="Search Employee.." />
+            <ComboBox
+                Width="150"
+                Height="25"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Red"
+                BorderBrush="#97a5b4"
+                BorderThickness="1"
+                DisplayMemberPath="Name"
+                Foreground="#868686"
+                ItemsSource="{Binding Departments}"
+                SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
+                Text="All" />
         </Grid>
 
         <!--  Separator  -->

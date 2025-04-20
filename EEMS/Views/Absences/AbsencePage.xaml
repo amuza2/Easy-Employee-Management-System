@@ -54,13 +54,25 @@
             Text="Filter by" />
 
         <!--  Filter Textbox  -->
-        <Grid Grid.Row="1">
-            <UC:SearchTextBoxControl
-                Width="250"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                PlaceholderText="Search Employee.." />
-        </Grid>
+        <UC:SearchTextBoxControl
+            Grid.Row="1"
+            Width="250"
+            Margin="0,0,5,0"
+            HorizontalAlignment="Right"
+            PlaceholderText="Search Employee.." />
+
+        <DatePicker
+            Grid.Row="1"
+            Width="200"
+            Margin="0,0,50,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderBrush="LightGray"
+            FontSize="14"
+            Foreground="#868686"
+            SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding ShownDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
 
         <!--  Separator  -->
         <Separator

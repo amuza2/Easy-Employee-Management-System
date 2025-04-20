@@ -24,6 +24,17 @@ public class EmployeeService : IEmployeeService
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Employee>> GetEmployeesByDepartmentId(int departmentId)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .Where(e => e.DepartmentId == departmentId)
+            .ToListAsync();
+    }
+
     public async Task<Employee> GetAsync(int id)
     {
         await using var context = _contextFactory.CreateDbContext();

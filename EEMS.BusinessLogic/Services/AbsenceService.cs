@@ -22,6 +22,15 @@ public class AbsenceService : IAbsenceService
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Absence>> GetAbsencesByDate(DateTime date)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Absences
+            .Include(e => e.Employee)
+            .Where(a => a.Date == date)
+            .ToListAsync();
+    }
+
     public async Task<Absence> GetAsync(int id)
     {
         await using var context = _contextFactory.CreateDbContext();

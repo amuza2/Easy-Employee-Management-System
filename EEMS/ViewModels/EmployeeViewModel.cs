@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
+using EEMS.DataAccess.Models;
 using EEMS.UI.Enums;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
@@ -15,14 +16,13 @@ public partial class EmployeeViewModel : ObservableObject
 {
     private readonly IEmployeeManagementService _employeeManagementService;
     public ObservableCollection<DataAccess.Models.Employee> Employees { get; set; }
+    public ObservableCollection<Department> Departments { get; set; }
 
-    [ObservableProperty]
-    private DataAccess.Models.Employee _selectedEmployee;
-
+    [ObservableProperty] private Employee _selectedEmployee;
     [ObservableProperty] private string _selectedTab = "All";
-
     [ObservableProperty] private bool _isEditing;
-    
+    [ObservableProperty] private Department _selectedDepartment;
+
     public bool IsNotEditing => !IsEditing;
 
     [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
@@ -55,7 +55,7 @@ public partial class EmployeeViewModel : ObservableObject
         ViewEmployeeCommand.NotifyCanExecuteChanged();
     }
 
-    partial void OnSelectedEmployeeChanged(DataAccess.Models.Employee value)
+    partial void OnSelectedEmployeeChanged(Employee value)
     {
         ViewEmployeeCommand.NotifyCanExecuteChanged();
     }
@@ -64,10 +64,53 @@ public partial class EmployeeViewModel : ObservableObject
     public EmployeeViewModel(IEmployeeManagementService employeeManagementService)
     {
         _employeeManagementService = employeeManagementService;
-        Employees = new ObservableCollection<DataAccess.Models.Employee>();
+        Employees = new ObservableCollection<Employee>();
+        Departments = new ObservableCollection<Department>();
+        //SelectedDepartment = new Department { Id = 0, Name = "All" };
         IsEditing = false;
-        SelectedTab = "All";
-        LoadDataForTab("All");
+        LoadDepartmentsToCombobox();
+    }
+
+    private async void LoadDepartmentsToCombobox()
+    {
+        Departments.Clear();
+        Department allDepartment = new Department { Id = 0, Name = "All" };
+        Departments.Add(allDepartment);
+        var departments = await _employeeManagementService.DepartmentService.GetAsync();
+
+        if (departments != null)
+        {
+            foreach (var department in departments)
+            {
+                Departments.Add(department);
+            }
+        }
+
+        SelectedDepartment = allDepartment;
+    }
+
+    partial void OnSelectedDepartmentChanged(Department value)
+    {
+        if(value == null) return;
+
+        if (value.Id == 0)
+        {
+            GetAllEmployees();
+        }
+        else
+        {
+            GetEmployeesByDepartmentId(value.Id);
+        }
+    }
+
+    private async void GetEmployeesByDepartmentId(int departmentId)
+    {
+        Employees.Clear();
+        var employees = await _employeeManagementService.EmployeeService.GetEmployeesByDepartmentId(departmentId);
+        foreach (var employee in employees)
+        {
+            Employees.Add(employee);
+        }
     }
 
     partial void OnSelectedTabChanged(string value)
@@ -81,10 +124,10 @@ public partial class EmployeeViewModel : ObservableObject
         {
            GetAllEmployees();
         }
-        else if (tab == "Absence")
-        {
-           GetAllAbsence();
-        }
+        //else if (tab == "Absence")
+        //{
+        //   GetAllAbsence();
+        //}
     }
 
     [RelayCommand]
