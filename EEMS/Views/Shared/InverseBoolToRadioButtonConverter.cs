@@ -7,11 +7,13 @@ public class InverseBoolToRadioButtonConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is false;
+        if (value is bool boolValue)
+            return !boolValue;
+        return false;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is false;
+        return value is bool isChecked && isChecked ? false : (bool?)null;
     }
 }

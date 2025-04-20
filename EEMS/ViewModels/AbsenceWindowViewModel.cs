@@ -37,14 +37,11 @@ public partial class AbsenceWindowViewModel : ObservableObject
         IsEdit = false;
         _employee = employee;
         _employeeManagementService = employeeManagementService;
-
         FirstName = _employee.FirstName;
         LastName = _employee.LastName;
         SelectedDate = DateTime.Today.Date;
         SelectedJustification = true;
     }
-
-    
 
     [RelayCommand]
     private async Task SaveAbsence(Window window)
@@ -76,7 +73,7 @@ public partial class AbsenceWindowViewModel : ObservableObject
             await _employeeManagementService.AbsenceService.UpdateAsync(_absence);
 
             await DialogService.ShowSingleButtonMessageBoxAsync(
-                    "Absence successfully added.",
+                    "Absence successfully updated.",
                     "Success",
                     "OK");
         }
