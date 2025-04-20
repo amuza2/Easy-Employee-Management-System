@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
+using EEMS.DataAccess.Models;
 using EEMS.UI.Views.Absences;
 using System.Collections.ObjectModel;
 
@@ -11,8 +12,9 @@ public partial class AbsencePageViewModel : ObservableObject
     private readonly IEmployeeManagementService _employeeManagementService;
     public ObservableCollection<DataAccess.Models.Absence> Absences { get; set; }
 
-    [ObservableProperty]
-    private DataAccess.Models.Absence _selectedAbsence;
+    [ObservableProperty] private Absence _selectedAbsence;
+    [ObservableProperty] private string _shownDate = DateTime.Today.ToString("dd/MM/yyyy");
+    [ObservableProperty] private DateTime _selectedDate;
 
     [RelayCommand]
     private void ViewAbsence()
@@ -43,6 +45,7 @@ public partial class AbsencePageViewModel : ObservableObject
         _employeeManagementService = employeeManagementService;
         Absences = new ObservableCollection<DataAccess.Models.Absence>();
         LoadAbsences();
+
     }
 
     private async void LoadAbsences()
@@ -56,4 +59,27 @@ public partial class AbsencePageViewModel : ObservableObject
             }
         }
     }
+
+    partial void OnSelectedDateChanged(DateTime value)
+    {
+        ShownDate = value.ToString("dd/MM/yyyy");
+        LoadDataGridWithSelectedDate(value);
+    }
+
+    private async Task LoadDataGridWithSelectedDate(DateTime date)
+    {
+        var absences = await _employeeManagementService.AbsenceService.GetAsync();
+        if (absences != null)
+        {
+            Absences.Clear();
+            foreach (var absence in absences)
+            {
+                if (absence.Date.Date == date.Date)
+                {
+                    Absences.Add(absence);
+                }
+            }
+        }
+    }
+        
 }

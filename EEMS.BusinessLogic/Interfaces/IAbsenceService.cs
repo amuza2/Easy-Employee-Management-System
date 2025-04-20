@@ -9,5 +9,7 @@ namespace EEMS.BusinessLogic.Interfaces
         Task<IEnumerable<Absence>> GetAsync();
         Task<Absence> GetAsync(int id);
         Task UpdateAsync(Absence absence);
+
+        Task<IEnumerable<Absence>> GetAbsencesByDate(DateTime date);
     }
 }
