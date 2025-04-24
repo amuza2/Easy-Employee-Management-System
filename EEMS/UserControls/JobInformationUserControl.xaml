@@ -89,14 +89,38 @@
             Items="{Binding JobNatureItems, Mode=TwoWay}"
             SelectedItem="{Binding SelectedJobNature, Mode=TwoWay}"
             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
-        <UC:RadioButtonGroupUserControl
+        <StackPanel
             Grid.Row="3"
             Grid.Column="1"
-            Caption="Status"
-            Option1Text="Active"
-            Option2Text="Inactive"
-            SelectedValue="{Binding SelectedStatus, Mode=TwoWay}"
-            Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
+            Margin="20,10">
+            <!--  Caption  -->
+            <TextBlock
+                Margin="0,0,0,8"
+                FontSize="13"
+                Foreground="#97a5b4"
+                Text="{Binding ElementName=myRadioButtonGroup, Path=Status}" />
+
+            <!--  Radio Buttons  -->
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <RadioButton
+                    Margin="0,0,50,0"
+                    BorderBrush="#cfd7de"
+                    BorderThickness="2"
+                    Content="Active"
+                    Foreground="#868686"
+                    GroupName="RadioGroup"
+                    IsChecked="{Binding SelectedGender, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                <RadioButton
+                    BorderBrush="#cfd7de"
+                    BorderThickness="2"
+                    Content="Inactive"
+                    Foreground="#868686"
+                    GroupName="RadioGroup"
+                    IsChecked="{Binding SelectedGender, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            </StackPanel>
+            <TextBlock Foreground="Red" Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=MaleRadioButton, FallbackValue=''}" />
+
+        </StackPanel>
         <!--<UC:ComboBoxUserControl
         Grid.Row="3"
         Grid.Column="1"

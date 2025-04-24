@@ -25,18 +25,18 @@
                 Margin="0,0,50,0"
                 BorderBrush="#cfd7de"
                 BorderThickness="2"
-                Content="{Binding Option1Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="{Binding Selected1Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Foreground="#868686"
                 GroupName="RadioGroup"
-                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsOption1Selected, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                IsChecked="{Binding SelectedGender, Converter={StaticResource GenderEnumToBoolConverter}, ConverterParameter=Male, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             <RadioButton
                 x:Name="FemaleRadioButton"
                 BorderBrush="#cfd7de"
                 BorderThickness="2"
-                Content="{Binding Option2Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="{Binding Selected2Text, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Foreground="#868686"
                 GroupName="RadioGroup"
-                IsChecked="{Binding ElementName=myRadioButtonGroup, Path=IsOption2Selected, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                IsChecked="{Binding SelectedGender, Converter={StaticResource GenderEnumToBoolConverter}, ConverterParameter=Female, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </StackPanel>
 
         <TextBlock Foreground="Red" Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=MaleRadioButton, FallbackValue=''}" />

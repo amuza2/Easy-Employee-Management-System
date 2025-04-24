@@ -8,10 +8,6 @@ namespace EEMS.UI.UserControls
     /// </summary>
     public partial class JobInformationUserControl : UserControl
     {
-        public JobInformationUserControl(JobInformationViewModel jobInformationViewModel)
-        {
-            DataContext = jobInformationViewModel;
-        }
         public JobInformationUserControl()
         {
             InitializeComponent();

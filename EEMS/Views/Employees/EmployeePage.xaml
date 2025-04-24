@@ -79,39 +79,57 @@
             <Button Content="Sanction" Style="{StaticResource tabButton}" />-->
         </StackPanel>
 
-        <!--  filter by name label  -->
-        <TextBlock
-            Grid.Row="1"
-            Margin="0,0,260,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            FontSize="13"
-            FontWeight="SemiBold"
-            Foreground="#121517"
-            Text="Filter by" />
+
 
         <!--  Filter Textbox  -->
 
         <Grid Grid.Row="1">
-            <UC:SearchTextBoxControl
-                Width="250"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                PlaceholderText="Search Employee.."
-                Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            <ComboBox
-                Width="150"
-                Height="25"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="Red"
-                BorderBrush="#97a5b4"
-                BorderThickness="1"
-                DisplayMemberPath="Name"
-                Foreground="#868686"
-                ItemsSource="{Binding Departments}"
-                SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
-                Text="All" />
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <!--  search by job nature  -->
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="13"
+                    FontWeight="SemiBold"
+                    Foreground="#121517"
+                    Text="Job Nature" />
+                <ComboBox
+                    Width="150"
+                    Height="24"
+                    Margin="5,0"
+                    BorderBrush="#97a5b4"
+                    BorderThickness="1"
+                    DisplayMemberPath="Name"
+                    Foreground="#868686"
+                    ItemsSource="{Binding JobNatureItems}"
+                    SelectedItem="{Binding SelectedJobNature, UpdateSourceTrigger=PropertyChanged}"
+                    Text="All" />
+                <!--  search by departments  -->
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="13"
+                    FontWeight="SemiBold"
+                    Foreground="#121517"
+                    Text="Deparmtent" />
+                <ComboBox
+                    Width="180"
+                    Height="24"
+                    Margin="5,0"
+                    BorderBrush="#97a5b4"
+                    BorderThickness="1"
+                    DisplayMemberPath="Name"
+                    Foreground="#868686"
+                    ItemsSource="{Binding Departments}"
+                    SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
+                    Text="All" />
+
+                <UC:SearchTextBoxControl
+                    Width="210"
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Right"
+                    PlaceholderText="Search Employee.."
+                    Text="{Binding SearchEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
         </Grid>
 
         <!--  Separator  -->

@@ -7,7 +7,6 @@ using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -34,7 +33,7 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (SelectedEmployee != null)
         {
-            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee, _employeeManagementService);
+            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee);
             var viewEmployeeDetailsWindow = new ViewEmployeeDetails(employeeDetails);
             viewEmployeeDetailsWindow.ShowDialog();
             SelectedEmployee = null;
@@ -165,12 +164,8 @@ public partial class EmployeeViewModel : ObservableObject
     [RelayCommand]
     private void AddEmployee()
     {
-        var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(),
-                                                      new JobInformationViewModel(_employeeManagementService),
-                                                      _employeeManagementService);
-
-        viewModel.UpdateGridWindowData = GetAllEmployees;
-
+        var viewModel = new AddAndEditWindowViewModel(_employeeManagementService);
+        viewModel.UpdateEmployeeDataGrid = GetAllEmployees;
         var AddAndEditWindow = new AddAndEditWindow(viewModel);
         AddAndEditWindow.ShowDialog();
     }
@@ -180,12 +175,10 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (SelectedEmployee != null)
         {
-            var viewModel = new AddAndEditWindowViewModel(new PersonalInformationViewModel(_employeeManagementService, SelectedEmployee),
-                                                          new JobInformationViewModel(_employeeManagementService, SelectedEmployee),
-                                                          _employeeManagementService);
+           
             //viewModel.UpdateGridWindowData = LoadEmployees;
-            var addAndEditWindow = new AddAndEditWindow(viewModel);
-            addAndEditWindow.ShowDialog();
+            //var addAndEditWindow = new AddAndEditWindow(viewModel);
+            //addAndEditWindow.ShowDialog();
         }
     }
 
@@ -271,6 +264,4 @@ public partial class EmployeeViewModel : ObservableObject
             Employees.Add(employee.Employee);
         }
     }
-
-
 }

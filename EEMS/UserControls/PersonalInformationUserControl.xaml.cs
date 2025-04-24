@@ -10,10 +10,6 @@ namespace EEMS.UI.UserControls;
 /// </summary>
 public partial class PersonalInformationUserControl : UserControl
 {
-    public PersonalInformationUserControl(PersonalInformationViewModel personalInformationViewModel)
-    {
-        DataContext = personalInformationViewModel;
-    }
     public PersonalInformationUserControl()
     {
         InitializeComponent();

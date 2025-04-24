@@ -12,9 +12,8 @@ public partial class AddAndEditWindow : Window
     public AddAndEditWindow(AddAndEditWindowViewModel addAndEditWindowViewModel)
     {
         InitializeComponent();
-        var viewModel = addAndEditWindowViewModel;
-        viewModel.CloseWindow = () => this.Close();
         DataContext = addAndEditWindowViewModel;
+        addAndEditWindowViewModel.Window = this;
     }
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -50,5 +49,8 @@ public partial class AddAndEditWindow : Window
         this.WindowState = WindowState.Minimized;
     }
 
-
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
 }

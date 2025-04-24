@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using EEMS.UI.Enums;
+using EEMS.Utilities.Enums;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace EEMS.UI.UserControls
@@ -25,77 +27,38 @@ namespace EEMS.UI.UserControls
             DependencyProperty.Register("Caption", typeof(string), typeof(RadioButtonGroupUserControl), new PropertyMetadata(string.Empty));
 
 
-        public string Option1Text
+
+        public Gender SelectedGender
         {
-            get { return (string)GetValue(Option1TextProperty); }
-            set { SetValue(Option1TextProperty, value); }
+            get { return (Gender)GetValue(SelectedGenderProperty); }
+            set { SetValue(SelectedGenderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Option1Text.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Option1TextProperty =
-            DependencyProperty.Register("Option1Text", typeof(string), typeof(RadioButtonGroupUserControl), new PropertyMetadata("Option 1"));
+        // Using a DependencyProperty as the backing store for SelectedGender.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedGenderProperty =
+            DependencyProperty.Register("SelectedGender", typeof(Gender), typeof(RadioButtonGroupUserControl), new PropertyMetadata(0));
 
 
-        public string Option2Text
+        public string Selected1Text
         {
-            get { return (string)GetValue(Option2TextProperty); }
-            set { SetValue(Option2TextProperty, value); }
+            get { return (string)GetValue(Selected1TextProperty); }
+            set { SetValue(Selected1TextProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Option2Text.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty Option2TextProperty =
-            DependencyProperty.Register("Option2Text", typeof(string), typeof(RadioButtonGroupUserControl), new PropertyMetadata("Option 2"));
+        // Using a DependencyProperty as the backing store for Selected1Text.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Selected1TextProperty =
+            DependencyProperty.Register("Selected1Text", typeof(string), typeof(RadioButtonGroupUserControl), new PropertyMetadata(string.Empty));
 
 
-
-
-        public bool IsOption1Selected
+        public string Selected2Text
         {
-            get { return (bool)GetValue(IsOption1SelectedProperty); }
-            set { SetValue(IsOption1SelectedProperty, value); }
+            get { return (string)GetValue(Selected2TextProperty); }
+            set { SetValue(Selected2TextProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsOption1Selected.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsOption1SelectedProperty =
-            DependencyProperty.Register("IsOption1Selected", typeof(bool), typeof(RadioButtonGroupUserControl), new PropertyMetadata(false, OnIsOption1SelectedChanged));
-
-        private static void OnIsOption1SelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = d as RadioButtonGroupUserControl;
-            if (control != null && (bool)e.NewValue)
-            {
-                control.SelectedValue = control.Option1Text;
-            }
-        }
-
-        public bool IsOption2Selected
-        {
-            get { return (bool)GetValue(IsOption2SelectedProperty); }
-            set { SetValue(IsOption2SelectedProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsOption2Selected.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsOption2SelectedProperty =
-            DependencyProperty.Register("IsOption2Selected", typeof(bool), typeof(RadioButtonGroupUserControl), new PropertyMetadata(false, OnIsOption2SelectedChanged));
-
-        private static void OnIsOption2SelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var control = d as RadioButtonGroupUserControl;
-            if (control != null && (bool)e.NewValue)
-            {
-                control.SelectedValue = control.Option2Text;
-            }
-        }
-
-        public object SelectedValue
-        {
-            get { return (object)GetValue(SelectedValueProperty); }
-            set { SetValue(SelectedValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedValueProperty =
-            DependencyProperty.Register("SelectedValue", typeof(object), typeof(RadioButtonGroupUserControl), new PropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for Selected2Text.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty Selected2TextProperty =
+            DependencyProperty.Register("Selected2Text", typeof(string), typeof(RadioButtonGroupUserControl), new PropertyMetadata(string.Empty));
 
 
 
