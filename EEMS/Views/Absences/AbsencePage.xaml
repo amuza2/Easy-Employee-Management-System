@@ -43,29 +43,28 @@
         </StackPanel>
 
         <!--  filter by name label  -->
-        <TextBlock
-            Grid.Row="1"
-            Margin="0,0,260,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            FontSize="13"
-            FontWeight="SemiBold"
-            Foreground="#121517"
-            Text="Filter by" />
+        <!--<TextBlock
+        Grid.Row="1"
+        Margin="0,0,260,0"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        FontSize="13"
+        FontWeight="SemiBold"
+        Foreground="#121517"
+        Text="Filter by" />-->
 
         <!--  Filter Textbox  -->
-        <UC:SearchTextBoxControl
-            Grid.Row="1"
-            Width="250"
-            Margin="0,0,5,0"
-            HorizontalAlignment="Right"
-            PlaceholderText="Search Employee.." />
+        <!--<UC:SearchTextBoxControl
+        Grid.Row="1"
+        Width="250"
+        Margin="0,0,5,0"
+        HorizontalAlignment="Right"
+        PlaceholderText="Search Employee.." />-->
 
         <DatePicker
             Grid.Row="1"
             Width="200"
-            Margin="0,0,50,0"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Right"
             VerticalAlignment="Center"
             BorderBrush="LightGray"
             FontSize="14"

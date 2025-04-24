@@ -1,209 +1,199 @@
-﻿using EEMS.BusinessLogic.Interfaces;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using EEMS.BusinessLogic.Interfaces;
 using EEMS.DataAccess.Models;
-using EEMS.UI.MVVM;
 using EEMS.UI.Views.Shared;
-using System.ComponentModel;
+using EEMS.Utilities.Enums;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
-using System.Windows.Input;
 
 namespace EEMS.UI.ViewModels;
 
-public class AddAndEditWindowViewModel : ViewModelBase
+public partial class AddAndEditWindowViewModel : ObservableValidator
 {
 	private readonly IEmployeeManagementService _employeeManagementService;
-    public PersonalInformationViewModel _personalInformationVM { get; }
-    public JobInformationViewModel _jobInformationVM { get; }
-	public Action CloseWindow { get; set; }
-	public Action UpdateGridWindowData { get; set; }
+	private bool _isEditing = false;
 
+    [ObservableProperty] [Required(ErrorMessage ="First name cannot be empty")] private string _firstName;
+    [ObservableProperty] [Required(ErrorMessage = "Last name cannot be empty")] private string _lastName;
+    [ObservableProperty] [MinLength(10, ErrorMessage = "Provide a valid number")] [RegularExpression(@"^\d+$", ErrorMessage = "Phone number must contain digits only")][Required(ErrorMessage = "Phone cannot be empty")] private string _phone;
+    [ObservableProperty] [Required(ErrorMessage = "Address cannot be empty")] private string _address;
+    [ObservableProperty] [Required(ErrorMessage = "Gender cannot be empty")] private Gender _selectedGender;
+    [ObservableProperty] [Required(ErrorMessage = "Email cannot be empty")] private string _email;
+    [ObservableProperty] [Required(ErrorMessage = "Birth date cannot be empty")] private DateTime _selectedBirthDate;
+    [ObservableProperty] [Required(ErrorMessage = "Birth location cannot be empty")] private string _birthLocation;
+    [ObservableProperty] [Required(ErrorMessage = "Family situation cannot be empty")] private FamilySituation _selectedFamilySituation;
+    [ObservableProperty] [Required(ErrorMessage = "Residence cannot be empty")] private string _residence;
+    [ObservableProperty] [Required(ErrorMessage = "Job title cannot be empty")] private string _jobTitle;
+    [ObservableProperty] [Required(ErrorMessage = "Essention training cannot be empty")] private string _essentialTraining;
+    [ObservableProperty] [Required(ErrorMessage = "Other training cannot be empty")] private string _otherTraining;
+    [ObservableProperty] [Required(ErrorMessage = "Spoken language cannot be empty")] private string _spokenLanguages;
+    [ObservableProperty] [Required(ErrorMessage = "Experience cannot be empty")] private int _experience;
+    [ObservableProperty] [Required(ErrorMessage = "Department cannot be empty")] private Department _selectedDepartment;
+    [ObservableProperty] [Required(ErrorMessage = "Job Nature cannot be empty")] private JobNature _selectedJobNature;
+    [ObservableProperty] [Required(ErrorMessage = "recruitment date cannot be empty")] private DateTime _selectedRecruitmentDate;
+    [ObservableProperty] [Required(ErrorMessage = "Status cannot be empty")] private Status _selectedStatus;
+    public ObservableCollection<Department> DepartmentItems { get; } = new();
+    public ObservableCollection<JobNature> JobNatureItems { get; } = new();
+    public ObservableCollection<FamilySituation> FamilySituationItems { get; } = new();
+    public Window? Window { get; set; }
+    public Action UpdateEmployeeDataGrid { get; set; }
 
-    private Employee _employeeData = new Employee();
-
-	public Employee EmployeeData
-	{
-		get { return _employeeData; }
-		set { _employeeData = value; OnPropertyChanged(); }
-	}
-
-
-	private object _currentView;
-
-	public object CurrentView
-	{
-		get { return _currentView; }
-		set
-		{ 
-			_currentView = value;
-			OnPropertyChanged();
-			CommandManager.InvalidateRequerySuggested();
-            UpdateNextButtonContent();
-        }
-	}
-
-	private string _nextBtnContent;
-
-	public string NextBtnContent
+    partial void OnFirstNameChanged(string value)
     {
-		get { return _nextBtnContent; }
-		set
-		{ 
-			_nextBtnContent = value;
-			OnPropertyChanged();	
-		}
-	}
-
-    private void UpdateNextButtonContent()
+        ValidateProperty(value, nameof(FirstName));
+    }
+    partial void OnLastNameChanged(string value)
     {
-		if(CurrentView == _jobInformationVM)
-		{
-			NextBtnContent = "Submit";
-			IsPersonalInfoActive = false;
-			IsJobInfoActive = true;
-        }
-		else
-		{
-			NextBtnContent = "Save & Next";
-            IsPersonalInfoActive = true;
-            IsJobInfoActive = false;
-        }
+        ValidateProperty(value, nameof(LastName));
+    }
+    partial void OnPhoneChanged(string value)
+    {
+        ValidateProperty(value, nameof(Address));
+    }
+    partial void OnSelectedGenderChanged(Gender value)
+    {
+        ValidateProperty(value, nameof(SelectedGender));
+    }
+    partial void OnEmailChanged(string value)
+    {
+        ValidateProperty(value, nameof(Email));
+    }
+    partial void OnSelectedBirthDateChanged(DateTime value)
+    {
+        ValidateProperty(value, nameof(SelectedBirthDate));
+    }
+    partial void OnBirthLocationChanged(string value)
+    {
+        ValidateProperty(value, nameof(BirthLocation));
+    }
+    partial void OnSelectedFamilySituationChanged(FamilySituation value)
+    {
+        ValidateProperty(value, nameof(SelectedFamilySituation));
+    }
+    partial void OnResidenceChanged(string value)
+    {
+        ValidateProperty(value, nameof(Residence));
+    }
+    partial void OnSelectedJobNatureChanged(JobNature value)
+    {
+        ValidateProperty(value, nameof(SelectedJobNature));
+    }
+    partial void OnEssentialTrainingChanged(string value)
+    {
+        ValidateProperty(value, nameof(EssentialTraining));
+    }
+    partial void OnOtherTrainingChanged(string value)
+    {
+        ValidateProperty(value, nameof(OtherTraining));
+    }
+    partial void OnSpokenLanguagesChanged(string value)
+    {
+        ValidateProperty(value, nameof(SpokenLanguages));
+    }
+    partial void OnExperienceChanged(int value)
+    {
+        ValidateProperty(value, nameof(Experience));
+    }
+    partial void OnSelectedDepartmentChanged(Department value)
+    {
+        ValidateProperty(value, nameof(SelectedDepartment));
+    }
+    partial void OnSelectedRecruitmentDateChanged(DateTime value)
+    {
+        ValidateProperty(value, nameof(SelectedRecruitmentDate));
+    }
+    partial void OnSelectedStatusChanged(Status value)
+    {
+        ValidateProperty(value, nameof(SelectedStatus));
     }
 
-	private bool _isPersonalInfoActive = true;
-
-	public bool IsPersonalInfoActive
-    {
-		get { return _isPersonalInfoActive; }
-		set { _isPersonalInfoActive = value; OnPropertyChanged(); }
-	}
-
-	private bool _isJobInfoActive = false;
-
-	public bool IsJobInfoActive
-    {
-		get { return _isJobInfoActive; }
-		set { _isJobInfoActive = value; OnPropertyChanged(); }
-	}
-
-    public ICommand NextBtnCommand { get; }
-    public ICommand BackBtnCommand { get; }
-
-    public AddAndEditWindowViewModel(PersonalInformationViewModel personalInfoVM, JobInformationViewModel jobInfoVM, IEmployeeManagementService employeeManagementService)
+    public AddAndEditWindowViewModel( IEmployeeManagementService employeeManagementService)
 	{
 		_employeeManagementService = employeeManagementService;
-        _personalInformationVM = personalInfoVM;
-		_jobInformationVM = jobInfoVM;
+        SelectedBirthDate = DateTime.Today;
+        SelectedRecruitmentDate = DateTime.Today;
+        LoadFamilySituation();
+        _ = LoadDepartmentsAsync();
+        _ = LoadJobNatureAsync();
 
-		_personalInformationVM.ErrorsChanged += ChildViewModel_ErrorsChanged;
-		_jobInformationVM.ErrorsChanged += ChildViewModel_ErrorsChanged;
-		CurrentView = _personalInformationVM;
-
-		
-		_nextBtnContent = "Save & Next";
-
-		NextBtnCommand = new RelayCommand(HandleNextOrSubmit, CanProceed);
-		BackBtnCommand = new RelayCommand(() => CurrentView = _personalInformationVM);
-	}
-
-    private void ChildViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
-    {
-        // Propagate the error state change to update command availability
-        CommandManager.InvalidateRequerySuggested();
     }
 
-    private async void HandleNextOrSubmit()
-	{
-		if (CurrentView == _personalInformationVM)
-		{
-            // Validate all properties in the personal information view model
-            _personalInformationVM.ValidateAllProperties();
-
-			if (_personalInformationVM.HasErrors)
-				return;
-
-            await SavePersonalInformation();
-			CurrentView = _jobInformationVM;
-		}
-		else if (CurrentView == _jobInformationVM)
-		{
-			_jobInformationVM.ValidateAllProperties();
-
-			if (_jobInformationVM.HasErrors)
-				return;
-
-			await SaveJobInformation();
-			_ = AddEmployeeToDatabase();
-		}
-	}
-
-    private async Task AddEmployeeToDatabase()
+    private void LoadFamilySituation()
     {
-		try
-		{
-			var emp_id = await _employeeManagementService.EmployeeService.AddAsync(EmployeeData);
-            if (emp_id < 1)
-			{
-                await DialogService.ShowSingleButtonMessageBoxAsync(
-                    "Error adding employee. Please try again.",
-                    "Error",
-                    "OK");
-                return;
-            }
-            await DialogService.ShowSingleButtonMessageBoxAsync(
-                $"Employee added successfully.",
-                "Success",
-                "OK");
-
-			UpdateGridWindowData?.Invoke();
-			CloseWindow?.Invoke();			
-        }
-		catch (Exception ex)
-		{
-			throw new Exception($"Error: {ex.Message}");
-        }
-    }
-
-    private bool CanProceed()
-    {
-        if (CurrentView == _personalInformationVM)
+        foreach (var item in Enum.GetValues(typeof(FamilySituation)).Cast<FamilySituation>())
         {
-            // Only check if required fields are filled and no errors
-            return _personalInformationVM.AreRequiredFieldsFilled() && !_personalInformationVM.HasErrors;
+            FamilySituationItems.Add(item);
         }
-		else if (CurrentView == _jobInformationVM)
-		{
-			return _jobInformationVM.AreRequiredFieldsFilled() && !_jobInformationVM.HasErrors;
-		}
-
-		return false;
     }
 
-
-    private async Task SavePersonalInformation()
+    private async Task LoadJobNatureAsync()
     {
-        EmployeeData.FirstName = _personalInformationVM.FirstName;
-        EmployeeData.LastName = _personalInformationVM.LastName;
-        EmployeeData.Phone = _personalInformationVM.Phone;
-        EmployeeData.Email = _personalInformationVM.Email;
-        EmployeeData.DateOfBirth = (DateTime)_personalInformationVM.SelectedDate;
-        EmployeeData.BirthLocation = _personalInformationVM.BirthLocation;
-        EmployeeData.Address = _personalInformationVM.Address;
-        EmployeeData.FamilySituation = _personalInformationVM.SelectedFamilySituation?.ToString();
-		EmployeeData.Gender = _personalInformationVM.SelectedGender.ToString() == "Male" ? 0 : 1;
-		EmployeeData.Residence = _personalInformationVM.Residence;
+        var jobNatures = await _employeeManagementService.JobNatureService.GetAsync();
+        foreach (var jobNature in jobNatures)
+        {
+            JobNatureItems.Add(jobNature);
+        }
     }
 
-    private async Task SaveJobInformation()
+    private async Task<IEnumerable<Department>> LoadDepartmentsAsync()
     {
-        EmployeeData.JobTitle = _jobInformationVM.JobTitle;
-        EmployeeData.EssentialTraining = _jobInformationVM.EssentialTraining;
-        EmployeeData.Training = _jobInformationVM.OtherTraining;
-        EmployeeData.RecruitmentDate = DateTime.Now.Date;
-        EmployeeData.LanguagesSpoken = _jobInformationVM.SpokenLanguages;
-        EmployeeData.Experience = _jobInformationVM.Experience;
-        EmployeeData.DepartmentId = await _employeeManagementService.DepartmentService.GetDepartmentIdByNameAsync(_jobInformationVM.SelectedDeparment);
-        EmployeeData.JobNatureId = await _employeeManagementService.JobNatureService.GetJobNatureIdByNameAsync(_jobInformationVM.SelectedJobNature);
+        var departments = await _employeeManagementService.DepartmentService.GetAsync();
+
+        foreach (var department in departments)
+        {
+            DepartmentItems.Add(department);
+        }
+        return departments;
     }
 
 
+    [RelayCommand]
+    private async void SaveEmployee()
+    {
+        if (HasErrors) return;
+
+        var newEmployee = new Employee()
+        {
+            FirstName = FirstName,
+            LastName = LastName,
+            Phone = Phone,
+            Address = Address,
+            Gender = SelectedGender,
+            Email = Email,
+            DateOfBirth = SelectedBirthDate,
+            BirthLocation = BirthLocation,
+            FamilySituation = SelectedFamilySituation,
+            Residence = Residence,
+
+            JobTitle = JobTitle,
+            EssentialTraining = EssentialTraining,
+            Training = OtherTraining,
+            LanguagesSpoken = SpokenLanguages,
+            Experience = Experience,
+            DepartmentId = SelectedDepartment.Id,
+            JobNatureId = SelectedJobNature?.Id,
+            RecruitmentDate = SelectedRecruitmentDate,
+            IsActive = SelectedStatus
+        };
+
+        var employeeId = await _employeeManagementService.EmployeeService.AddAsync(newEmployee);
+        if (employeeId < 1)
+        {
+            await DialogService.ShowSingleButtonMessageBoxAsync(
+                "Error adding employee. Please try again.",
+                "Error",
+                "OK");
+            return;
+        }
+        await DialogService.ShowSingleButtonMessageBoxAsync(
+            $"Employee added successfully.",
+            "Success",
+            "OK");
+
+        UpdateEmployeeDataGrid?.Invoke();
+        Window?.Close();
+    }
 
 }

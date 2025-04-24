@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
 using EEMS.DataAccess.Models;
+using EEMS.Utilities.Enums;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -15,47 +16,45 @@ public partial class ViewEmployeeDetailsViewModel : ObservableObject
     [ObservableProperty] private string _phone;
     [ObservableProperty] private string _email;
     [ObservableProperty] private string _jobTitle;
-    [ObservableProperty] private string _department;
-    [ObservableProperty] private string _jobNature;
+    [ObservableProperty] private string _departmentName;
+    [ObservableProperty] private string _jobNatureName;
     [ObservableProperty] private string _address;
-    [ObservableProperty] private string _dateOfBirth;
+    [ObservableProperty] private DateTime _dateOfBirth;
     [ObservableProperty] private string _birthLocation;
     [ObservableProperty] private string _residence;
-    [ObservableProperty] private string _familySituation;
-    [ObservableProperty] private string _gender;
-    [ObservableProperty] private string _recruitmentDate;
+    [ObservableProperty] private FamilySituation _familySituation;
+    [ObservableProperty] private Gender _gender;
+    [ObservableProperty] private DateTime _recruitmentDate;
     [ObservableProperty] private string _essentialTraining;
     [ObservableProperty] private string _training;
     [ObservableProperty] private string _languagesSpoken;
     [ObservableProperty] private int _experience;
-    [ObservableProperty] private string _isActive;
+    [ObservableProperty] private Status _isActive;
 
-    private readonly IEmployeeManagementService _employeeManagementService;
 
-    public ViewEmployeeDetailsViewModel(Employee employee, IEmployeeManagementService employeeManagementService)
+    public ViewEmployeeDetailsViewModel(Employee employee)
     {
-        _employee = employee;
-        _employeeManagementService = employeeManagementService;
+        _employee = employee; 
 
         FirstName = employee.FirstName;
         LastName = employee.LastName;
         Phone = employee.Phone.ToString();
         Email = employee.Email;
         JobTitle = employee.JobTitle;
-        Department = employee.Department.Name;
-        JobNature = employee.JobNature.Name;
+        DepartmentName = employee.Department.Name;
+        JobNatureName = employee.JobNature.Name;
         Address = employee.Address;
-        DateOfBirth = employee.DateOfBirth.Date.ToString("dd/MM/yyyy");
+        DateOfBirth = employee.DateOfBirth.Date;
         BirthLocation = employee.BirthLocation;
         Residence = employee.Residence;
         FamilySituation = employee.FamilySituation;
-        Gender = employee.Gender == 0 ? "Female" : "Male";
-        RecruitmentDate = employee.RecruitmentDate.Date.ToString("dd/MM/yyyy");
-        EssentialTraining = employee.EssentialTraining;
+        Gender = employee.Gender;
+        RecruitmentDate = employee.RecruitmentDate.Date;
+        EssentialTraining = employee.EssentialTraining ?? "";
         Training = employee.Training;
-        LanguagesSpoken = employee.LanguagesSpoken;
+        LanguagesSpoken = employee.LanguagesSpoken ?? "";
         Experience = employee.Experience ?? 0;
-        IsActive = employee.IsActive ? "Active" : "Inactive";
+        IsActive = employee.IsActive;
     }
 
     [RelayCommand]
@@ -72,14 +71,4 @@ public partial class ViewEmployeeDetailsViewModel : ObservableObject
             printDialog.PrintDocument(paginator, "Employee Details");
         }
     }
-
-    //private Task<string> GetDepartmentName(int id)
-    //{
-    //    var departmentName =  _employeeManagementService.GetAsync(id);
-    //    return departmentName;
-    //}
-
-
-
-
 }

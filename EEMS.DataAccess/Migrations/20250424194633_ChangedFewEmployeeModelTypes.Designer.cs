@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EEMS.DataAccess.Migrations
 {
     [DbContext(typeof(EEMSDbContext))]
-    partial class EEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424194633_ChangedFewEmployeeModelTypes")]
+    partial class ChangedFewEmployeeModelTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Absences", (string)null);
+                    b.ToTable("Absences");
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Account", b =>
@@ -70,7 +73,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts", (string)null);
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Department", b =>
@@ -87,7 +90,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -193,176 +196,113 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasIndex("JobNatureId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Address = "شارع الملك عبدالعزيز، الرياض",
-                            BirthLocation = "الرياض",
-                            DateOfBirth = new DateTime(1995, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Address = "123 Main St, New York, USA",
+                            BirthLocation = "New York, USA",
+                            DateOfBirth = new DateTime(1990, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 1,
-                            Email = "ahmad@example.com",
-                            EssentialTraining = "ASP.NET Core",
-                            Experience = 3,
+                            Email = "john.doe@example.com",
                             FamilySituation = "Single",
-                            FirstName = "أحمد",
+                            FirstName = "John",
                             Gender = "Male",
                             IsActive = "Active",
                             IsArchived = false,
                             JobNatureId = 1,
-                            JobTitle = "مهندس برمجيات",
-                            LanguagesSpoken = "العربية، الإنجليزية",
-                            LastName = "الزيدي",
-                            Phone = "0599988776",
-                            RecruitmentDate = new DateTime(2022, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "الرياض",
-                            Training = "تدريب في تطوير الويب"
+                            JobTitle = "Software Engineer",
+                            LastName = "Doe",
+                            Phone = "123-456-7890",
+                            RecruitmentDate = new DateTime(2020, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Residence = "New York, USA",
+                            Training = "C#, .NET, SQL"
                         },
                         new
                         {
                             Id = 2,
-                            Address = "حي الشاطئ، جدة",
-                            BirthLocation = "جدة",
-                            DateOfBirth = new DateTime(1992, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Address = "456 Elm St, Los Angeles, USA",
+                            BirthLocation = "Los Angeles, USA",
+                            DateOfBirth = new DateTime(1985, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
-                            Email = "sara@example.com",
-                            EssentialTraining = "UML، تحليل البيانات",
-                            Experience = 5,
+                            Email = "jane.smith@example.com",
                             FamilySituation = "Married",
-                            FirstName = "سارة",
+                            FirstName = "Jane",
                             Gender = "Female",
-                            IsActive = "Active",
+                            IsActive = "Inactive",
                             IsArchived = false,
                             JobNatureId = 2,
-                            JobTitle = "محللة نظم",
-                            LanguagesSpoken = "العربية",
-                            LastName = "العتيبي",
-                            Phone = "0501122334",
-                            RecruitmentDate = new DateTime(2021, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "جدة",
-                            Training = "تحليل نظم المعلومات"
+                            JobTitle = "Project Manager",
+                            LastName = "Smith",
+                            Phone = "987-654-3210",
+                            RecruitmentDate = new DateTime(2018, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Residence = "Los Angeles, USA",
+                            Training = "PMP, Agile, Scrum"
                         },
                         new
                         {
                             Id = 3,
-                            Address = "حي الفيصلية، الدمام",
-                            BirthLocation = "الدمام",
-                            DateOfBirth = new DateTime(1988, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 3,
-                            Email = "khaled.anazi@example.com",
-                            EssentialTraining = "إدارة فرق العمل، PMP",
-                            Experience = 10,
-                            FamilySituation = "Married",
-                            FirstName = "خالد",
-                            Gender = "Male",
-                            IsActive = "Active",
+                            Address = "789 Oak St, Chicago, USA",
+                            BirthLocation = "Chicago, USA",
+                            DateOfBirth = new DateTime(1992, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = 1,
+                            Email = "alice.johnson@example.com",
+                            FamilySituation = "Single",
+                            FirstName = "Alice",
+                            Gender = "Female",
+                            IsActive = "Inactive",
                             IsArchived = false,
-                            JobNatureId = 1,
-                            JobTitle = "مدير مشاريع",
-                            LanguagesSpoken = "العربية، الإنجليزية",
-                            LastName = "العنزي",
-                            Phone = "0567788990",
-                            RecruitmentDate = new DateTime(2020, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "الدمام",
-                            Training = "إدارة المشاريع الاحترافية (PMP)"
+                            JobNatureId = 3,
+                            JobTitle = "QA Engineer",
+                            LastName = "Johnson",
+                            Phone = "555-123-4567",
+                            RecruitmentDate = new DateTime(2021, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Residence = "Chicago, USA",
+                            Training = "Selenium, Manual Testing"
                         },
                         new
                         {
                             Id = 4,
-                            Address = "حي العزيزية، مكة",
-                            BirthLocation = "مكة",
-                            DateOfBirth = new DateTime(1996, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Address = "321 Pine St, Houston, USA",
+                            BirthLocation = "Houston, USA",
+                            DateOfBirth = new DateTime(1988, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 3,
-                            Email = "nada.harbi@example.com",
-                            EssentialTraining = "Adobe Photoshop، Figma",
-                            Experience = 2,
-                            FamilySituation = "Single",
-                            FirstName = "ندى",
+                            Email = "bob.brown@example.com",
+                            FamilySituation = "Married",
+                            FirstName = "Bob",
                             Gender = "Female",
                             IsActive = "Active",
                             IsArchived = false,
-                            JobNatureId = 2,
-                            JobTitle = "مصممة جرافيك",
-                            LanguagesSpoken = "العربية، الإنجليزية",
-                            LastName = "الحربي",
-                            Phone = "0553344556",
-                            RecruitmentDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "مكة",
-                            Training = "دورات Adobe و UI/UX"
+                            JobNatureId = 1,
+                            JobTitle = "DevOps Engineer",
+                            LastName = "Brown",
+                            Phone = "444-555-6666",
+                            RecruitmentDate = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Residence = "Houston, USA",
+                            Training = "Docker, Kubernetes, Azure"
                         },
                         new
                         {
                             Id = 5,
-                            Address = "حي المنسك، أبها",
-                            BirthLocation = "أبها",
-                            DateOfBirth = new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Address = "654 Beach St, Miami, USA",
+                            BirthLocation = "Miami, USA",
+                            DateOfBirth = new DateTime(1995, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = 2,
-                            Email = "fahad.shahri@example.com",
-                            EssentialTraining = "أمن الشبكات",
-                            Experience = 8,
+                            Email = "charlie.davis@example.com",
                             FamilySituation = "Married",
-                            FirstName = "فهد",
-                            Gender = "Male",
-                            IsActive = "Inactive",
-                            IsArchived = false,
-                            JobNatureId = 1,
-                            JobTitle = "أخصائي شبكات",
-                            LanguagesSpoken = "العربية",
-                            LastName = "الشهري",
-                            Phone = "0531122334",
-                            RecruitmentDate = new DateTime(2019, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "أبها",
-                            Training = "CCNA، أمن الشبكات"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "حي اليرموك، الخبر",
-                            BirthLocation = "الخبر",
-                            DateOfBirth = new DateTime(1994, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 1,
-                            Email = "reem.subaie@example.com",
-                            EssentialTraining = "تخطيط الموارد، تقييم الأداء",
-                            Experience = 4,
-                            FamilySituation = "Divorced",
-                            FirstName = "ريم",
+                            FirstName = "Charlie",
                             Gender = "Female",
                             IsActive = "Active",
                             IsArchived = false,
-                            JobNatureId = 1,
-                            JobTitle = "أخصائية موارد بشرية",
-                            LanguagesSpoken = "العربية، الإنجليزية",
-                            LastName = "السبيعي",
-                            Phone = "0504455667",
-                            RecruitmentDate = new DateTime(2021, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "الخبر",
-                            Training = "إدارة الموارد البشرية، تقييم الأداء"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Address = "حي النهضة، نجران",
-                            BirthLocation = "نجران",
-                            DateOfBirth = new DateTime(1985, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DepartmentId = 3,
-                            Email = "mazen.yami@example.com",
-                            EssentialTraining = "تدقيق مالي",
-                            Experience = 12,
-                            FamilySituation = "Widowed",
-                            FirstName = "مازن",
-                            Gender = "Male",
-                            IsActive = "Active",
-                            IsArchived = false,
                             JobNatureId = 3,
-                            JobTitle = "محاسب",
-                            LanguagesSpoken = "العربية",
-                            LastName = "اليامي",
-                            Phone = "0542211334",
-                            RecruitmentDate = new DateTime(2018, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Residence = "نجران",
-                            Training = "معايير IFRS، تدقيق داخلي"
+                            JobTitle = "UI/UX Designer",
+                            LastName = "Davis",
+                            Phone = "777-888-9999",
+                            RecruitmentDate = new DateTime(2022, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Residence = "Miami, USA",
+                            Training = "Figma, Adobe XD, Sketch"
                         });
                 });
 
@@ -380,7 +320,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobNatures", (string)null);
+                    b.ToTable("JobNatures");
 
                     b.HasData(
                         new

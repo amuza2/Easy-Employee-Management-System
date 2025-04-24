@@ -288,7 +288,7 @@
                         Click="btnMinimize_Click"
                         FontSize="20"
                         Style="{StaticResource topButton}">
-                        <Icon:PackIconMaterial Kind="Minus" />
+                        <Icon:PackIconMaterial Kind="WindowMinimize" />
                     </Button>
 
                     <Button
@@ -296,7 +296,7 @@
                         Click="btnExit_Click"
                         FontSize="20"
                         Style="{StaticResource topButton}">
-                        <Icon:PackIconMaterial Kind="Xamarin" />
+                        <Icon:PackIconMaterial Kind="Close" />
                     </Button>
                 </StackPanel>
 

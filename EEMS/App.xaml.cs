@@ -53,8 +53,6 @@ public partial class App : Application
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();
-        service.AddTransient<PersonalInformationViewModel>();
-        service.AddTransient<JobInformationViewModel>();
         service.AddTransient<AddAndEditWindowViewModel>();
         service.AddTransient<ViewEmployeeDetailsViewModel>();
         service.AddTransient<AbsenceWindowViewModel>();
@@ -68,11 +66,6 @@ public partial class App : Application
         service.AddTransient<EmployeePage>();
         service.AddTransient<DashboardPage>();
         service.AddTransient<AbsencePage>();
-
-
-        //Resigter User Control
-        service.AddTransient<PersonalInformationUserControl>();
-        service.AddTransient<JobInformationUserControl>();
 
 
         //Register Views

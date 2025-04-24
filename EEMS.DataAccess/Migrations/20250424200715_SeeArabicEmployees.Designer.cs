@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EEMS.DataAccess.Migrations
 {
     [DbContext(typeof(EEMSDbContext))]
-    partial class EEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424200715_SeeArabicEmployees")]
+    partial class SeeArabicEmployees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Absences", (string)null);
+                    b.ToTable("Absences");
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Account", b =>
@@ -70,7 +73,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts", (string)null);
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Department", b =>
@@ -87,7 +90,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -193,7 +196,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasIndex("JobNatureId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
@@ -380,7 +383,7 @@ namespace EEMS.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobNatures", (string)null);
+                    b.ToTable("JobNatures");
 
                     b.HasData(
                         new
