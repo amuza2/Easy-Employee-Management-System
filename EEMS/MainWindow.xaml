@@ -229,10 +229,51 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <!--<Button Style="{StaticResource menuButton}">
+                            <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Condidates" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                            </Button>-->
+                            <Button Command="{Binding NavigateToCondidatePageCommand}">
+                                <Button.Style>
+                                    <Style BasedOn="{StaticResource menuButton}" TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ActivePage}" Value="Condidate">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="#6895ff"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation
+                                                                FillBehavior="HoldEnd"
+                                                                Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                                To="Transparent"
+                                                                Duration="0:0:0.3" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Button.Background>
+                                    <SolidColorBrush Color="Transparent" />
+                                </Button.Background>
+
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="ForumOutline" Style="{StaticResource menuButtonIcon}" />
-                                    <TextBlock Text="Condidates" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <Icon:PackIconMaterial Kind="Tree" Style="{StaticResource menuButtonIcon}" />
+                                    <TextBlock Text="Condidate" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
 

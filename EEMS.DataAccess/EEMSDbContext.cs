@@ -12,6 +12,8 @@ public class EEMSDbContext : DbContext
     public DbSet<Absence> Absences { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<JobNature> JobNatures { get; set; }
+    public DbSet<Condidate> Condidates { get; set; }
+    public DbSet<OpenedJob> Openedjobs { get; set; }
     //public DbSet<AbsenceType> AbsenceTypes { get; set; }
     //public DbSet<DrivingLicenseType> DrivingLicenseTypes { get; set; }
     //public DbSet<EmployeeDrivingLicense> EmployeeDrivingLicenses { get; set; }
@@ -153,6 +155,19 @@ public class EEMSDbContext : DbContext
         //    .Property(s => s.DateHappened)
         //    .HasColumnType("date");
 
+
+        //Condidate relations
+        // One to Many: OpendJob -> Condidate
+        modelBuilder.Entity<Condidate>()
+            .HasOne(c => c.OpenedJob)
+            .WithMany(o => o.Condidates)
+            .HasForeignKey(c => c.OpenedJobId);
+
+        // One to Many: JobNature -> Condidate
+        modelBuilder.Entity<Condidate>()
+            .HasOne(c => c.JobNature)
+            .WithMany(j => j.Condidates)
+            .HasForeignKey(c => c.JobNatureId);
 
         // Data seeding
 

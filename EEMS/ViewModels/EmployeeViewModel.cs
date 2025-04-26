@@ -20,25 +20,13 @@ public partial class EmployeeViewModel : ObservableObject
 
     [ObservableProperty] private Employee _selectedEmployee;
     [ObservableProperty] private string _selectedTab = "All";
-    [ObservableProperty] private bool _isEditing;
+    //[ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
     [ObservableProperty] private string _searchEmployee;
 
     private List<Employee> _filteredEmployees = new List<Employee>();
 
-    public bool IsNotEditing => !IsEditing;
-
-    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
-    private void ViewEmployee(object obj)
-    {
-        if (SelectedEmployee != null)
-        {
-            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee);
-            var viewEmployeeDetailsWindow = new ViewEmployeeDetails(employeeDetails);
-            viewEmployeeDetailsWindow.ShowDialog();
-            SelectedEmployee = null;
-        }
-    }
+    //public bool IsNotEditing => !IsEditing;
 
     [RelayCommand]
     private void SelectTab(string tabName)
@@ -49,14 +37,14 @@ public partial class EmployeeViewModel : ObservableObject
 
     private bool CanPerformUserAction(object obj)
     {
-        return SelectedEmployee != null && !IsEditing;
+        return SelectedEmployee != null;
     }
 
-    partial void OnIsEditingChanged(bool value)
-    {
-        OnPropertyChanged(nameof(IsNotEditing));
-        ViewEmployeeCommand.NotifyCanExecuteChanged();
-    }
+    //partial void OnIsEditingChanged(bool value)
+    //{
+    //    OnPropertyChanged(nameof(IsNotEditing));
+    //    ViewEmployeeCommand.NotifyCanExecuteChanged();
+    //}
 
     partial void OnSelectedEmployeeChanged(Employee value)
     {
@@ -91,7 +79,6 @@ public partial class EmployeeViewModel : ObservableObject
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
         Departments = new ObservableCollection<Department>();
-        IsEditing = false;
         LoadDepartmentsToCombobox();
     }
 
@@ -170,20 +157,33 @@ public partial class EmployeeViewModel : ObservableObject
         AddAndEditWindow.ShowDialog();
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private void ViewEmployee(object obj)
+    {
+        if (SelectedEmployee != null)
+        {
+            var employeeDetails = new ViewEmployeeDetailsViewModel(SelectedEmployee);
+            var viewEmployeeDetailsWindow = new ViewEmployeeDetails(employeeDetails);
+            viewEmployeeDetailsWindow.ShowDialog();
+            SelectedEmployee = null;
+        }
+    }
+
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
     private void EditEmployee(object obj)
     {
         if (SelectedEmployee != null)
         {
-           
             //viewModel.UpdateGridWindowData = LoadEmployees;
-            //var addAndEditWindow = new AddAndEditWindow(viewModel);
-            //addAndEditWindow.ShowDialog();
+            var viewModel = new AddAndEditWindowViewModel(_employeeManagementService, SelectedEmployee);
+            var addAndEditWindow = new AddAndEditWindow(viewModel);
+            addAndEditWindow.ShowDialog();
+            SelectedEmployee = null;
         }
     }
 
-    [RelayCommand]
-    private async void DeleteEmployee()
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private async void DeleteEmployee(object obj)
     {
         if (SelectedEmployee != null)
         {

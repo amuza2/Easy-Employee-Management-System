@@ -570,7 +570,7 @@
                                             Margin="0,40,20,0"
                                             HorizontalAlignment="Right"
                                             Command="{Binding SaveEmployeeCommand}"
-                                            Content="Save"
+                                            Content="{Binding ButtonName}"
                                             Style="{StaticResource mainButton}">
                                             <Button.Effect>
                                                 <DropShadowEffect

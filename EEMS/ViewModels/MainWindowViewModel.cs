@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.UI.Views.Absences;
+using EEMS.UI.Views.Condidates;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
@@ -62,6 +63,13 @@ public partial class MainWindowViewModel : ObservableObject
     {
         ActivePage = "Absence";
         _navigationService.NavigateTo<AbsencePage>();
+    }
+
+    [RelayCommand]
+    private void NavigateToCondidatePage()
+    {
+        ActivePage = "Condidate";
+        _navigationService.NavigateTo<CondidatePage>();
     }
 
 }
