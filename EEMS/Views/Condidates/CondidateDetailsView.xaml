@@ -1,0 +1,516 @@
+﻿<Window
+    x:Class="EEMS.UI.Views.Condidates.CondidateDetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.Views.Condidates"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Candidate Details"
+    Width="950"
+    Height="780"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style x:Key="SectionHeaderText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#3366CC" />
+            <Setter Property="Margin" Value="0,15,0,10" />
+        </Style>
+
+        <Style x:Key="LabelText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#555555" />
+            <Setter Property="Margin" Value="0,5,0,2" />
+        </Style>
+
+        <Style x:Key="ValueText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Padding" Value="25,12" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+
+        <!--<Style
+        x:Key="PrimaryButton"
+        BasedOn="{StaticResource ActionButton}"
+        TargetType="Button">
+        <Setter Property="Background" Value="#4880ff" />
+        <Setter Property="Foreground" Value="White" />
+        <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="#3366CC" />
+        </Trigger>
+        </Style.Triggers>
+        </Style>-->
+
+        <!--<Style
+        x:Key="SecondaryButton"
+        BasedOn="{StaticResource ActionButton}"
+        TargetType="Button">
+        <Setter Property="Background" Value="#f0f3f8" />
+        <Setter Property="Foreground" Value="#4880ff" />
+        <Setter Property="BorderBrush" Value="#4880ff" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="#e6ebf5" />
+        </Trigger>
+        </Style.Triggers>
+        </Style>-->
+
+        <DropShadowEffect
+            x:Key="CardShadow"
+            BlurRadius="10"
+            Direction="-90"
+            Opacity="0.1"
+            ShadowDepth="3"
+            Color="#000000" />
+    </Window.Resources>
+
+    <Border
+        BorderBrush="#4880ff"
+        BorderThickness="2"
+        CornerRadius="18">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="15"
+                Direction="-90"
+                Opacity="0.2"
+                ShadowDepth="5"
+                Color="#000000" />
+        </Border.Effect>
+
+        <Grid>
+            <Border
+                Background="White"
+                CornerRadius="16"
+                MouseDown="Border_MouseDown">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Header Bar  -->
+                    <Border Background="#4880ff" CornerRadius="16,16,0,0">
+                        <Grid>
+                            <StackPanel
+                                Margin="20,0,0,0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Icon:PackIconMaterial
+                                    Width="24"
+                                    Height="24"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"
+                                    Kind="AccountSearch" />
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="CANDIDATE DETAILS" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Margin="0,0,15,0"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="btnMinimize"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,10,0"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    Click="btnMinimize_Click"
+                                    Foreground="White"
+                                    Style="{StaticResource ResourceKey=ActionButton}">
+                                    <Icon:PackIconMaterial
+                                        Width="14"
+                                        Height="14"
+                                        Kind="WindowMinimize" />
+                                </Button>
+
+                                <Button
+                                    x:Name="btnExit"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,5,0"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    Click="btnExit_Click"
+                                    Foreground="White"
+                                    Style="{StaticResource ResourceKey=ActionButton}">
+                                    <Icon:PackIconMaterial
+                                        Width="14"
+                                        Height="14"
+                                        Kind="Close" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!--  Content Area  -->
+                    <Border
+                        Grid.Row="1"
+                        Background="#f8fafc"
+                        CornerRadius="0,0,16,16">
+
+                        <Grid Margin="25,15,25,20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--  Candidate Name Header  -->
+                            <Border
+                                Margin="0,0,0,20"
+                                Padding="20"
+                                Background="White"
+                                CornerRadius="12"
+                                Effect="{DynamicResource ResourceKey=CardShadow}">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        FontSize="24"
+                                        FontWeight="Bold"
+                                        Foreground="#333333">
+                                        <Run Text="{Binding FirstName}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding LastName}" />
+                                    </TextBlock>
+                                    <TextBlock
+                                        Margin="0,5,0,0"
+                                        HorizontalAlignment="Center"
+                                        FontSize="16"
+                                        Foreground="#4880ff">
+                                        <Run Text="Position: " />
+                                        <Run Text="{Binding OpenedJob.Title}" />
+                                    </TextBlock>
+                                    <TextBlock
+                                        Margin="0,3,0,0"
+                                        HorizontalAlignment="Center"
+                                        FontSize="14"
+                                        Foreground="#666666">
+                                        <Run Text="Interview Date: " />
+                                        <Run Text="{Binding InterviewDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <!--  Candidate Details  -->
+                            <TabControl
+                                Grid.Row="1"
+                                Background="Transparent"
+                                BorderThickness="0">
+
+                                <TabItem Header="Personal Information">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Left Column  -->
+                                            <Border
+                                                Grid.Column="0"
+                                                Margin="0,10,10,0"
+                                                Padding="25,20"
+                                                Background="White"
+                                                CornerRadius="12"
+                                                Effect="{StaticResource CardShadow}">
+
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Basic Information" />
+
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <!--  Column 1  -->
+                                                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="First Name" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding FirstName}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Last Name" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding LastName}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Gender" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding Gender}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Date of Birth" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding DateOfBirth, StringFormat='{}{0:MM/dd/yyyy}'}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Blood Group" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding BloodGroup}" />
+                                                        </StackPanel>
+
+                                                        <!--  Column 2  -->
+                                                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Birth Location" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding BirthLocation}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Address" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding Address}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Residence" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding Residence}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Family Situation" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding FamilySituation}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="No. of Siblings" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding NumberOfBrothersAndSisters}" />
+                                                        </StackPanel>
+                                                    </Grid>
+
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Contact Information" />
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Phone" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding Phone}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Email" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding Email}" />
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--  Right Column  -->
+                                            <Border
+                                                Grid.Column="1"
+                                                Margin="10,10,0,0"
+                                                Padding="25,20"
+                                                Background="White"
+                                                CornerRadius="12"
+                                                Effect="{StaticResource CardShadow}">
+
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Family Information" />
+
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <!--  Column 1  -->
+                                                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Father's Full Name" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding FatherFullName}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Father's Job" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding FatherJob}" />
+                                                        </StackPanel>
+
+                                                        <!--  Column 2  -->
+                                                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Mother's Full Name" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding MotherFullName}" />
+
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Mother's Job" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding MotherJob}" />
+                                                        </StackPanel>
+                                                    </Grid>
+
+                                                    <StackPanel>
+                                                        <TextBlock Style="{StaticResource SectionHeaderText}" Text="Spouse Information" />
+                                                        <TextBlock Style="{StaticResource LabelText}" Text="Spouse's Full Name" />
+                                                        <TextBlock Style="{StaticResource ValueText}" Text="{Binding HusbandFullname}" />
+
+                                                        <TextBlock Style="{StaticResource LabelText}" Text="Spouse's Job" />
+                                                        <TextBlock Style="{StaticResource ValueText}" Text="{Binding HusbandJob}" />
+                                                    </StackPanel>
+
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Identification" />
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="National Card Number" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding NationalCardNumber}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="National Card Release Date" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding NationalCardNumberReleaseDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Social Security Number" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding SocialSecurityNumber}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Bank Account Number" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding BankAccountNumber}" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+
+                                <TabItem Header="Qualifications">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Left Column  -->
+                                            <Border
+                                                Grid.Column="0"
+                                                Margin="0,10,10,0"
+                                                Padding="25,20"
+                                                Background="White"
+                                                CornerRadius="12"
+                                                Effect="{StaticResource CardShadow}">
+
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Professional Qualifications" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Essential Training" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding EssentialTraining}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Training" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding Training}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Languages Spoken" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding LanguagesSpoken}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Experience (years)" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding Experience}" />
+
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Skills" />
+
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Driving License" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding HasDrivingLicence}" />
+                                                        </StackPanel>
+
+                                                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="MS Office Skills" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding KnowMicrosoftOfficeSoftware}" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!--  Right Column  -->
+                                            <Border
+                                                Grid.Column="1"
+                                                Margin="10,10,0,0"
+                                                Padding="25,20"
+                                                Background="White"
+                                                CornerRadius="12"
+                                                Effect="{StaticResource CardShadow}">
+
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="Application Information" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Applied Position" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding OpenedJob.Title}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Job Nature" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding JobNature.Name}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Interview Date" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding InterviewDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Archived" />
+                                                    <TextBlock Style="{StaticResource ValueText}">
+                                                        <Run Text="{Binding IsArchived}" />
+                                                    </TextBlock>
+
+                                                    <TextBlock Style="{StaticResource SectionHeaderText}" Text="National Service Information" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Cleared From National Service" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding ClearedFromNationalService}" />
+
+                                                    <TextBlock Style="{StaticResource LabelText}" Text="Suitable But Not Incorporated" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding NationalServiceSuitableNotIncorporated}" />
+
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Suspended From" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding NationalServiceDateSuspendedFrom, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                                        </StackPanel>
+
+                                                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                                            <TextBlock Style="{StaticResource LabelText}" Text="Suspended To" />
+                                                            <TextBlock Style="{StaticResource ValueText}" Text="{Binding NationalServiceDateSuspendedTo, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </TabItem>
+                            </TabControl>
+
+                            <!--  Action Buttons  -->
+                            <StackPanel
+                                Grid.Row="2"
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <Button
+                                    Click="CloseButton_Click"
+                                    Content="Close"
+                                    Style="{StaticResource SecondaryButton}">
+                                    <Button.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="8"
+                                            Direction="-90"
+                                            Opacity="0.2"
+                                            ShadowDepth="3"
+                                            Color="#000000" />
+                                    </Button.Effect>
+                                </Button>
+
+                                <Button
+                                    Margin="20,0,0,0"
+                                    Command="{Binding PrintCandidateDetailCommand}"
+                                    Content="Print"
+                                    Style="{StaticResource mainButton}">
+                                    <Button.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="8"
+                                            Direction="-90"
+                                            Opacity="0.2"
+                                            ShadowDepth="3"
+                                            Color="#000000" />
+                                    </Button.Effect>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+
+</Window>

@@ -5,6 +5,7 @@ using EEMS.UI.Views.Condidates;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
+using EEMS.UI.Views.Shared.PageNativation;
 using System.Windows.Media;
 
 namespace EEMS.UI.ViewModels;

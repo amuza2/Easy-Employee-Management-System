@@ -45,6 +45,7 @@
             Margin="0,10,0,0"
             Orientation="Horizontal">
             <Button
+                VerticalAlignment="Top"
                 BorderBrush="{Binding SelectedTab, Converter={StaticResource TabSelectedToBrushConverter}, ConverterParameter=All}"
                 Command="{Binding SelectTabCommand}"
                 CommandParameter="All"
@@ -120,7 +121,7 @@
                     Foreground="#868686"
                     ItemsSource="{Binding Departments}"
                     SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
-                    Text="All" />
+                    Text=" All" />
 
                 <UC:SearchTextBoxControl
                     Width="210"

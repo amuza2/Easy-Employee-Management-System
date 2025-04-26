@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace EEMS.UI.Views.Shared
+namespace EEMS.UI.Converters
 {
     public class CollapsedMenuWidthConverter : IValueConverter
     {

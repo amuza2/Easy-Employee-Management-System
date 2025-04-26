@@ -2,7 +2,7 @@
 using EEMS.UI.ViewModels;
 using System.Windows;
 
-namespace EEMS.UI.Views.Shared;
+namespace EEMS.UI.Views.Shared.MessageBoxes;
 
 public class DialogService
 {

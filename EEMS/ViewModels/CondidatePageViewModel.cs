@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
 using EEMS.DataAccess.Models;
+using EEMS.UI.Views.Condidates;
+using EEMS.UI.Views.Shared.DocumentPrinting;
 using System.Collections.ObjectModel;
 
 namespace EEMS.UI.ViewModels;
@@ -60,5 +62,23 @@ public partial class CondidatePageViewModel : ObservableObject
     private async Task GetArchivedCondidates()
     {
         throw new NotImplementedException();
+    }
+
+    //View Condidate
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private async void ViewCondidate(object obj)
+    {
+        if (SelectedCondidate != null)
+        {
+            var condidateDetailsViewModel = new CondidateDetailsViewViewModel(SelectedCondidate, new DocumentBuilderFactory(), new PrintService());
+            var condidateDetailsView = new CondidateDetailsView(condidateDetailsViewModel);
+            condidateDetailsView.ShowDialog();
+            SelectedCondidate = null;
+        }
+    }
+
+    private bool CanPerformUserAction(object obj)
+    {
+        return SelectedCondidate != null;
     }
 }

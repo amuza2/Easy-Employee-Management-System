@@ -6,6 +6,7 @@ using EEMS.UI.Enums;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
+using EEMS.UI.Views.Shared.MessageBoxes;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -17,12 +18,14 @@ public partial class EmployeeViewModel : ObservableObject
     private readonly IEmployeeManagementService _employeeManagementService;
     public ObservableCollection<Employee> Employees { get; set; }
     public ObservableCollection<Department> Departments { get; set; }
+    public ObservableCollection<JobNature> JobNatureItems { get; set; }
 
     [ObservableProperty] private Employee _selectedEmployee;
     [ObservableProperty] private string _selectedTab = "All";
     //[ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
     [ObservableProperty] private string _searchEmployee;
+    [ObservableProperty] private JobNature _selectedJobNature;
 
     private List<Employee> _filteredEmployees = new List<Employee>();
 
@@ -80,10 +83,12 @@ public partial class EmployeeViewModel : ObservableObject
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
         Departments = new ObservableCollection<Department>();
-        LoadDepartmentsToCombobox();
+        JobNatureItems = new ObservableCollection<JobNature>();
+        _ = LoadDepartmentsToCombobox();
+        _ = LoadJobNatureItems();
     }
 
-    private async void LoadDepartmentsToCombobox()
+    private async Task LoadDepartmentsToCombobox()
     {
         Departments.Clear();
         Department allDepartment = new Department { Id = 0, Name = "All" };
@@ -99,6 +104,22 @@ public partial class EmployeeViewModel : ObservableObject
         }
 
         SelectedDepartment = allDepartment;
+    }
+
+    private async Task LoadJobNatureItems()
+    {
+        JobNatureItems.Clear();
+        JobNature jobNature1 = new JobNature { Id = 0, Name = "All" };
+        JobNatureItems.Add(jobNature1);
+        var jobNatures = await _employeeManagementService.JobNatureService.GetAsync();
+        if (jobNatures != null)
+        {
+            foreach (var jobNature in jobNatures)
+            {
+                JobNatureItems.Add(jobNature);
+            }
+        }
+        SelectedJobNature = jobNature1;
     }
 
     partial void OnSelectedDepartmentChanged(Department value)
