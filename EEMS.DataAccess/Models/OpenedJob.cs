@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace EEMS.DataAccess.Models;
 
-public class JobNature
+public class OpenedJob
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public int DepartmentId { get; set; }
+    public virtual Department Department { get; set; }
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     public virtual ICollection<Condidate> Condidates { get; set; } = new List<Condidate>();
 }

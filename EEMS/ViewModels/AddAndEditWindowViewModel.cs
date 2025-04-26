@@ -7,13 +7,13 @@ using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace EEMS.UI.ViewModels;
 
 public partial class AddAndEditWindowViewModel : ObservableValidator
 {
 	private readonly IEmployeeManagementService _employeeManagementService;
-	private bool _isEditing = false;
 
     [ObservableProperty] [Required(ErrorMessage ="First name cannot be empty")] private string _firstName;
     [ObservableProperty] [Required(ErrorMessage = "Last name cannot be empty")] private string _lastName;
@@ -34,6 +34,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
     [ObservableProperty] [Required(ErrorMessage = "Job Nature cannot be empty")] private JobNature _selectedJobNature;
     [ObservableProperty] [Required(ErrorMessage = "recruitment date cannot be empty")] private DateTime _selectedRecruitmentDate;
     [ObservableProperty] [Required(ErrorMessage = "Status cannot be empty")] private Status _selectedStatus;
+    [ObservableProperty] private string _buttonName = "Save";
     public ObservableCollection<Department> DepartmentItems { get; } = new();
     public ObservableCollection<JobNature> JobNatureItems { get; } = new();
     public ObservableCollection<FamilySituation> FamilySituationItems { get; } = new();
@@ -111,13 +112,47 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
 
     public AddAndEditWindowViewModel( IEmployeeManagementService employeeManagementService)
 	{
-		_employeeManagementService = employeeManagementService;
+        ButtonName = "Save";    
+        _employeeManagementService = employeeManagementService;
         SelectedBirthDate = DateTime.Today;
         SelectedRecruitmentDate = DateTime.Today;
         LoadFamilySituation();
         _ = LoadDepartmentsAsync();
         _ = LoadJobNatureAsync();
+    }
 
+    public AddAndEditWindowViewModel(IEmployeeManagementService employeeManagementService,Employee employee)
+    {
+        ButtonName = "Update";
+        _employeeManagementService = employeeManagementService;
+        LoadFamilySituation();
+        _ = LoadDepartmentsAsync();
+        _ = LoadJobNatureAsync();
+        LoadEmployeeDetail(employee);
+    }
+
+    private void LoadEmployeeDetail(Employee employee)
+    {
+        FirstName = employee.FirstName;
+        LastName = employee.LastName;
+        Phone = employee.Phone;
+        Address = employee.Address;
+        SelectedGender = (Gender)employee.FamilySituation;
+        Email = employee.Email;
+        SelectedBirthDate = employee.DateOfBirth;
+        BirthLocation = employee.BirthLocation;
+        SelectedFamilySituation = employee.FamilySituation;
+        Residence = employee.Residence;
+
+        JobTitle = employee.JobTitle;
+        EssentialTraining = employee.EssentialTraining ?? "";
+        OtherTraining = employee.Training;
+        SpokenLanguages = employee.LanguagesSpoken ?? "";
+        Experience = (int)employee.Experience;
+        SelectedDepartment = DepartmentItems.FirstOrDefault(d => d.Id == employee.Department?.Id);
+        SelectedJobNature = JobNatureItems.FirstOrDefault(n => n.Id == employee.JobNature?.Id);
+        SelectedRecruitmentDate = employee.RecruitmentDate;
+        SelectedStatus = employee.IsActive;
     }
 
     private void LoadFamilySituation()

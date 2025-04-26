@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using EEMS.UI.UserControls;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
+using EEMS.UI.Views.Condidates;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
@@ -50,6 +51,7 @@ public partial class App : Application
         service.AddTransient<IJobNatureService, JobNatureService>();
         service.AddTransient<IEmployeeManagementService, EmployeeManagementService>();
         service.AddTransient<IAbsenceService, AbsenceService>();
+        service.AddTransient<ICondidateService, CondidateService>();
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();
@@ -60,12 +62,14 @@ public partial class App : Application
         service.AddTransient<ViewAbsenceDetailsViewModel>();
         service.AddTransient<SingleButtonMessageBoxViewModel>();
         service.AddTransient<TwoButtonMessageBoxViewModel>();
+        service.AddTransient<CondidatePageViewModel>();
         
 
         // Register pages
         service.AddTransient<EmployeePage>();
         service.AddTransient<DashboardPage>();
         service.AddTransient<AbsencePage>();
+        service.AddTransient<CondidatePage>();
 
 
         //Register Views
