@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EEMS.BusinessLogic\EEMS.BusinessLogic.csproj" />
     <ProjectReference Include="..\EEMS.DataAccess\EEMS.DataAccess.csproj" />
+    <ProjectReference Include="..\EEMS.Utilities\EEMS.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

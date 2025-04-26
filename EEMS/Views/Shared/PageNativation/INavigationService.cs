@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace EEMS.UI.Views.Shared
+namespace EEMS.UI.Views.Shared.PageNativation
 {
     public interface INavigationService
     {

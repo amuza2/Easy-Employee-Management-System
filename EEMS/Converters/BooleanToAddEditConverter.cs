@@ -1,19 +1,17 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace EEMS.UI.Views.Shared;
+namespace EEMS.UI.Converters;
 
-public class BoolToRadioButtonConverter : IValueConverter
+public class BooleanToAddEditConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is bool boolValue)
-            return boolValue;
-        return false;
+        return (bool)value ? "Update" : "Add";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is bool isChecked && isChecked ? true : (bool?)null;
+        throw new NotImplementedException();
     }
 }

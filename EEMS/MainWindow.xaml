@@ -77,14 +77,16 @@
                     <DockPanel>
                         <!--  Manu Titles  -->
                         <TextBlock
-                            Height="29"
                             Margin="25,25,0,10"
                             DockPanel.Dock="Top"
                             FontSize="16"
                             FontWeight="SemiBold"
                             Foreground="{Binding SetColor}"
-                            Text="Company Name"
-                            TextAlignment="Left" />
+                            TextAlignment="Left">
+                            <Run Text="Industrial Technology" />
+                            <LineBreak />
+                            <Run Text="Research Center" />
+                        </TextBlock>
                         <TextBlock
                             Margin="25,25,0,10"
                             DockPanel.Dock="Top"
@@ -224,7 +226,7 @@
                                 </Button.Background>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Tree" Style="{StaticResource menuButtonIcon}" />
+                                    <Icon:PackIconMaterial Kind="CalendarRemove" Style="{StaticResource menuButtonIcon}" />
                                     <TextBlock Text="Absence" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>
@@ -272,7 +274,7 @@
                                 </Button.Background>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="Tree" Style="{StaticResource menuButtonIcon}" />
+                                    <Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource menuButtonIcon}" />
                                     <TextBlock Text="Condidate" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                             </Button>

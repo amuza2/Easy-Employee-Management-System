@@ -8,6 +8,8 @@ using EEMS.UI.Views.Condidates;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
+using EEMS.UI.Views.Shared.DocumentPrinting;
+using EEMS.UI.Views.Shared.PageNativation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
@@ -82,6 +84,11 @@ public partial class App : Application
         service.AddTransient<ViewAbsenceDetails>();
         service.AddTransient<SingleButtonMessageBox>();
         service.AddTransient<TowButtonMessageBox>();
+
+        // Document printing
+        service.AddTransient<IDocumentBuilderFactory, DocumentBuilderFactory>();
+        service.AddTransient<PrintService>();
+        service.AddTransient<PrintService>();
 
         // Register Navigation Service
         service.AddTransient<INavigationService, NavigationService>();

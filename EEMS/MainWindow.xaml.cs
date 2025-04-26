@@ -1,8 +1,8 @@
 ﻿using EEMS.UI.Views.Employees;
-using EEMS.UI.Views.Shared;
 using EEMS.UI.ViewModels;
 using System.Windows;
 using System.Windows.Input;
+using EEMS.UI.Views.Shared.PageNativation;
 
 
 namespace EEMS;

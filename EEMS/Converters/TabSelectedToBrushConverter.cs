@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace EEMS.UI.Views.Shared;
+namespace EEMS.UI.Converters;
 
 public class TabSelectedToBrushConverter : IValueConverter
 {

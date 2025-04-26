@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace EEMS.UI.Views.Shared;
+namespace EEMS.UI.Converters;
 
 public class InverseBoolToRadioButtonConverter : IValueConverter
 {

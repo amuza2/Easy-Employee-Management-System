@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 
-namespace EEMS.UI.Views.Shared
+namespace EEMS.UI.Views.Shared.PageNativation
 {
     public class NavigationService : INavigationService
     {
