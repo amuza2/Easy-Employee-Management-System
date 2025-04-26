@@ -145,9 +145,9 @@
             Grid.Row="3"
             CellStyle="{DynamicResource DataGridCellStyle1}"
             ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-            ItemsSource="{Binding Employees}"
+            ItemsSource="{Binding Condidates}"
             RowStyle="{DynamicResource DataGridRowStyle1}"
-            SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedCondidate, Mode=TwoWay}"
             Style="{DynamicResource DataGridStyle1}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -184,7 +184,7 @@
 
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding JobNature}"
+                    Binding="{Binding JobNature.Name}"
                     CanUserResize="False"
                     Header="Position"
                     IsReadOnly="True" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EEMS.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,9 @@ namespace EEMS.UI.Views.Condidates
     /// </summary>
     public partial class CondidatePage : Page
     {
-        public CondidatePage()
+        public CondidatePage(CondidatePageViewModel condidatePageViewModel)
         {
+            DataContext = condidatePageViewModel;
             InitializeComponent();
         }
     }

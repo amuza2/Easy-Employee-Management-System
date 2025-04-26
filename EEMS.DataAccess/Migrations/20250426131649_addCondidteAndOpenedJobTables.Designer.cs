@@ -4,6 +4,7 @@ using EEMS.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EEMS.DataAccess.Migrations
 {
     [DbContext(typeof(EEMSDbContext))]
-    partial class EEMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250426131649_addCondidteAndOpenedJobTables")]
+    partial class addCondidteAndOpenedJobTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace EEMS.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("ClearedFromNationalService")
+                    b.Property<bool>("ClearedFromNationalService")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -118,9 +121,11 @@ namespace EEMS.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FatherFullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FatherJob")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -136,9 +141,11 @@ namespace EEMS.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HusbandFullname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HusbandJob")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InterviewDate")
@@ -161,9 +168,11 @@ namespace EEMS.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MotherFullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MotherJob")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalCardNumber")
@@ -173,16 +182,16 @@ namespace EEMS.DataAccess.Migrations
                     b.Property<DateTime>("NationalCardNumberReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("NationalServiceDateSuspendedFrom")
+                    b.Property<DateTime>("NationalServiceDateSuspendedFrom")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("NationalServiceDateSuspendedTo")
+                    b.Property<DateTime>("NationalServiceDateSuspendedTo")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("NationalServiceSuitableNotIncorporated")
+                    b.Property<bool>("NationalServiceSuitableNotIncorporated")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("NumberOfBrothersAndSisters")
+                    b.Property<int>("NumberOfBrothersAndSisters")
                         .HasColumnType("int");
 
                     b.Property<int?>("OpenedJobId")
@@ -211,181 +220,6 @@ namespace EEMS.DataAccess.Migrations
                     b.HasIndex("OpenedJobId");
 
                     b.ToTable("Condidates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "وسط الجزائر العاصمة",
-                            BankAccountNumber = "1234567890123456",
-                            BirthLocation = "الجزائر العاصمة",
-                            BloodGroup = "APlus",
-                            ClearedFromNationalService = true,
-                            DateOfBirth = new DateTime(1995, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ahmed.benali@example.com",
-                            EssentialTraining = "تطوير البرمجيات",
-                            Experience = 3,
-                            FamilySituation = "Single",
-                            FatherFullName = "محمد بن علي",
-                            FatherJob = "مهندس",
-                            FirstName = "أحمد",
-                            Gender = "Male",
-                            HasDrivingLicence = "Have",
-                            InterviewDate = new DateTime(2025, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsArchived = false,
-                            JobNatureId = 1,
-                            KnowMicrosoftOfficeSoftware = true,
-                            LanguagesSpoken = "العربية، الفرنسية، الإنجليزية",
-                            LastName = "بن علي",
-                            MotherFullName = "فاطمة بوزيد",
-                            MotherJob = "معلمة",
-                            NationalCardNumber = "123456789",
-                            NationalCardNumberReleaseDate = new DateTime(2019, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumberOfBrothersAndSisters = 2,
-                            OpenedJobId = 1,
-                            Phone = "0550123456",
-                            Residence = "الجزائر العاصمة",
-                            SocialSecurityNumber = "9876543210",
-                            Training = "هندسة البرمجيات"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "وسط مدينة وهران",
-                            BankAccountNumber = "9876543210987654",
-                            BirthLocation = "وهران",
-                            BloodGroup = "BPlus",
-                            DateOfBirth = new DateTime(1998, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "sara.boualem@example.com",
-                            EssentialTraining = "إدارة المشاريع",
-                            Experience = 1,
-                            FamilySituation = "Single",
-                            FatherFullName = "عبد القادر بوعلام",
-                            FatherJob = "طبيب",
-                            FirstName = "سارة",
-                            Gender = "Female",
-                            HasDrivingLicence = "NotHave",
-                            InterviewDate = new DateTime(2025, 4, 28, 0, 0, 0, 0, DateTimeKind.Local),
-                            IsArchived = false,
-                            JobNatureId = 2,
-                            KnowMicrosoftOfficeSoftware = true,
-                            LanguagesSpoken = "العربية، الفرنسية",
-                            LastName = "بوعلام",
-                            MotherFullName = "سميرة شريف",
-                            MotherJob = "ربة منزل",
-                            NationalCardNumber = "987654321",
-                            NationalCardNumberReleaseDate = new DateTime(2016, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumberOfBrothersAndSisters = 1,
-                            OpenedJobId = 2,
-                            Phone = "0550987654",
-                            Residence = "وهران",
-                            SocialSecurityNumber = "1234567890",
-                            Training = "إدارة الأعمال"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "وسط مدينة قسنطينة",
-                            BankAccountNumber = "1122334455667788",
-                            BirthLocation = "قسنطينة",
-                            BloodGroup = "OPlus",
-                            ClearedFromNationalService = true,
-                            DateOfBirth = new DateTime(1993, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mohamed.lamine@example.com",
-                            EssentialTraining = "صيانة المعدات الكهربائية",
-                            Experience = 5,
-                            FamilySituation = "Married",
-                            FatherFullName = "علي لمين",
-                            FatherJob = "محاسب",
-                            FirstName = "محمد",
-                            Gender = "Male",
-                            HasDrivingLicence = "Have",
-                            InterviewDate = new DateTime(2025, 5, 1, 0, 0, 0, 0, DateTimeKind.Local),
-                            IsArchived = false,
-                            JobNatureId = 3,
-                            KnowMicrosoftOfficeSoftware = false,
-                            LanguagesSpoken = "العربية، الفرنسية",
-                            LastName = "لمين",
-                            MotherFullName = "زهرة بلقاسم",
-                            MotherJob = "ممرضة",
-                            NationalCardNumber = "112233445",
-                            NationalCardNumberReleaseDate = new DateTime(2012, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumberOfBrothersAndSisters = 3,
-                            OpenedJobId = 1,
-                            Phone = "0770123456",
-                            Residence = "قسنطينة",
-                            SocialSecurityNumber = "1122334455",
-                            Training = "الهندسة الكهربائية"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "حي 100 مسكن سطيف",
-                            BankAccountNumber = "6677889900112233",
-                            BirthLocation = "سطيف",
-                            BloodGroup = "ABPlus",
-                            DateOfBirth = new DateTime(1996, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "khadija.yassine@example.com",
-                            EssentialTraining = "الإسعافات الأولية",
-                            Experience = 2,
-                            FamilySituation = "Single",
-                            FatherFullName = "عبد الله ياسين",
-                            FatherJob = "مقاول",
-                            FirstName = "خديجة",
-                            Gender = "Female",
-                            HasDrivingLicence = "NotHave",
-                            InterviewDate = new DateTime(2025, 4, 29, 0, 0, 0, 0, DateTimeKind.Local),
-                            IsArchived = false,
-                            JobNatureId = 2,
-                            KnowMicrosoftOfficeSoftware = true,
-                            LanguagesSpoken = "العربية، الفرنسية",
-                            LastName = "ياسين",
-                            MotherFullName = "ليلى بوخديمي",
-                            MotherJob = "مدرسة",
-                            NationalCardNumber = "556677889",
-                            NationalCardNumberReleaseDate = new DateTime(2015, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumberOfBrothersAndSisters = 4,
-                            OpenedJobId = 3,
-                            Phone = "0660987654",
-                            Residence = "سطيف",
-                            SocialSecurityNumber = "5566778899",
-                            Training = "التمريض"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "وسط مدينة عنابة",
-                            BankAccountNumber = "4455667788990011",
-                            BirthLocation = "عنابة",
-                            BloodGroup = "BMinus",
-                            ClearedFromNationalService = true,
-                            DateOfBirth = new DateTime(1990, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "abderrahmane.cherif@example.com",
-                            EssentialTraining = "ميكانيك السيارات",
-                            Experience = 7,
-                            FamilySituation = "Married",
-                            FatherFullName = "مصطفى شريف",
-                            FatherJob = "فني صيانة",
-                            FirstName = "عبد الرحمن",
-                            Gender = "Male",
-                            HasDrivingLicence = "Have",
-                            InterviewDate = new DateTime(2025, 4, 27, 0, 0, 0, 0, DateTimeKind.Local),
-                            IsArchived = false,
-                            JobNatureId = 1,
-                            KnowMicrosoftOfficeSoftware = false,
-                            LanguagesSpoken = "العربية",
-                            LastName = "شريف",
-                            MotherFullName = "نوال دحماني",
-                            MotherJob = "ربة منزل",
-                            NationalCardNumber = "334455667",
-                            NationalCardNumberReleaseDate = new DateTime(2010, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumberOfBrothersAndSisters = 5,
-                            OpenedJobId = 2,
-                            Phone = "0770887766",
-                            Residence = "عنابة",
-                            SocialSecurityNumber = "3344556677",
-                            Training = "الميكانيك"
-                        });
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Department", b =>
@@ -735,32 +569,6 @@ namespace EEMS.DataAccess.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Openedjobs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DepartmentId = 1,
-                            Name = "Software Engineer"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DepartmentId = 1,
-                            Name = "Network Specialist"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DepartmentId = 1,
-                            Name = "HR Specialist"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DepartmentId = 2,
-                            Name = "Accountant"
-                        });
                 });
 
             modelBuilder.Entity("EEMS.DataAccess.Models.Absence", b =>

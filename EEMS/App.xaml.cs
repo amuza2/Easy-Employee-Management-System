@@ -52,6 +52,8 @@ public partial class App : Application
         service.AddTransient<IEmployeeManagementService, EmployeeManagementService>();
         service.AddTransient<IAbsenceService, AbsenceService>();
         service.AddTransient<ICondidateService, CondidateService>();
+        service.AddTransient<ICondidateManagementService, CondidateManagementService>();
+        service.AddTransient<IOpenedJobService, OpenedJobService>();
 
         // Register ViewModels
         service.AddTransient<EmployeeViewModel>();

@@ -46,6 +46,7 @@ public partial class EmployeeViewModel : ObservableObject
     //    ViewEmployeeCommand.NotifyCanExecuteChanged();
     //}
 
+    // Part of Edit Employee
     partial void OnSelectedEmployeeChanged(Employee value)
     {
         ViewEmployeeCommand.NotifyCanExecuteChanged();
