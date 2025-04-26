@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EEMS.BusinessLogic.Interfaces;
 
-public class ICondidateManagementService
+public interface ICondidateManagementService
 {
     IJobNatureService JobNatureService { get; }
     ICondidateService CondidateService { get; }
-    
+    IOpenedJobService OpenedJobService { get; } 
 }

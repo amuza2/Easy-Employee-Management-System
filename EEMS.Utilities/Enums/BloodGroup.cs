@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace EEMS.Utilities.Enums;
 
-public enum FamilySituation
+public enum BloodGroup
 {
-    Single, Married, Divorced, Widowed
+    APlus,
+    AMinus,
+    BPlus,
+    BMinus,
+    ABPlus,
+    ABMinus,
+    OPlus,
+    OMinus
 }

@@ -169,6 +169,23 @@ public class EEMSDbContext : DbContext
             .WithMany(j => j.Condidates)
             .HasForeignKey(c => c.JobNatureId);
 
+        modelBuilder.Entity<Condidate>()
+            .Property(e => e.Gender)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Condidate>()
+            .Property(e => e.FamilySituation)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Condidate>()
+            .Property(e => e.HasDrivingLicence)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Condidate>()
+            .Property(e => e.BloodGroup)
+            .HasConversion<string>();
+
+
         // Data seeding
 
         modelBuilder.Entity<Department>().HasData(
@@ -358,10 +375,214 @@ public class EEMSDbContext : DbContext
                 DepartmentId = 3,
                 JobNatureId = 3
             }
-
-
             );
 
+        // seed Opened Jobs
+        modelBuilder.Entity<OpenedJob>().HasData(
+            new OpenedJob
+            {
+                Id = 1,
+                Name = "Software Engineer",
+                DepartmentId = 1,
+            },
+            new OpenedJob
+            {
+                Id = 2,
+                Name = "Network Specialist",
+                DepartmentId = 1,
+            },
+            new OpenedJob
+            {
+                Id = 3,
+                Name = "HR Specialist",
+                DepartmentId = 1,
+            },
+            new OpenedJob
+            {
+                Id = 4,
+                Name = "Accountant",
+                DepartmentId = 2,
+            }
+            );
+
+        // seed Condidates
+            modelBuilder.Entity<Condidate>().HasData(
+
+        new Condidate
+        {
+            Id = 1,
+            FirstName = "أحمد",
+            LastName = "بن علي",
+            Phone = "0550123456",
+            Email = "ahmed.benali@example.com",
+            Training = "هندسة البرمجيات",
+            DateOfBirth = new DateTime(1995, 3, 15),
+            BirthLocation = "الجزائر العاصمة",
+            Address = "وسط الجزائر العاصمة",
+            FamilySituation = FamilySituation.Single,
+            InterviewDate = new DateTime(2025, 12, 5),
+            Gender = Gender.Male,
+            EssentialTraining = "تطوير البرمجيات",
+            LanguagesSpoken = "العربية، الفرنسية، الإنجليزية",
+            Experience = 3,
+            Residence = "الجزائر العاصمة",
+            IsArchived = false,
+            HasDrivingLicence = DrivingLicense.Have,
+            KnowMicrosoftOfficeSoftware = true,
+            FatherFullName = "محمد بن علي",
+            MotherFullName = "فاطمة بوزيد",
+            FatherJob = "مهندس",
+            MotherJob = "معلمة",
+            BloodGroup = BloodGroup.APlus,
+            NumberOfBrothersAndSisters = 2,
+            HusbandFullname = null,
+            HusbandJob = null,
+            BankAccountNumber = "1234567890123456",
+            SocialSecurityNumber = "9876543210",
+            NationalCardNumber = "123456789",
+            NationalCardNumberReleaseDate = new DateTime(2019, 6, 1),
+            ClearedFromNationalService = true,
+            OpenedJobId = 1,
+            JobNatureId = 1
+        },
+        new Condidate
+        {
+            Id = 2,
+            FirstName = "سارة",
+            LastName = "بوعلام",
+            Phone = "0550987654",
+            Email = "sara.boualem@example.com",
+            Training = "إدارة الأعمال",
+            DateOfBirth = new DateTime(1998, 7, 20),
+            BirthLocation = "وهران",
+            Address = "وسط مدينة وهران",
+            FamilySituation = FamilySituation.Single,
+            InterviewDate = DateTime.Today.AddDays(2),
+            Gender = Gender.Female,
+            EssentialTraining = "إدارة المشاريع",
+            LanguagesSpoken = "العربية، الفرنسية",
+            Experience = 1,
+            Residence = "وهران",
+            IsArchived = false,
+            HasDrivingLicence = DrivingLicense.NotHave,
+            KnowMicrosoftOfficeSoftware = true,
+            FatherFullName = "عبد القادر بوعلام",
+            MotherFullName = "سميرة شريف",
+            FatherJob = "طبيب",
+            MotherJob = "ربة منزل",
+            BloodGroup = BloodGroup.BPlus,
+            NumberOfBrothersAndSisters = 1,
+            BankAccountNumber = "9876543210987654",
+            SocialSecurityNumber = "1234567890",
+            NationalCardNumber = "987654321",
+            NationalCardNumberReleaseDate = new DateTime(2016, 8, 15),
+            OpenedJobId = 2,
+            JobNatureId = 2
+        },
+        new Condidate
+        {
+            Id = 3,
+            FirstName = "محمد",
+            LastName = "لمين",
+            Phone = "0770123456",
+            Email = "mohamed.lamine@example.com",
+            Training = "الهندسة الكهربائية",
+            DateOfBirth = new DateTime(1993, 11, 5),
+            BirthLocation = "قسنطينة",
+            Address = "وسط مدينة قسنطينة",
+            FamilySituation = FamilySituation.Married,
+            InterviewDate = DateTime.Today.AddDays(5),
+            Gender = Gender.Male,
+            EssentialTraining = "صيانة المعدات الكهربائية",
+            LanguagesSpoken = "العربية، الفرنسية",
+            Experience = 5,
+            Residence = "قسنطينة",
+            IsArchived = false,
+            HasDrivingLicence = DrivingLicense.Have,
+            KnowMicrosoftOfficeSoftware = false,
+            FatherFullName = "علي لمين",
+            MotherFullName = "زهرة بلقاسم",
+            FatherJob = "محاسب",
+            MotherJob = "ممرضة",
+            BloodGroup = BloodGroup.OPlus,
+            NumberOfBrothersAndSisters = 3,
+            BankAccountNumber = "1122334455667788",
+            SocialSecurityNumber = "1122334455",
+            NationalCardNumber = "112233445",
+            NationalCardNumberReleaseDate = new DateTime(2012, 4, 10),
+            ClearedFromNationalService = true,
+            OpenedJobId = 1,
+            JobNatureId = 3
+        },
+        new Condidate
+        {
+            Id = 4,
+            FirstName = "خديجة",
+            LastName = "ياسين",
+            Phone = "0660987654",
+            Email = "khadija.yassine@example.com",
+            Training = "التمريض",
+            DateOfBirth = new DateTime(1996, 1, 10),
+            BirthLocation = "سطيف",
+            Address = "حي 100 مسكن سطيف",
+            FamilySituation = FamilySituation.Single,
+            InterviewDate = DateTime.Today.AddDays(3),
+            Gender = Gender.Female,
+            EssentialTraining = "الإسعافات الأولية",
+            LanguagesSpoken = "العربية، الفرنسية",
+            Experience = 2,
+            Residence = "سطيف",
+            IsArchived = false,
+            HasDrivingLicence = DrivingLicense.NotHave,
+            KnowMicrosoftOfficeSoftware = true,
+            FatherFullName = "عبد الله ياسين",
+            MotherFullName = "ليلى بوخديمي",
+            FatherJob = "مقاول",
+            MotherJob = "مدرسة",
+            BloodGroup = BloodGroup.ABPlus,
+            NumberOfBrothersAndSisters = 4,
+            BankAccountNumber = "6677889900112233",
+            SocialSecurityNumber = "5566778899",
+            NationalCardNumber = "556677889",
+            NationalCardNumberReleaseDate = new DateTime(2015, 9, 20),
+            OpenedJobId = 3,
+            JobNatureId = 2
+        },
+        new Condidate
+        {
+            Id = 5,
+            FirstName = "عبد الرحمن",
+            LastName = "شريف",
+            Phone = "0770887766",
+            Email = "abderrahmane.cherif@example.com",
+            Training = "الميكانيك",
+            DateOfBirth = new DateTime(1990, 5, 25),
+            BirthLocation = "عنابة",
+            Address = "وسط مدينة عنابة",
+            FamilySituation = FamilySituation.Married,
+            InterviewDate = DateTime.Today.AddDays(1),
+            Gender = Gender.Male,
+            EssentialTraining = "ميكانيك السيارات",
+            LanguagesSpoken = "العربية",
+            Experience = 7,
+            Residence = "عنابة",
+            IsArchived = false,
+            HasDrivingLicence = DrivingLicense.Have,
+            KnowMicrosoftOfficeSoftware = false,
+            FatherFullName = "مصطفى شريف",
+            MotherFullName = "نوال دحماني",
+            FatherJob = "فني صيانة",
+            MotherJob = "ربة منزل",
+            BloodGroup = BloodGroup.BMinus,
+            NumberOfBrothersAndSisters = 5,
+            BankAccountNumber = "4455667788990011",
+            SocialSecurityNumber = "3344556677",
+            NationalCardNumber = "334455667",
+            NationalCardNumberReleaseDate = new DateTime(2010, 2, 18),
+            ClearedFromNationalService = true,
+            OpenedJobId = 2,
+            JobNatureId = 1
+        });
 
 
     }

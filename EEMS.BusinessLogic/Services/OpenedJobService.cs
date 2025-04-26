@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace EEMS.BusinessLogic.Services;
 
-public class OpendJobService : IOpenedJobService
+public class OpenedJobService : IOpenedJobService
 {
     private readonly IDbContextFactory<EEMSDbContext> _contextFactory;
-    public OpendJobService(IDbContextFactory<EEMSDbContext> contextFactory)
+    public OpenedJobService(IDbContextFactory<EEMSDbContext> contextFactory)
     {
         _contextFactory = contextFactory;
     }

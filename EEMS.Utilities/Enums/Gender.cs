@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EEMS.Utilities.Enums
+namespace EEMS.Utilities.Enums;
+
+public enum Gender
 {
-    public enum Gender
-    {
-        Male, Female
-    }
+    Male, Female
 }
