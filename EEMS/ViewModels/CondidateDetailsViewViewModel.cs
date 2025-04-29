@@ -47,7 +47,7 @@ public partial class CondidateDetailsViewViewModel : ObservableObject
     [ObservableProperty] private DateTime? _nationalServiceDateSuspendedTo;
     [ObservableProperty] private bool? _nationalServiceSuitableNotIncorporated;
     [ObservableProperty] private string _openedJobName;
-    [ObservableProperty] private string _jobNatureName;
+    [ObservableProperty] private JobNatureEnum _jobNatureItem;
 
     public CondidateDetailsViewViewModel(Condidate condidate, IDocumentBuilderFactory factory, PrintService printService)
     {
@@ -71,7 +71,7 @@ public partial class CondidateDetailsViewViewModel : ObservableObject
         Experience = _condidate.Experience ?? 0;
         Residence = _condidate.Residence;
         IsArchived = _condidate.IsArchived;
-        HasDrivingLicence = _condidate.HasDrivingLicence;
+        HasDrivingLicence = _condidate.HasDrivingLicense;
         KnowMicrosoftOfficeSoftware = _condidate.KnowMicrosoftOfficeSoftware;
         FatherFullName = _condidate.FatherFullName ?? string.Empty;
         MotherFullName = _condidate.MotherFullName ?? string.Empty;
@@ -90,7 +90,7 @@ public partial class CondidateDetailsViewViewModel : ObservableObject
         NationalServiceDateSuspendedTo = _condidate.NationalServiceDateSuspendedTo;
         NationalServiceSuitableNotIncorporated = _condidate.NationalServiceSuitableNotIncorporated;
         OpenedJobName = _condidate.OpenedJob?.Name ?? string.Empty;
-        JobNatureName = _condidate.JobNature?.Name ?? string.Empty;
+        JobNatureItem = _condidate.JobNatureItem;
     }
 
     [RelayCommand]

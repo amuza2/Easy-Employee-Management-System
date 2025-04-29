@@ -153,9 +153,9 @@
                 <ContextMenu>
                     <MenuItem Command="{Binding ViewCondidateCommand}" Header="View" />
                     <MenuItem Command="{Binding EditCondidateCommand}" Header="Edit" />
-                    <MenuItem Command="{Binding ArchiveCondidateCommand}" Header="Archiver" />
-                    <MenuItem Command="{Binding DeleteCondidateCommand}" Header="Supprimer" />
-                    <MenuItem Command="{Binding PrintCondidateCommand}" Header="Imprimer" />
+                    <MenuItem Command="{Binding ArchiveCondidateCommand}" Header="Archive" />
+                    <MenuItem Command="{Binding DeleteCondidateCommand}" Header="Delete" />
+                    <MenuItem Command="{Binding PrintCondidateCommand}" Header="Print" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
@@ -184,7 +184,7 @@
 
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding JobNature.Name}"
+                    Binding="{Binding JobNatureItem}"
                     CanUserResize="False"
                     Header="Position"
                     IsReadOnly="True" />

@@ -1,15 +1,15 @@
 ﻿<Window
-    x:Class="EEMS.UI.Views.Employees.AddAndEditWindow"
+    x:Class="EEMS.UI.Views.Condidates.AddAndEditCondidateWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:UC="clr-namespace:EEMS.UI.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:EEMS.UI.Views.Employees"
+    xmlns:local="clr-namespace:EEMS.UI.Views.Condidates"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:EEMS.UI.ViewModels"
-    Title="AddAndEditWindow"
+    Title="AddAndEditCandidateWindow"
     Width="1150"
     Height="750"
     AllowsTransparency="True"
@@ -34,8 +34,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <!--  exit window  -->
-
+            <!--  window title  -->
             <TextBlock
                 Margin="50,0,0,2"
                 HorizontalAlignment="Left"
@@ -43,13 +42,13 @@
                 FontSize="16"
                 FontWeight="SemiBold"
                 Foreground="#4880ff"
-                Text="Add New Employee Form" />
+                Text="Add New Candidate Form" />
             <Icon:PackIconMaterial
                 Margin="20,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Foreground="#4880ff"
-                Kind="AccountOutline" />
+                Kind="AccountSearchOutline" />
 
             <StackPanel
                 Grid.Column="1"
@@ -92,7 +91,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Foreground="#4880ff"
-                            Kind="Account" />
+                            Kind="AccountSearchOutline" />
                     </Grid>
 
                     <TextBlock
@@ -100,17 +99,29 @@
                         FontSize="20"
                         FontWeight="SemiBold"
                         Foreground="#fff"
-                        Text="Employee Informations"
+                        Text="Candidate Information"
                         TextAlignment="Center" />
 
                     <UC:CardUserControl
-                        Title="Personel Information"
+                        Title="Personal Information"
                         Number="1"
                         Time="3 min" />
                     <UC:CardUserControl
-                        Title="Job Information"
+                        Title="Family Information"
                         Number="2"
                         Time="2 min" />
+                    <UC:CardUserControl
+                        Title="Document Information"
+                        Number="3"
+                        Time="2 min" />
+                    <UC:CardUserControl
+                        Title="National Service"
+                        Number="4"
+                        Time="1 min" />
+                    <UC:CardUserControl
+                        Title="Job Information"
+                        Number="5"
+                        Time="1 min" />
 
                 </StackPanel>
             </Border>
@@ -156,11 +167,25 @@
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!--  Form Title  -->
+                            <!--  Form Content  -->
                             <ScrollViewer Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
                                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
                                     <Grid>
                                         <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
                                             <RowDefinition />
                                             <RowDefinition />
                                             <RowDefinition />
@@ -183,6 +208,7 @@
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
+                                        <!--  Personal Information Section  -->
                                         <StackPanel
                                             Grid.ColumnSpan="2"
                                             Margin="20,20,0,0"
@@ -205,7 +231,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="18"
                                                 Foreground="#374655"
-                                                Text="Personal Informations" />
+                                                Text="Personal Information" />
                                         </StackPanel>
 
                                         <Separator
@@ -215,8 +241,7 @@
                                             Margin="-20,20"
                                             Background="#e1e6eb" />
 
-
-
+                                        <!--  Personal Information Fields - Left Column  -->
                                         <StackPanel Grid.Row="2" Grid.Column="0">
                                             <TextBlock Foreground="#868686" Text="First Name:" />
                                             <TextBox
@@ -286,7 +311,7 @@
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="6" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Gender" />
+                                            <TextBlock Foreground="#868686" Text="Gender:" />
                                             <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                                                 <RadioButton
                                                     Content="Male"
@@ -302,6 +327,24 @@
                                             </StackPanel>
                                         </StackPanel>
 
+                                        <StackPanel Grid.Row="7" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Residence:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter your residence"
+                                                Text="{Binding Residence}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!--  Personal Information Fields - Right Column  -->
                                         <StackPanel Grid.Row="2" Grid.Column="1">
                                             <TextBlock Foreground="#868686" Text="Email:" />
                                             <TextBox
@@ -319,13 +362,12 @@
                                             </TextBox>
                                         </StackPanel>
 
-
                                         <StackPanel Grid.Row="3" Grid.Column="1">
                                             <TextBlock Foreground="#868686" Text="Date of Birth:" />
                                             <DatePicker
                                                 Width="250"
                                                 HorizontalAlignment="Left"
-                                                SelectedDate="{Binding SelectedBirthDate, Mode=TwoWay}" />
+                                                SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" />
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="4" Grid.Column="1">
@@ -364,24 +406,43 @@
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="6" Grid.Column="1">
-                                            <TextBlock Foreground="#868686" Text="Residence:" />
-                                            <TextBox
+                                            <TextBlock Foreground="#868686" Text="Blood Group:" />
+                                            <ComboBox
                                                 Width="250"
                                                 Height="30"
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Enter your residence"
-                                                Text="{Binding Residence}">
-                                                <TextBox.Resources>
+                                                materialDesign:HintAssist.Hint="Select your blood group"
+                                                ItemsSource="{Binding BloodGroupItems}"
+                                                SelectedItem="{Binding SelectedBloodGroup}">
+                                                <ComboBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
                                                     </Style>
-                                                </TextBox.Resources>
-                                            </TextBox>
+                                                </ComboBox.Resources>
+                                            </ComboBox>
                                         </StackPanel>
 
+                                        <StackPanel Grid.Row="7" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Driving License:" />
+                                            <CheckBox
+                                                Margin="0,5,0,20"
+                                                Content="Has driving license"
+                                                IsChecked="{Binding HasDrvinglicense}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="8" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="MS Office Knowledge:" />
+                                            <CheckBox
+                                                Margin="0,5,0,20"
+                                                Content="Knows Microsoft Office"
+                                                IsChecked="{Binding KnowMicrosoftOfficeSoftware}" />
+                                        </StackPanel>
+
+                                        <!--  Family Information Section  -->
                                         <StackPanel
-                                            Grid.Row="7"
+                                            Grid.Row="9"
+                                            Grid.ColumnSpan="2"
                                             Margin="20,20,0,0"
                                             Orientation="Horizontal">
                                             <Grid Width="50" Height="50">
@@ -395,66 +456,33 @@
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     Foreground="#c2ddfc"
-                                                    Kind="FaceManProfile" />
+                                                    Kind="FamilyTree" />
                                             </Grid>
                                             <TextBlock
                                                 Margin="15,0,0,0"
                                                 VerticalAlignment="Center"
                                                 FontSize="18"
                                                 Foreground="#374655"
-                                                Text="Job Informations" />
+                                                Text="Family Information" />
                                         </StackPanel>
 
                                         <Separator
-                                            Grid.Row="8"
+                                            Grid.Row="10"
                                             Grid.ColumnSpan="2"
                                             Height="0.7"
                                             Margin="-20,20"
                                             Background="#e1e6eb" />
 
-                                        <StackPanel Grid.Row="9" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Job Title:" />
-                                            <TextBox
-                                                Width="250"
-                                                Height="30"
-                                                Margin="0,0,0,20"
-                                                HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Enter your job title"
-                                                Text="{Binding JobTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                                <TextBox.Resources>
-                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
-                                                        <Setter Property="Padding" Value="15,0,0,0" />
-                                                    </Style>
-                                                </TextBox.Resources>
-                                            </TextBox>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Row="10" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Essential Training:" />
-                                            <TextBox
-                                                Width="250"
-                                                Height="30"
-                                                Margin="0,0,0,20"
-                                                HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Enter your job essential training"
-                                                Text="{Binding EssentialTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                                <TextBox.Resources>
-                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
-                                                        <Setter Property="Padding" Value="15,0,0,0" />
-                                                    </Style>
-                                                </TextBox.Resources>
-                                            </TextBox>
-                                        </StackPanel>
-
+                                        <!--  Family Information Fields  -->
                                         <StackPanel Grid.Row="11" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Other Training:" />
+                                            <TextBlock Foreground="#868686" Text="Father's Full Name:" />
                                             <TextBox
                                                 Width="250"
                                                 Height="30"
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Enter your other training"
-                                                Text="{Binding OtherTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                materialDesign:HintAssist.Hint="Enter father's full name"
+                                                Text="{Binding FatherFullName}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -464,14 +492,14 @@
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="12" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Languages Spoken:" />
+                                            <TextBlock Foreground="#868686" Text="Father's Job:" />
                                             <TextBox
                                                 Width="250"
                                                 Height="30"
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Enter your language spoken"
-                                                Text="{Binding SpokenLanguages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                materialDesign:HintAssist.Hint="Enter father's job"
+                                                Text="{Binding FatherJob}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -481,7 +509,340 @@
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="13" Grid.Column="0">
-                                            <TextBlock Foreground="#868686" Text="Experience" />
+                                            <TextBlock Foreground="#868686" Text="Number of Brothers and Sisters:" />
+                                            <materialDesign:NumericUpDown
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                Value="{Binding NumberOfBrothersAndSisters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="11" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Mother's Full Name:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter mother's full name"
+                                                Text="{Binding MotherFullName}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="12" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Mother's Job:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter mother's job"
+                                                Text="{Binding MotherJob}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="13" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Husband's Full Name:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter husband's full name (if applicable)"
+                                                Text="{Binding HusbandFullname}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="14" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Husband's Job:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter husband's job (if applicable)"
+                                                Text="{Binding HusbandJob}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <!--  Document Information Section  -->
+                                        <StackPanel
+                                            Grid.Row="15"
+                                            Grid.ColumnSpan="2"
+                                            Margin="20,20,0,0"
+                                            Orientation="Horizontal">
+                                            <Grid Width="50" Height="50">
+                                                <Border
+                                                    BorderBrush="#efefef"
+                                                    BorderThickness="1.5"
+                                                    CornerRadius="50" />
+                                                <Icon:PackIconMaterial
+                                                    Width="40"
+                                                    Height="40"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#c2ddfc"
+                                                    Kind="FileDocumentOutline" />
+                                            </Grid>
+                                            <TextBlock
+                                                Margin="15,0,0,0"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                Foreground="#374655"
+                                                Text="Document Information" />
+                                        </StackPanel>
+
+                                        <Separator
+                                            Grid.Row="16"
+                                            Grid.ColumnSpan="2"
+                                            Height="0.7"
+                                            Margin="-20,20"
+                                            Background="#e1e6eb" />
+
+                                        <!--  Document Information Fields  -->
+                                        <StackPanel Grid.Row="17" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Bank Account Number:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter bank account number"
+                                                Text="{Binding BankAccountNumber}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="18" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Social Security Number:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter social security number"
+                                                Text="{Binding SocialSecurityNumber}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="17" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="National Card Number:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter national card number"
+                                                Text="{Binding NationalCardNumber}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="18" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="National Card Release Date:" />
+                                            <DatePicker
+                                                Width="250"
+                                                HorizontalAlignment="Left"
+                                                SelectedDate="{Binding NationalCardNumberReleaseDate, Mode=TwoWay}" />
+                                        </StackPanel>
+
+                                        <!--  National Service Section  -->
+                                        <StackPanel
+                                            Grid.Row="19"
+                                            Grid.ColumnSpan="2"
+                                            Margin="20,20,0,0"
+                                            Orientation="Horizontal">
+                                            <Grid Width="50" Height="50">
+                                                <Border
+                                                    BorderBrush="#efefef"
+                                                    BorderThickness="1.5"
+                                                    CornerRadius="50" />
+                                                <Icon:PackIconMaterial
+                                                    Width="40"
+                                                    Height="40"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#c2ddfc"
+                                                    Kind="MapMarkerRadius" />
+                                            </Grid>
+                                            <TextBlock
+                                                Margin="15,0,0,0"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                Foreground="#374655"
+                                                Text="National Service" />
+                                        </StackPanel>
+
+                                        <Separator
+                                            Grid.Row="20"
+                                            Grid.ColumnSpan="2"
+                                            Height="0.7"
+                                            Margin="-20,20"
+                                            Background="#e1e6eb" />
+
+                                        <!--  National Service Fields  -->
+                                        <StackPanel Grid.Row="21" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Cleared from National Service:" />
+                                            <CheckBox
+                                                Margin="0,5,0,20"
+                                                Content="Cleared"
+                                                IsChecked="{Binding ClearedFromNationalService}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="21" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Suitable but Not Incorporated:" />
+                                            <CheckBox
+                                                Margin="0,5,0,20"
+                                                Content="Suitable but Not Incorporated"
+                                                IsChecked="{Binding NationalServiceSuitableNotIncorporated}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="22" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="National Service Suspended From:" />
+                                            <DatePicker
+                                                Width="250"
+                                                HorizontalAlignment="Left"
+                                                SelectedDate="{Binding NationalServiceDateSuspendedFrom, Mode=TwoWay}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="22" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="National Service Suspended To:" />
+                                            <DatePicker
+                                                Width="250"
+                                                HorizontalAlignment="Left"
+                                                SelectedDate="{Binding NationalServiceDateSuspendedTo, Mode=TwoWay}" />
+                                        </StackPanel>
+
+                                        <!--  Job Information Section  -->
+                                        <StackPanel
+                                            Grid.Row="23"
+                                            Grid.ColumnSpan="2"
+                                            Margin="20,20,0,0"
+                                            Orientation="Horizontal">
+                                            <Grid Width="50" Height="50">
+                                                <Border
+                                                    BorderBrush="#efefef"
+                                                    BorderThickness="1.5"
+                                                    CornerRadius="50" />
+                                                <Icon:PackIconMaterial
+                                                    Width="40"
+                                                    Height="40"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#c2ddfc"
+                                                    Kind="BriefcaseOutline" />
+                                            </Grid>
+                                            <TextBlock
+                                                Margin="15,0,0,0"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                Foreground="#374655"
+                                                Text="Job Information" />
+                                        </StackPanel>
+
+                                        <Separator
+                                            Grid.Row="24"
+                                            Grid.ColumnSpan="2"
+                                            Height="0.7"
+                                            Margin="-20,20"
+                                            Background="#e1e6eb" />
+
+                                        <!--  Job Information Fields  -->
+                                        <StackPanel Grid.Row="25" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Interview Date:" />
+                                            <DatePicker
+                                                Width="250"
+                                                HorizontalAlignment="Left"
+                                                SelectedDate="{Binding InterviewDate, Mode=TwoWay}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="26" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Essential Training:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter essential training"
+                                                Text="{Binding EssentialTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="27" Grid.Column="0">
+                                            <TextBlock Foreground="#868686" Text="Training:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter training information"
+                                                Text="{Binding Training, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="25" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Languages Spoken:" />
+                                            <TextBox
+                                                Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
+                                                HorizontalAlignment="Left"
+                                                materialDesign:HintAssist.Hint="Enter languages spoken"
+                                                Text="{Binding LanguagesSpoken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <TextBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </TextBox.Resources>
+                                            </TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="26" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Experience (Years):" />
                                             <materialDesign:NumericUpDown
                                                 Width="250"
                                                 Height="30"
@@ -490,35 +851,14 @@
                                                 Value="{Binding Experience, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
 
-                                        <!--  column 2 side  -->
-                                        <StackPanel Grid.Row="9" Grid.Column="1">
-                                            <TextBlock Foreground="#868686" Text="Department:" />
-                                            <ComboBox
-                                                Width="250"
-                                                Height="30"
-                                                Margin="0,0,0,20"
-                                                HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Select your department"
-                                                DisplayMemberPath="Name"
-                                                ItemsSource="{Binding DepartmentItems}"
-                                                SelectedItem="{Binding SelectedDepartment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                                <ComboBox.Resources>
-                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
-                                                        <Setter Property="Padding" Value="15,0,0,0" />
-                                                    </Style>
-                                                </ComboBox.Resources>
-                                            </ComboBox>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Row="10" Grid.Column="1">
+                                        <StackPanel Grid.Row="27" Grid.Column="1">
                                             <TextBlock Foreground="#868686" Text="Job Nature:" />
                                             <ComboBox
                                                 Width="250"
                                                 Height="30"
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                materialDesign:HintAssist.Hint="Select your job nature"
-                                                DisplayMemberPath="Name"
+                                                materialDesign:HintAssist.Hint="Select job nature"
                                                 ItemsSource="{Binding JobNatureItems}"
                                                 SelectedItem="{Binding SelectedJobNature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <ComboBox.Resources>
@@ -529,34 +869,28 @@
                                             </ComboBox>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Row="11" Grid.Column="1">
-                                            <TextBlock Foreground="#868686" Text="Recruitment Date:" />
-                                            <DatePicker
+                                        <StackPanel Grid.Row="28" Grid.Column="1">
+                                            <TextBlock Foreground="#868686" Text="Opened Job:" />
+                                            <ComboBox
                                                 Width="250"
+                                                Height="30"
+                                                Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                SelectedDate="{Binding SelectedRecruitmentDate, Mode=TwoWay}" />
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Row="12" Grid.Column="1">
-                                            <TextBlock Foreground="#868686" Text="Status" />
-                                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                                                <RadioButton
-                                                    Content="Active"
-                                                    Foreground="#868686"
-                                                    GroupName="StatusGroupName"
-                                                    IsChecked="{Binding SelectedStatus, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Active}" />
-                                                <RadioButton
-                                                    Margin="140,0,0,0"
-                                                    Content="Inactive"
-                                                    Foreground="#868686"
-                                                    GroupName="StatusGroupName"
-                                                    IsChecked="{Binding SelectedStatus, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Inactive}" />
-                                            </StackPanel>
+                                                materialDesign:HintAssist.Hint="Select opened job"
+                                                DisplayMemberPath="Name"
+                                                ItemsSource="{Binding OpenedJobItems}"
+                                                SelectedItem="{Binding SelectedOpenedJob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <ComboBox.Resources>
+                                                    <Style TargetType="{x:Type materialDesign:SmartHint}">
+                                                        <Setter Property="Padding" Value="15,0,0,0" />
+                                                    </Style>
+                                                </ComboBox.Resources>
+                                            </ComboBox>
                                         </StackPanel>
 
                                         <!--  Form Bottom Background  -->
                                         <Border
-                                            Grid.Row="14"
+                                            Grid.Row="29"
                                             Grid.ColumnSpan="2"
                                             Height="80"
                                             Margin="-20,40,-20,0"
@@ -565,11 +899,11 @@
 
                                         <!--  Main button  -->
                                         <Button
-                                            Grid.Row="14"
+                                            Grid.Row="29"
                                             Grid.Column="1"
                                             Margin="0,40,20,0"
                                             HorizontalAlignment="Right"
-                                            Command="{Binding SaveEmployeeCommand}"
+                                            Command="{Binding SaveCandidateCommand}"
                                             Content="{Binding ButtonName}"
                                             Style="{StaticResource mainButton}">
                                             <Button.Effect>
@@ -584,7 +918,7 @@
 
                                         <!--  Secondary button  -->
                                         <Button
-                                            Grid.Row="14"
+                                            Grid.Row="29"
                                             Width="150"
                                             Margin="20,40,0,0"
                                             HorizontalAlignment="Left"

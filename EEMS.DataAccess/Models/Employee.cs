@@ -30,8 +30,8 @@ public class Employee
     public int? DepartmentId { get; set; }
     public virtual Department Department { get; set; }
 
-    public int? JobNatureId { get; set; }
-    public virtual JobNature JobNature { get; set; }
+    public JobNatureEnum JobNatureItem { get; set; }
+
 
     //public int? LeaveId { get; set; }
     //public virtual Leave Leave { get; set; }

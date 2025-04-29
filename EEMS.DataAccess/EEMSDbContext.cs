@@ -11,7 +11,6 @@ public class EEMSDbContext : DbContext
     public DbSet<Department> Departments { get; set; }
     public DbSet<Absence> Absences { get; set; }
     public DbSet<Account> Accounts { get; set; }
-    public DbSet<JobNature> JobNatures { get; set; }
     public DbSet<Condidate> Condidates { get; set; }
     public DbSet<OpenedJob> Openedjobs { get; set; }
     //public DbSet<AbsenceType> AbsenceTypes { get; set; }
@@ -76,10 +75,10 @@ public class EEMSDbContext : DbContext
         //    .HasForeignKey(edl => edl.DrivingLicenseTypeId);
 
         // One to Many: JobNature -> Employee
-        modelBuilder.Entity<Employee>()
-            .HasOne(e => e.JobNature)
-            .WithMany(j => j.Employees)
-            .HasForeignKey(e => e.JobNatureId);
+        //modelBuilder.Entity<Employee>()
+        //    .HasOne(e => e.JobNature)
+        //    .WithMany(j => j.Employees)
+        //    .HasForeignKey(e => e.JobNatureId);
 
         modelBuilder.Entity<Employee>()
             .Property(e => e.Gender)
@@ -91,6 +90,10 @@ public class EEMSDbContext : DbContext
 
         modelBuilder.Entity<Employee>()
             .Property(e => e.IsActive)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Employee>()
+            .Property(e => e.JobNatureItem)
             .HasConversion<string>();
 
         // One to Many: Employee -> Vacation
@@ -164,10 +167,10 @@ public class EEMSDbContext : DbContext
             .HasForeignKey(c => c.OpenedJobId);
 
         // One to Many: JobNature -> Condidate
-        modelBuilder.Entity<Condidate>()
-            .HasOne(c => c.JobNature)
-            .WithMany(j => j.Condidates)
-            .HasForeignKey(c => c.JobNatureId);
+        //modelBuilder.Entity<Condidate>()
+        //    .HasOne(c => c.JobNatureItem)
+        //    .WithMany(j => j.Condidates)
+        //    .HasForeignKey(c => c.JobNatureId);
 
         modelBuilder.Entity<Condidate>()
             .Property(e => e.Gender)
@@ -178,11 +181,15 @@ public class EEMSDbContext : DbContext
             .HasConversion<string>();
 
         modelBuilder.Entity<Condidate>()
-            .Property(e => e.HasDrivingLicence)
+            .Property(e => e.HasDrivingLicense)
             .HasConversion<string>();
 
         modelBuilder.Entity<Condidate>()
             .Property(e => e.BloodGroup)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Condidate>()
+            .Property(e => e.JobNatureItem)
             .HasConversion<string>();
 
 
@@ -199,12 +206,6 @@ public class EEMSDbContext : DbContext
         //    new Project { Id = 2, Name = "Gas Finding", Place = "Ain Salah" },
         //    new Project { Id = 3, Name = "Gas Tube Manufacture", Place = "Djanat" }
         //    );
-
-        modelBuilder.Entity<JobNature>().HasData(
-            new JobNature { Id = 1, Name = "Full-time Work" },
-            new JobNature { Id = 2, Name = "Part-time Work" },
-            new JobNature { Id = 3, Name = "Temporary Work" }
-            );
 
         modelBuilder.Entity<Employee>().HasData(
             new Employee
@@ -229,7 +230,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 1,
-                JobNatureId = 1
             },
             new Employee
             {
@@ -253,7 +253,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 2,
-                JobNatureId = 2
             },
             new Employee
             {
@@ -277,7 +276,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 3,
-                JobNatureId = 1
             },
             new Employee
             {
@@ -301,7 +299,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 3,
-                JobNatureId = 2
             },
             new Employee
             {
@@ -325,7 +322,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Inactive,
                 IsArchived = false,
                 DepartmentId = 2,
-                JobNatureId = 1
             },
             new Employee
             {
@@ -349,7 +345,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 1,
-                JobNatureId = 1
             },
             new Employee
             {
@@ -373,7 +368,6 @@ public class EEMSDbContext : DbContext
                 IsActive = Status.Active,
                 IsArchived = false,
                 DepartmentId = 3,
-                JobNatureId = 3
             }
             );
 
@@ -427,7 +421,7 @@ public class EEMSDbContext : DbContext
             Experience = 3,
             Residence = "الجزائر العاصمة",
             IsArchived = false,
-            HasDrivingLicence = DrivingLicense.Have,
+            HasDrivingLicense = DrivingLicense.Have,
             KnowMicrosoftOfficeSoftware = true,
             FatherFullName = "محمد بن علي",
             MotherFullName = "فاطمة بوزيد",
@@ -443,7 +437,6 @@ public class EEMSDbContext : DbContext
             NationalCardNumberReleaseDate = new DateTime(2019, 6, 1),
             ClearedFromNationalService = true,
             OpenedJobId = 1,
-            JobNatureId = 1
         },
         new Condidate
         {
@@ -464,7 +457,7 @@ public class EEMSDbContext : DbContext
             Experience = 1,
             Residence = "وهران",
             IsArchived = false,
-            HasDrivingLicence = DrivingLicense.NotHave,
+            HasDrivingLicense = DrivingLicense.NotHave,
             KnowMicrosoftOfficeSoftware = true,
             FatherFullName = "عبد القادر بوعلام",
             MotherFullName = "سميرة شريف",
@@ -477,7 +470,6 @@ public class EEMSDbContext : DbContext
             NationalCardNumber = "987654321",
             NationalCardNumberReleaseDate = new DateTime(2016, 8, 15),
             OpenedJobId = 2,
-            JobNatureId = 2
         },
         new Condidate
         {
@@ -498,7 +490,7 @@ public class EEMSDbContext : DbContext
             Experience = 5,
             Residence = "قسنطينة",
             IsArchived = false,
-            HasDrivingLicence = DrivingLicense.Have,
+            HasDrivingLicense = DrivingLicense.Have,
             KnowMicrosoftOfficeSoftware = false,
             FatherFullName = "علي لمين",
             MotherFullName = "زهرة بلقاسم",
@@ -512,7 +504,6 @@ public class EEMSDbContext : DbContext
             NationalCardNumberReleaseDate = new DateTime(2012, 4, 10),
             ClearedFromNationalService = true,
             OpenedJobId = 1,
-            JobNatureId = 3
         },
         new Condidate
         {
@@ -533,7 +524,7 @@ public class EEMSDbContext : DbContext
             Experience = 2,
             Residence = "سطيف",
             IsArchived = false,
-            HasDrivingLicence = DrivingLicense.NotHave,
+            HasDrivingLicense = DrivingLicense.NotHave,
             KnowMicrosoftOfficeSoftware = true,
             FatherFullName = "عبد الله ياسين",
             MotherFullName = "ليلى بوخديمي",
@@ -546,7 +537,6 @@ public class EEMSDbContext : DbContext
             NationalCardNumber = "556677889",
             NationalCardNumberReleaseDate = new DateTime(2015, 9, 20),
             OpenedJobId = 3,
-            JobNatureId = 2
         },
         new Condidate
         {
@@ -567,7 +557,7 @@ public class EEMSDbContext : DbContext
             Experience = 7,
             Residence = "عنابة",
             IsArchived = false,
-            HasDrivingLicence = DrivingLicense.Have,
+            HasDrivingLicense = DrivingLicense.Have,
             KnowMicrosoftOfficeSoftware = false,
             FatherFullName = "مصطفى شريف",
             MotherFullName = "نوال دحماني",
@@ -581,7 +571,6 @@ public class EEMSDbContext : DbContext
             NationalCardNumberReleaseDate = new DateTime(2010, 2, 18),
             ClearedFromNationalService = true,
             OpenedJobId = 2,
-            JobNatureId = 1
         });
 
 

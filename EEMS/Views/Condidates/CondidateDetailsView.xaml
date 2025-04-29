@@ -426,10 +426,10 @@
                                                     <TextBlock Style="{StaticResource SectionHeaderText}" Text="Application Information" />
 
                                                     <TextBlock Style="{StaticResource LabelText}" Text="Applied Position" />
-                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding OpenedJob.Title}" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding OpenedJobName}" />
 
                                                     <TextBlock Style="{StaticResource LabelText}" Text="Job Nature" />
-                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding JobNature.Name}" />
+                                                    <TextBlock Style="{StaticResource ValueText}" Text="{Binding JobNatureItem}" />
 
                                                     <TextBlock Style="{StaticResource LabelText}" Text="Interview Date" />
                                                     <TextBlock Style="{StaticResource ValueText}" Text="{Binding InterviewDate, StringFormat='{}{0:MM/dd/yyyy}'}" />

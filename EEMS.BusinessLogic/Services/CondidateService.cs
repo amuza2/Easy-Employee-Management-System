@@ -38,7 +38,6 @@ public class CondidateService : ICondidateService
     {
         await using var context = _contextFactory.CreateDbContext();
         return await context.Condidates
-            .Include(b => b.JobNature)
             .Include(c => c.OpenedJob)
             .ToListAsync();
     }
@@ -47,7 +46,6 @@ public class CondidateService : ICondidateService
     {
         await using var context = _contextFactory.CreateDbContext();
         return await context.Condidates
-            .Include(b => b.JobNature)
             .Include(c => c.OpenedJob)
             .FirstAsync(e => e.Id == id);
     }
