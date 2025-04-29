@@ -6,14 +6,12 @@ namespace EEMS.BusinessLogic.Services;
 public class CondidateManagementService : ICondidateManagementService
 {
     public ICondidateService CondidateService { get; }
-    public IJobNatureService JobNatureService { get; }
     public IOpenedJobService OpenedJobService { get; }
 
     public CondidateManagementService(ICondidateService condidateService,
-        IJobNatureService jobNatureService, IOpenedJobService openedJobService)
+         IOpenedJobService openedJobService)
     {
         CondidateService = condidateService;
-        JobNatureService = jobNatureService;
         OpenedJobService = openedJobService;
     }
 }

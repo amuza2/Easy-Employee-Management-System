@@ -8,7 +8,6 @@ namespace EEMS.BusinessLogic.Interfaces;
 
 public interface ICondidateManagementService
 {
-    IJobNatureService JobNatureService { get; }
     ICondidateService CondidateService { get; }
     IOpenedJobService OpenedJobService { get; } 
 }

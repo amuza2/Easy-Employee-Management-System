@@ -7,6 +7,7 @@ using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
 using EEMS.UI.Views.Shared.MessageBoxes;
+using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -18,14 +19,14 @@ public partial class EmployeeViewModel : ObservableObject
     private readonly IEmployeeManagementService _employeeManagementService;
     public ObservableCollection<Employee> Employees { get; set; }
     public ObservableCollection<Department> Departments { get; set; }
-    public ObservableCollection<JobNature> JobNatureItems { get; set; }
+    public ObservableCollection<JobNatureEnum> JobNatureItems { get; set; }
 
     [ObservableProperty] private Employee _selectedEmployee;
     [ObservableProperty] private string _selectedTab = "All";
     //[ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
     [ObservableProperty] private string _searchEmployee;
-    [ObservableProperty] private JobNature _selectedJobNature;
+    [ObservableProperty] private JobNatureEnum _selectedJobNature;
 
     private List<Employee> _filteredEmployees = new List<Employee>();
 
@@ -83,9 +84,9 @@ public partial class EmployeeViewModel : ObservableObject
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
         Departments = new ObservableCollection<Department>();
-        JobNatureItems = new ObservableCollection<JobNature>();
+        JobNatureItems = new ObservableCollection<JobNatureEnum>();
         _ = LoadDepartmentsToCombobox();
-        _ = LoadJobNatureItems();
+        LoadJobNatureItems();
     }
 
     private async Task LoadDepartmentsToCombobox()
@@ -106,20 +107,12 @@ public partial class EmployeeViewModel : ObservableObject
         SelectedDepartment = allDepartment;
     }
 
-    private async Task LoadJobNatureItems()
+    private void LoadJobNatureItems()
     {
-        JobNatureItems.Clear();
-        JobNature jobNature1 = new JobNature { Id = 0, Name = "All" };
-        JobNatureItems.Add(jobNature1);
-        var jobNatures = await _employeeManagementService.JobNatureService.GetAsync();
-        if (jobNatures != null)
+        foreach (var item in Enum.GetValues(typeof(JobNatureEnum)).Cast<JobNatureEnum>())
         {
-            foreach (var jobNature in jobNatures)
-            {
-                JobNatureItems.Add(jobNature);
-            }
+            JobNatureItems.Add(item);
         }
-        SelectedJobNature = jobNature1;
     }
 
     partial void OnSelectedDepartmentChanged(Department value)
@@ -128,7 +121,7 @@ public partial class EmployeeViewModel : ObservableObject
 
         if (value.Id == 0)
         {
-            GetAllEmployees();
+            _ = GetAllEmployees();
         }
         else
         {
@@ -141,7 +134,7 @@ public partial class EmployeeViewModel : ObservableObject
         Employees.Clear();
         if(departmentId == 0)
         {
-            GetAllEmployees();
+            _= GetAllEmployees();
         }
         else
         {
@@ -162,7 +155,7 @@ public partial class EmployeeViewModel : ObservableObject
     {
         if (tab == "All")
         {
-           GetAllEmployees();
+           _ = GetAllEmployees();
         }
         //else if (tab == "Absence")
         //{
@@ -174,7 +167,10 @@ public partial class EmployeeViewModel : ObservableObject
     private void AddEmployee()
     {
         var viewModel = new AddAndEditWindowViewModel(_employeeManagementService);
-        viewModel.UpdateEmployeeDataGrid = GetAllEmployees;
+        
+        // update data grid when employee is added or updated
+        viewModel.UpdateEmployeeDataGrid = async () => { await GetAllEmployees(); };
+        
         var AddAndEditWindow = new AddAndEditWindow(viewModel);
         AddAndEditWindow.ShowDialog();
     }
@@ -255,7 +251,7 @@ public partial class EmployeeViewModel : ObservableObject
         }
     }
 
-    private async void GetAllEmployees()
+    private async Task GetAllEmployees()
     {
         Employees.Clear();
         var employees = await _employeeManagementService.EmployeeService.GetAsync();

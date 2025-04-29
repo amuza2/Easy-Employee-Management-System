@@ -17,7 +17,7 @@ public partial class ViewEmployeeDetailsViewModel : ObservableObject
     [ObservableProperty] private string _email;
     [ObservableProperty] private string _jobTitle;
     [ObservableProperty] private string _departmentName;
-    [ObservableProperty] private string _jobNatureName;
+    [ObservableProperty] private JobNatureEnum _jobNatureName;
     [ObservableProperty] private string _address;
     [ObservableProperty] private DateTime _dateOfBirth;
     [ObservableProperty] private string _birthLocation;
@@ -42,7 +42,7 @@ public partial class ViewEmployeeDetailsViewModel : ObservableObject
         Email = employee.Email;
         JobTitle = employee.JobTitle;
         DepartmentName = employee.Department.Name;
-        JobNatureName = employee.JobNature.Name;
+        JobNatureName = employee.JobNatureItem;
         Address = employee.Address;
         DateOfBirth = employee.DateOfBirth.Date;
         BirthLocation = employee.BirthLocation;

@@ -32,12 +32,13 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
     [ObservableProperty] [Required(ErrorMessage = "Spoken language cannot be empty")] private string _spokenLanguages;
     [ObservableProperty] [Required(ErrorMessage = "Experience cannot be empty")] private int _experience;
     [ObservableProperty] [Required(ErrorMessage = "Department cannot be empty")] private Department _selectedDepartment;
-    [ObservableProperty] [Required(ErrorMessage = "Job Nature cannot be empty")] private JobNature _selectedJobNature;
+    [ObservableProperty] [Required(ErrorMessage = "Job Nature cannot be empty")] private JobNatureEnum _selectedJobNature;
     [ObservableProperty] [Required(ErrorMessage = "recruitment date cannot be empty")] private DateTime _selectedRecruitmentDate;
     [ObservableProperty] [Required(ErrorMessage = "Status cannot be empty")] private Status _selectedStatus;
     [ObservableProperty] private string _buttonName = "Save";
+    
     public ObservableCollection<Department> DepartmentItems { get; } = new();
-    public ObservableCollection<JobNature> JobNatureItems { get; } = new();
+    public ObservableCollection<JobNatureEnum> JobNatureItems { get; } = new();
     public ObservableCollection<FamilySituation> FamilySituationItems { get; } = new();
     public Window? Window { get; set; }
     public Action UpdateEmployeeDataGrid { get; set; }
@@ -78,7 +79,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
     {
         ValidateProperty(value, nameof(Residence));
     }
-    partial void OnSelectedJobNatureChanged(JobNature value)
+    partial void OnSelectedJobNatureChanged(JobNatureEnum value)
     {
         ValidateProperty(value, nameof(SelectedJobNature));
     }
@@ -119,7 +120,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
         SelectedRecruitmentDate = DateTime.Today;
         LoadFamilySituation();
         _ = LoadDepartmentsAsync();
-        _ = LoadJobNatureAsync();
+        LoadJobNature();
     }
 
     public AddAndEditWindowViewModel(IEmployeeManagementService employeeManagementService,Employee employee)
@@ -128,7 +129,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
         _employeeManagementService = employeeManagementService;
         LoadFamilySituation();
         _ = LoadDepartmentsAsync();
-        _ = LoadJobNatureAsync();
+        LoadJobNature();
         LoadEmployeeDetail(employee);
     }
 
@@ -151,7 +152,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
         SpokenLanguages = employee.LanguagesSpoken ?? "";
         Experience = (int)employee.Experience;
         SelectedDepartment = DepartmentItems.FirstOrDefault(d => d.Id == employee.Department?.Id);
-        SelectedJobNature = JobNatureItems.FirstOrDefault(n => n.Id == employee.JobNature?.Id);
+        SelectedJobNature = employee.JobNatureItem;
         SelectedRecruitmentDate = employee.RecruitmentDate;
         SelectedStatus = employee.IsActive;
     }
@@ -164,12 +165,11 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
         }
     }
 
-    private async Task LoadJobNatureAsync()
+    private void LoadJobNature()
     {
-        var jobNatures = await _employeeManagementService.JobNatureService.GetAsync();
-        foreach (var jobNature in jobNatures)
+        foreach (var item in Enum.GetValues(typeof(JobNatureEnum)).Cast<JobNatureEnum>())
         {
-            JobNatureItems.Add(jobNature);
+            JobNatureItems.Add(item);
         }
     }
 
@@ -209,7 +209,7 @@ public partial class AddAndEditWindowViewModel : ObservableValidator
             LanguagesSpoken = SpokenLanguages,
             Experience = Experience,
             DepartmentId = SelectedDepartment.Id,
-            JobNatureId = SelectedJobNature?.Id,
+            JobNatureItem = SelectedJobNature,
             RecruitmentDate = SelectedRecruitmentDate,
             IsActive = SelectedStatus
         };

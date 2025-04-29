@@ -1,7 +1,6 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
 using EEMS.BusinessLogic.Services;
 using EEMS.DataAccess;
-using EEMS.UI.UserControls;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Condidates;
@@ -50,7 +49,6 @@ public partial class App : Application
         // Register services
         service.AddTransient<IEmployeeService, EmployeeService>();
         service.AddTransient<IDepartmentService, DepartmentService>();
-        service.AddTransient<IJobNatureService, JobNatureService>();
         service.AddTransient<IEmployeeManagementService, EmployeeManagementService>();
         service.AddTransient<IAbsenceService, AbsenceService>();
         service.AddTransient<ICondidateService, CondidateService>();
@@ -67,7 +65,8 @@ public partial class App : Application
         service.AddTransient<SingleButtonMessageBoxViewModel>();
         service.AddTransient<TwoButtonMessageBoxViewModel>();
         service.AddTransient<CondidatePageViewModel>();
-        
+        service.AddTransient<AddAndEditCondidateViewModel>();
+
 
         // Register pages
         service.AddTransient<EmployeePage>();
@@ -84,10 +83,10 @@ public partial class App : Application
         service.AddTransient<ViewAbsenceDetails>();
         service.AddTransient<SingleButtonMessageBox>();
         service.AddTransient<TowButtonMessageBox>();
+        service.AddTransient<AddAndEditCondidateWindow>();
 
         // Document printing
         service.AddTransient<IDocumentBuilderFactory, DocumentBuilderFactory>();
-        service.AddTransient<PrintService>();
         service.AddTransient<PrintService>();
 
         // Register Navigation Service

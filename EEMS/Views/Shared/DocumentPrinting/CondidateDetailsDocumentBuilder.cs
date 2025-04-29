@@ -1,4 +1,4 @@
-﻿using EEMS.DataAccess.Models;
+﻿using model = EEMS.DataAccess.Models;
 using EEMS.Utilities.Enums;
 using System.Windows;
 using System.Windows.Documents;
@@ -8,9 +8,9 @@ namespace EEMS.UI.Views.Shared.DocumentPrinting;
 
 public class CondidateDetailsDocumentBuilder : IPrintableDocumentBuilder
 {
-    private readonly Condidate _condidate;
+    private readonly model.Condidate _condidate;
 
-    public CondidateDetailsDocumentBuilder(Condidate condidate)
+    public CondidateDetailsDocumentBuilder(model.Condidate condidate)
     {
         _condidate = condidate;
     }
@@ -124,7 +124,7 @@ public class CondidateDetailsDocumentBuilder : IPrintableDocumentBuilder
         // Row 1: Additional capabilities
         var aRow1 = new TableRow();
         aRow1.Cells.Add(CreateTableCell("Has Driving License:", true));
-        aRow1.Cells.Add(CreateTableCell(_condidate.HasDrivingLicence == DrivingLicense.Have ? "Yes" : "No"));
+        aRow1.Cells.Add(CreateTableCell(_condidate.HasDrivingLicense == DrivingLicense.Have ? "Yes" : "No"));
         aRow1.Cells.Add(CreateTableCell("MS Office Skills:", true));
         aRow1.Cells.Add(CreateTableCell(_condidate.KnowMicrosoftOfficeSoftware ? "Yes" : "No"));
         additionalInfoTable.RowGroups[0].Rows.Add(aRow1);

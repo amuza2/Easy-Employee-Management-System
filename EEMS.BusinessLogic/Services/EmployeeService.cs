@@ -19,7 +19,6 @@ public class EmployeeService : IEmployeeService
         await using var context = _contextFactory.CreateDbContext();
         return await context.Employees
             .Include(a => a.Absences)
-            .Include(b => b.JobNature)
             .Include(c => c.Department)
             .ToListAsync();
     }
@@ -29,7 +28,6 @@ public class EmployeeService : IEmployeeService
         await using var context = _contextFactory.CreateDbContext();
         return await context.Employees
             .Include(a => a.Absences)
-            .Include(b => b.JobNature)
             .Include(c => c.Department)
             .Where(e => e.DepartmentId == departmentId)
             .ToListAsync();
@@ -40,7 +38,6 @@ public class EmployeeService : IEmployeeService
         await using var context = _contextFactory.CreateDbContext();
         return await context.Employees
             .Include(a => a.Absences)
-            .Include(b => b.JobNature)
             .Include(c => c.Department)
             .FirstAsync(e => e.Id == id);
     }

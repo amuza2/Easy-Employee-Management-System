@@ -8,14 +8,15 @@ namespace EEMS.Utilities.Enums;
 
 public enum JobNatureEnum
 {
-    FullTime = 1,
-    PartTime = 2,
-    Temporary = 3,
-    Internship = 4,
-    Freelance = 5,
-    Contract = 6,
-    Volunteer = 7,
-    Remote = 8,
-    OnSite = 9,
-    Hybrid = 10
+    None,
+    FullTime,
+    PartTime,
+    Temporary,
+    Internship,
+    Freelance,
+    Contract,
+    Volunteer,
+    Remote,
+    OnSite,
+    Hybrid
 }

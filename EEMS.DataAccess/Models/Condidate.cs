@@ -1,10 +1,5 @@
 ﻿using EEMS.Utilities.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EEMS.DataAccess.Models;
 
@@ -29,7 +24,7 @@ public class Condidate
     public int? Experience { get; set; }
     public string Residence { get; set; }
     public bool IsArchived { get; set; }
-    public DrivingLicense HasDrivingLicence { get; set; }
+    public DrivingLicense HasDrivingLicense { get; set; }
     public bool KnowMicrosoftOfficeSoftware { get; set; }
     public string? FatherFullName { get; set; }
     public string? MotherFullName { get; set; }
@@ -51,6 +46,5 @@ public class Condidate
     public int? OpenedJobId { get; set; }
     public virtual OpenedJob OpenedJob { get; set; }
 
-    public int? JobNatureId { get; set; }
-    public virtual JobNature JobNature { get; set; }
+    public JobNatureEnum JobNatureItem { get; set; }
 }
