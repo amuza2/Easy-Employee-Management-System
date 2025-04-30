@@ -18,7 +18,7 @@ public class DocumentBuilderFactory : IDocumentBuilderFactory
         {
             DocumentType.CondidateDetails => new CondidateDetailsDocumentBuilder((model.Condidate)data),
             DocumentType.EmployeeDetails => new EmployeeDetailsDocumentBuilder((model.Employee)data),
-            DocumentType.WorkCertificate => new WorkCertificateDocumentBuilder((model.Employee)data),
+            DocumentType.WorkCertificate => new EmployeeJobCertificateDocumentBuilder((model.Employee)data),
             DocumentType.VacationCertificate => new VacationCertificateDocumentBuilder((model.Employee)data),
             _ => throw new NotSupportedException("Document type not supported")
         };

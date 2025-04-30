@@ -18,7 +18,7 @@ public class CondidateDetailsDocumentBuilder : IPrintableDocumentBuilder
     public FlowDocument BuilderDocument()
     {
         var document = new FlowDocument();
-        // Add content to the document here
+        // content of the document
 
         document.PagePadding = new Thickness(50);
         document.FontFamily = new FontFamily("Segoe UI");
