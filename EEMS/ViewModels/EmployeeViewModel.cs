@@ -6,17 +6,19 @@ using EEMS.UI.Enums;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Shared;
+using EEMS.UI.Views.Shared.DocumentPrinting;
 using EEMS.UI.Views.Shared.MessageBoxes;
 using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace EEMS.UI.Views.Employees;
 
 public partial class EmployeeViewModel : ObservableObject
 {
     private readonly IEmployeeManagementService _employeeManagementService;
+    private IDocumentBuilderFactory _factory;
+    private readonly PrintService _printService;
+
     public ObservableCollection<Employee> Employees { get; set; }
     public ObservableCollection<Department> Departments { get; set; }
     public ObservableCollection<JobNatureEnum> JobNatureItems { get; set; }
@@ -79,8 +81,10 @@ public partial class EmployeeViewModel : ObservableObject
         }
     }
 
-    public EmployeeViewModel(IEmployeeManagementService employeeManagementService)
+    public EmployeeViewModel(IEmployeeManagementService employeeManagementService, IDocumentBuilderFactory documentBuilderFactory, PrintService printService)
     {
+        _factory = documentBuilderFactory;
+        _printService = printService;
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
         Departments = new ObservableCollection<Department>();
@@ -236,19 +240,11 @@ public partial class EmployeeViewModel : ObservableObject
     [RelayCommand]
     private void PrintEmployee()
     {
-        if (SelectedEmployee != null)
-        {
-            var printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
-            {
-                var document = new FlowDocument();
-                var paragraph = new Paragraph(new Run($"First name: {SelectedEmployee.FirstName}\nLast name: {SelectedEmployee.LastName}"));
-                document.Blocks.Add(paragraph);
+        var builder = _factory.Create(DocumentType.WorkCertificate, SelectedEmployee);
+        //_printService.Print(builder);
+        _printService.PreviewDocument(builder);
 
-                var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
-                printDialog.PrintDocument(paginator, "Employee Details");
-            }
-        }
+
     }
 
     private async Task GetAllEmployees()

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\logo-expertise.png" />
     <None Remove="Resources\Images\user.png" />
     <None Remove="UserControls\Email campaign-rafiki.png" />
     <None Remove="UserControls\email.png" />
@@ -46,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\logo-expertise.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
 
