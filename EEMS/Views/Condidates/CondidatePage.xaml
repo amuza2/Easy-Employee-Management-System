@@ -99,11 +99,9 @@
                     Margin="5,0"
                     BorderBrush="#97a5b4"
                     BorderThickness="1"
-                    DisplayMemberPath="Name"
                     Foreground="#868686"
                     ItemsSource="{Binding JobNatureItems}"
-                    SelectedItem="{Binding SelectedJobNature, UpdateSourceTrigger=PropertyChanged}"
-                    Text="All" />
+                    SelectedItem="{Binding SelectedJobNature, UpdateSourceTrigger=PropertyChanged}" />
                 <!--  search by departments  -->
                 <TextBlock
                     VerticalAlignment="Center"

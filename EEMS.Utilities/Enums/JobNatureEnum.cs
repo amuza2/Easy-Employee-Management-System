@@ -8,7 +8,7 @@ namespace EEMS.Utilities.Enums;
 
 public enum JobNatureEnum
 {
-    None,
+    All,
     FullTime,
     PartTime,
     Temporary,
