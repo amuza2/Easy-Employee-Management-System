@@ -40,13 +40,13 @@
                 Margin="5"
                 Click="btnPrint_Click"
                 Content="Print" />
-            <Button
-                Name="btnExportPDF"
-                Width="80"
-                Height="30"
-                Margin="5"
-                Click="btnExportPDF_Click"
-                Content="Export PDF" />
+            <!--<Button
+            Name="btnExportPDF"
+            Width="80"
+            Height="30"
+            Margin="5"
+            Click="btnExportPDF_Click"
+            Content="Export PDF" />-->
             <Button
                 Name="btnClose"
                 Width="80"

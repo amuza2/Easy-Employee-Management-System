@@ -7,7 +7,6 @@ using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
-using System.Windows.Input;
 
 namespace EEMS.UI.ViewModels;
 

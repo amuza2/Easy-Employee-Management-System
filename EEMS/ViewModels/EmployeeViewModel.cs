@@ -10,6 +10,8 @@ using EEMS.UI.Views.Shared.DocumentPrinting;
 using EEMS.UI.Views.Shared.MessageBoxes;
 using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace EEMS.UI.Views.Employees;
 
@@ -20,26 +22,17 @@ public partial class EmployeeViewModel : ObservableObject
     private readonly PrintService _printService;
 
     public ObservableCollection<Employee> Employees { get; set; }
+    public ICollectionView FilteredEmployees { get; }
     public ObservableCollection<Department> Departments { get; set; }
     public ObservableCollection<JobNatureEnum> JobNatureItems { get; set; }
 
-    [ObservableProperty] private Employee _selectedEmployee;
-    [ObservableProperty] private string _selectedTab = "All";
+    [ObservableProperty] private Employee? _selectedEmployee;
     //[ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
     [ObservableProperty] private string _searchEmployee;
     [ObservableProperty] private JobNatureEnum _selectedJobNature;
 
-    private List<Employee> _filteredEmployees = new List<Employee>();
-
     //public bool IsNotEditing => !IsEditing;
-
-    [RelayCommand]
-    private void SelectTab(string tabName)
-    {
-        //Debug.WriteLine($"Selected tab: {tabName}");
-        SelectedTab = tabName;
-    }
 
     private bool CanPerformUserAction(object obj)
     {
@@ -52,34 +45,16 @@ public partial class EmployeeViewModel : ObservableObject
     //    ViewEmployeeCommand.NotifyCanExecuteChanged();
     //}
 
-    // Part of Edit Employee
-    partial void OnSelectedEmployeeChanged(Employee value)
+    //  raise the CanExecuteChanged event manually when SelectedEmployee changes, so the UI can re-evaluate which buttons should be enabled.
+    partial void OnSelectedEmployeeChanged(Employee? value)
     {
         ViewEmployeeCommand.NotifyCanExecuteChanged();
+        EditEmployeeCommand.NotifyCanExecuteChanged();
+        DeleteEmployeeCommand.NotifyCanExecuteChanged();
+        PrintEmployeeCommand.NotifyCanExecuteChanged();
+        EmployeeAbsenceCommand.NotifyCanExecuteChanged();
     }
 
-    // Search Employee textbox
-    partial void OnSearchEmployeeChanged(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            GetEmployeesByDepartmentId(SelectedDepartment.Id);
-        }
-        else
-        {
-            _filteredEmployees = Employees
-                .Where(e => e.FirstName.Contains(value, StringComparison.OrdinalIgnoreCase) ||
-                            e.LastName.Contains(value, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            Employees.Clear();
-
-            foreach (var emp in _filteredEmployees)
-            {
-                Employees.Add(emp);
-            }
-        }
-    }
 
     public EmployeeViewModel(IEmployeeManagementService employeeManagementService, IDocumentBuilderFactory documentBuilderFactory, PrintService printService)
     {
@@ -87,10 +62,42 @@ public partial class EmployeeViewModel : ObservableObject
         _printService = printService;
         _employeeManagementService = employeeManagementService;
         Employees = new ObservableCollection<Employee>();
+        FilteredEmployees = CollectionViewSource.GetDefaultView(Employees);
+        FilteredEmployees.Filter = FilterEmployee;
         Departments = new ObservableCollection<Department>();
         JobNatureItems = new ObservableCollection<JobNatureEnum>();
         _ = LoadDepartmentsToCombobox();
         LoadJobNatureItems();
+        _ = GetAllEmployees();
+    }
+
+    private bool FilterEmployee(object obj)
+    {
+        if(obj is not Employee emp) return false;
+        bool matchesSearch = string.IsNullOrEmpty(SearchEmployee) ||
+            emp.FirstName.Contains(SearchEmployee, StringComparison.OrdinalIgnoreCase) ||
+            emp.LastName.Contains(SearchEmployee, StringComparison.OrdinalIgnoreCase);
+
+        bool matchesDepartment = SelectedDepartment == null || SelectedDepartment.Id == 0 ||
+            emp.DepartmentId == SelectedDepartment.Id;
+
+        bool matchesJobnature = SelectedJobNature == JobNatureEnum.All ||
+            emp.JobNatureItem == SelectedJobNature;
+
+        return matchesSearch && matchesDepartment && matchesJobnature;
+    }
+
+    partial void OnSelectedJobNatureChanged(JobNatureEnum value)
+    {
+        FilteredEmployees.Refresh();
+    }
+    partial void OnSelectedDepartmentChanged(Department value)
+    {
+        FilteredEmployees.Refresh();
+    }
+    partial void OnSearchEmployeeChanged(string value)
+    {
+        FilteredEmployees.Refresh();
     }
 
     private async Task LoadDepartmentsToCombobox()
@@ -117,54 +124,6 @@ public partial class EmployeeViewModel : ObservableObject
         {
             JobNatureItems.Add(item);
         }
-    }
-
-    partial void OnSelectedDepartmentChanged(Department value)
-    {
-        if(value == null) return;
-
-        if (value.Id == 0)
-        {
-            _ = GetAllEmployees();
-        }
-        else
-        {
-            GetEmployeesByDepartmentId(value.Id);
-        }
-    }
-
-    private async void GetEmployeesByDepartmentId(int departmentId)
-    {
-        Employees.Clear();
-        if(departmentId == 0)
-        {
-            _= GetAllEmployees();
-        }
-        else
-        {
-            var employees = await _employeeManagementService.EmployeeService.GetEmployeesByDepartmentId(departmentId);
-            foreach (var employee in employees)
-            {
-                Employees.Add(employee);
-            }
-        }
-    }
-
-    partial void OnSelectedTabChanged(string value)
-    {
-        LoadDataForTab(value);
-    }
-
-    private void LoadDataForTab(string tab)
-    {
-        if (tab == "All")
-        {
-           _ = GetAllEmployees();
-        }
-        //else if (tab == "Absence")
-        //{
-        //   GetAllAbsence();
-        //}
     }
 
     [RelayCommand]
@@ -237,14 +196,12 @@ public partial class EmployeeViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
-    private void PrintEmployee()
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private void PrintEmployee(object obj)
     {
         var builder = _factory.Create(DocumentType.WorkCertificate, SelectedEmployee);
         //_printService.Print(builder);
         _printService.PreviewDocument(builder);
-
-
     }
 
     private async Task GetAllEmployees()
@@ -257,8 +214,8 @@ public partial class EmployeeViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
-    private void EmployeeAbsence()
+    [RelayCommand(CanExecute = nameof(CanPerformUserAction))]
+    private void EmployeeAbsence(object obj)
     {
         if (SelectedEmployee != null)
         {
