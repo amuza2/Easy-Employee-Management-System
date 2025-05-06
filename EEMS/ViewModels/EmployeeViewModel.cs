@@ -55,7 +55,6 @@ public partial class EmployeeViewModel : ObservableObject
         EmployeeAbsenceCommand.NotifyCanExecuteChanged();
     }
 
-
     public EmployeeViewModel(IEmployeeManagementService employeeManagementService, IDocumentBuilderFactory documentBuilderFactory, PrintService printService)
     {
         _factory = documentBuilderFactory;
@@ -70,7 +69,7 @@ public partial class EmployeeViewModel : ObservableObject
         LoadJobNatureItems();
         _ = GetAllEmployees();
     }
-
+    // handle search Employee controls
     private bool FilterEmployee(object obj)
     {
         if(obj is not Employee emp) return false;

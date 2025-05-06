@@ -9,7 +9,4 @@ public class Absence
     public DateTime Date { get; set; }
     public bool HasJustification { get; set; }
     public string? Note { get; set; }
-
-    //public int AbsenceTypeId { get; set; }
-    //public virtual AbsenceType AbsenceType { get; set; }
 }
