@@ -25,6 +25,7 @@
             <Converters:InverseBoolToRadioButtonConverter x:Key="InverseBoolToRadioButtonConverter" />
             <Converters:GenderToRadioButtonConverter x:Key="GenderToRadioButtonConverter" />
             <Converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            <Converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
 
 
 

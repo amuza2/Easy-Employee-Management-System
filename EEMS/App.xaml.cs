@@ -66,6 +66,8 @@ public partial class App : Application
         service.AddTransient<TwoButtonMessageBoxViewModel>();
         service.AddTransient<CondidatePageViewModel>();
         service.AddTransient<AddAndEditCondidateViewModel>();
+        service.AddTransient<DashboardViewModel>();
+        service.AddTransient<EmployeeSearchWindowViewModel>();
 
 
         // Register pages
@@ -73,6 +75,8 @@ public partial class App : Application
         service.AddTransient<DashboardPage>();
         service.AddTransient<AbsencePage>();
         service.AddTransient<CondidatePage>();
+        service.AddTransient<DashboardPage>();
+        service.AddTransient<EmployeeSearchWindow>();
 
 
         //Register Views

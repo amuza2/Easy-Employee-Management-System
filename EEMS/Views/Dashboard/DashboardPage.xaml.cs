@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EEMS.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace EEMS.UI.Views.Dashboard
     /// </summary>
     public partial class DashboardPage : Page
     {
-        public DashboardPage()
+        public DashboardPage(DashboardViewModel dashboardViewModel)
         {
             InitializeComponent();
+            DataContext = dashboardViewModel;
         }
     }
 }
