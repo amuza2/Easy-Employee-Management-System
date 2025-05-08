@@ -2,13 +2,17 @@
     x:Class="EEMS.UI.Views.Dashboard.EmployeeSearchWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EEMS.UI.Views.Dashboard"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Employee Search Window"
     Width="800"
     Height="450"
+    AllowsTransparency="True"
+    Background="Transparent"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
 
     <Window.Resources>
@@ -76,129 +80,193 @@
         </Style>
     </Window.Resources>
 
+    <Border
+        BorderBrush="#4880ff"
+        BorderThickness="3"
+        CornerRadius="20">
+        <Border
+            Background="#fff"
+            CornerRadius="20"
+            MouseDown="Border_MouseDown">
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <!--  Search Panel (First Row)  -->
-        <Grid Grid.Row="0" Margin="0,0,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <TextBlock
+                    Margin="50,0,0,2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="#4880ff"
+                    Text="Search Employee" />
+                <Icon:PackIconMaterial
+                    Grid.Row="0"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="#4880ff"
+                    Kind="AccountOutline" />
 
-            <!--  Search TextBox  -->
-            <Grid Grid.Column="0">
-                <TextBox
-                    Height="30"
-                    Padding="5"
-                    Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged}">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="TextBox">
-                                        <Border
-                                            Background="White"
-                                            BorderBrush="#ABADB3"
-                                            BorderThickness="1"
-                                            CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock
-                                                    Margin="5,5,0,0"
-                                                    Foreground="Gray"
-                                                    Text="Search for employee..."
-                                                    Visibility="{Binding Text.IsEmpty, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVis}}" />
-                                                <ScrollViewer
-                                                    x:Name="PART_ContentHost"
-                                                    Margin="5,0"
-                                                    VerticalAlignment="Center" />
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnMinimize"
+                        Margin="0,0,10,2"
+                        VerticalAlignment="Center"
+                        Click="btnMinimize_Click"
+                        FontSize="20"
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Minus" />
+                    </Button>
+
+                    <Button
+                        x:Name="btnExit"
+                        Margin="0,0,0,3"
+                        VerticalAlignment="Center"
+                        Click="btnExit_Click"
+                        Content="X"
+                        FontSize="20"
+                        Style="{StaticResource topButton}" />
+                </StackPanel>
+
+                <Border
+                    Grid.Row="1"
+                    Background="#f2f5f8"
+                    CornerRadius="20">
+                    <Grid Margin="10,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+
+                        <!--  Search Panel (First Row)  -->
+                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  Search TextBox  -->
+                            <Grid Grid.Column="0">
+                                <TextBox
+                                    Height="30"
+                                    Padding="5"
+                                    Text="{Binding SearchEmployee, UpdateSourceTrigger=PropertyChanged}">
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TextBox">
+                                                        <Border
+                                                            Background="White"
+                                                            BorderBrush="#ABADB3"
+                                                            BorderThickness="1"
+                                                            CornerRadius="3">
+                                                            <Grid>
+                                                                <TextBlock
+                                                                    Margin="5,5,0,0"
+                                                                    Foreground="Gray"
+                                                                    Text="Search for employee..."
+                                                                    Visibility="{Binding Text.IsEmpty, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVis}}" />
+                                                                <ScrollViewer
+                                                                    x:Name="PART_ContentHost"
+                                                                    Margin="5,0"
+                                                                    VerticalAlignment="Center" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                            </Grid>
+
+                            <!--  Department ComboBox  -->
+                            <ComboBox
+                                Grid.Column="1"
+                                Width="150"
+                                Height="30"
+                                Margin="10,0,0,0"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Departments}"
+                                SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+
+                            <!--  Job Nature ComboBox  -->
+                            <ComboBox
+                                Grid.Column="2"
+                                Width="150"
+                                Height="30"
+                                Margin="10,0,0,0"
+                                ItemsSource="{Binding JobNatureItems}"
+                                SelectedItem="{Binding SelectedJobNatureItem, UpdateSourceTrigger=PropertyChanged}"
+                                Text="All">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                        </Grid>
+
+                        <!--  DataGrid (Second Row)  -->
+                        <DataGrid
+                            Grid.Row="1"
+                            CellStyle="{DynamicResource DataGridCellStyle1}"
+                            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Employees}"
+                            MouseDoubleClick="DataGrid_MouseDoubleClick"
+                            RowStyle="{DynamicResource DataGridRowStyle1}"
+                            SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                            Style="{DynamicResource DataGridStyle1}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="50"
+                                    Binding="{Binding Id}"
+                                    Header="ID" />
+                                <DataGridTextColumn
+                                    Width="120"
+                                    Binding="{Binding FirstName}"
+                                    Header="First Name" />
+                                <DataGridTextColumn
+                                    Width="120"
+                                    Binding="{Binding LastName}"
+                                    Header="Last Name" />
+                                <DataGridTextColumn
+                                    Width="150"
+                                    Binding="{Binding Department.Name}"
+                                    Header="Department" />
+                                <DataGridTextColumn
+                                    Width="120"
+                                    Binding="{Binding JobNatureItem}"
+                                    Header="Job Nature" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding Email}"
+                                    Header="Email" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
             </Grid>
-
-            <!--  Department ComboBox  -->
-            <ComboBox
-                Grid.Column="1"
-                Width="150"
-                Height="30"
-                Margin="10,0,0,0"
-                DisplayMemberPath="Name"
-                ItemsSource="{Binding Departments}"
-                SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}">
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Left" />
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                    </Style>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
-
-            <!--  Job Nature ComboBox  -->
-            <ComboBox
-                Grid.Column="2"
-                Width="150"
-                Height="30"
-                Margin="10,0,0,0"
-                ItemsSource="{Binding JobNatureItems}"
-                SelectedItem="{Binding SelectedJobNatureItem, UpdateSourceTrigger=PropertyChanged}"
-                Text="All">
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Left" />
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                    </Style>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
-        </Grid>
-
-        <!--  DataGrid (Second Row)  -->
-        <DataGrid
-            Grid.Row="1"
-            CellStyle="{DynamicResource DataGridCellStyle1}"
-            ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-            IsReadOnly="True"
-            ItemsSource="{Binding Employees}"
-            MouseDoubleClick="DataGrid_MouseDoubleClick"
-            RowStyle="{DynamicResource DataGridRowStyle1}"
-            SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
-            Style="{DynamicResource DataGridStyle1}">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="50"
-                    Binding="{Binding Id}"
-                    Header="ID" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding FirstName}"
-                    Header="First Name" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding LastName}"
-                    Header="Last Name" />
-                <DataGridTextColumn
-                    Width="150"
-                    Binding="{Binding Department.Name}"
-                    Header="Department" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding JobNatureItem}"
-                    Header="Job Nature" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Email}"
-                    Header="Email" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        </Border>
+    </Border>
 </Window>

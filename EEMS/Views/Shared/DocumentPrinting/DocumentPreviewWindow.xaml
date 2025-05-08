@@ -34,12 +34,17 @@
             HorizontalAlignment="Right"
             Orientation="Horizontal">
             <Button
+                Name="btnClose"
+                Margin="10,0"
+                Click="btnClose_Click"
+                Content="Close"
+                Style="{StaticResource SecondaryButton}" />
+            <Button
                 Name="btnPrint"
-                Width="80"
-                Height="30"
                 Margin="5"
                 Click="btnPrint_Click"
-                Content="Print" />
+                Content="Print"
+                Style="{StaticResource mainButton}" />
             <!--<Button
             Name="btnExportPDF"
             Width="80"
@@ -47,13 +52,6 @@
             Margin="5"
             Click="btnExportPDF_Click"
             Content="Export PDF" />-->
-            <Button
-                Name="btnClose"
-                Width="80"
-                Height="30"
-                Margin="5"
-                Click="btnClose_Click"
-                Content="Close" />
         </StackPanel>
     </Grid>
 </Window>
