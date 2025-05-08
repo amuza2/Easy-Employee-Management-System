@@ -12,6 +12,7 @@
     Title="AddAndEditWindow"
     Width="1150"
     Height="750"
+    d:DataContext="{d:DesignInstance Type=vm:AddAndEditWindowViewModel}"
     AllowsTransparency="True"
     Background="Transparent"
     Style="{StaticResource MaterialDesignWindow}"
@@ -225,7 +226,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="First Name"
-                                                Text="{Binding FirstName}">
+                                                Text="{Binding Employee.FirstName}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -242,7 +243,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Last Name"
-                                                Text="{Binding LastName}">
+                                                Text="{Binding Employee.LastName}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -259,7 +260,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Phone"
-                                                Text="{Binding Phone}">
+                                                Text="{Binding Employee.Phone}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -276,7 +277,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Address"
-                                                Text="{Binding Address}">
+                                                Text="{Binding Employee.Address}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -292,13 +293,13 @@
                                                     Content="Male"
                                                     Foreground="#868686"
                                                     GroupName="GenderGroupName"
-                                                    IsChecked="{Binding SelectedGender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Male}" />
+                                                    IsChecked="{Binding Employee.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Male}" />
                                                 <RadioButton
                                                     Margin="140,0,0,0"
                                                     Content="Female"
                                                     Foreground="#868686"
                                                     GroupName="GenderGroupName"
-                                                    IsChecked="{Binding SelectedGender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Female}" />
+                                                    IsChecked="{Binding Employee.Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Female}" />
                                             </StackPanel>
                                         </StackPanel>
 
@@ -310,7 +311,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Email"
-                                                Text="{Binding Email}">
+                                                Text="{Binding Employee.Email}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -325,7 +326,7 @@
                                             <DatePicker
                                                 Width="250"
                                                 HorizontalAlignment="Left"
-                                                SelectedDate="{Binding SelectedBirthDate, Mode=TwoWay}" />
+                                                SelectedDate="{Binding Employee.DateOfBirth, Mode=TwoWay}" />
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="4" Grid.Column="1">
@@ -336,7 +337,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your birth location"
-                                                Text="{Binding BirthLocation}">
+                                                Text="{Binding Employee.BirthLocation}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -354,7 +355,7 @@
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Select your family situation"
                                                 ItemsSource="{Binding FamilySituationItems}"
-                                                SelectedItem="{Binding SelectedFamilySituation}">
+                                                SelectedItem="{Binding Employee.FamilySituation}">
                                                 <ComboBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -371,7 +372,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your residence"
-                                                Text="{Binding Residence}">
+                                                Text="{Binding Employee.Residence}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -420,7 +421,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your job title"
-                                                Text="{Binding JobTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                Text="{Binding Employee.JobTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -437,7 +438,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your job essential training"
-                                                Text="{Binding EssentialTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                Text="{Binding Employee.EssentialTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -454,7 +455,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your other training"
-                                                Text="{Binding OtherTraining, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                Text="{Binding Employee.Training, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -471,7 +472,7 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Enter your language spoken"
-                                                Text="{Binding SpokenLanguages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                Text="{Binding Employee.LanguagesSpoken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -487,7 +488,7 @@
                                                 Height="30"
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
-                                                Value="{Binding Experience, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Value="{Binding Employee.Experience, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
 
                                         <!--  column 2 side  -->
@@ -501,7 +502,8 @@
                                                 materialDesign:HintAssist.Hint="Select your department"
                                                 DisplayMemberPath="Name"
                                                 ItemsSource="{Binding DepartmentItems}"
-                                                SelectedItem="{Binding SelectedDepartment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                SelectedValue="{Binding Employee.DepartmentId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValuePath="Id">
                                                 <ComboBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -518,9 +520,8 @@
                                                 Margin="0,0,0,20"
                                                 HorizontalAlignment="Left"
                                                 materialDesign:HintAssist.Hint="Select your job nature"
-                                                DisplayMemberPath="Name"
                                                 ItemsSource="{Binding JobNatureItems}"
-                                                SelectedItem="{Binding SelectedJobNature, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                SelectedItem="{Binding Employee.JobNatureItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <ComboBox.Resources>
                                                     <Style TargetType="{x:Type materialDesign:SmartHint}">
                                                         <Setter Property="Padding" Value="15,0,0,0" />
@@ -534,7 +535,7 @@
                                             <DatePicker
                                                 Width="250"
                                                 HorizontalAlignment="Left"
-                                                SelectedDate="{Binding SelectedRecruitmentDate, Mode=TwoWay}" />
+                                                SelectedDate="{Binding Employee.RecruitmentDate, Mode=TwoWay}" />
                                         </StackPanel>
 
                                         <StackPanel Grid.Row="12" Grid.Column="1">
@@ -544,13 +545,13 @@
                                                     Content="Active"
                                                     Foreground="#868686"
                                                     GroupName="StatusGroupName"
-                                                    IsChecked="{Binding SelectedStatus, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Active}" />
+                                                    IsChecked="{Binding Employee.IsActive, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Active}" />
                                                 <RadioButton
                                                     Margin="140,0,0,0"
                                                     Content="Inactive"
                                                     Foreground="#868686"
                                                     GroupName="StatusGroupName"
-                                                    IsChecked="{Binding SelectedStatus, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Inactive}" />
+                                                    IsChecked="{Binding Employee.IsActive, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Inactive}" />
                                             </StackPanel>
                                         </StackPanel>
 
