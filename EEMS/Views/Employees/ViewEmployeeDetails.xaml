@@ -1,0 +1,320 @@
+﻿<Window
+    x:Class="EEMS.UI.Views.Employees.ViewEmployeeDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.Views.Employees"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ViewEmployeeDetails"
+    Width="800"
+    Height="900"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Border
+        BorderBrush="#4880ff"
+        BorderThickness="3"
+        CornerRadius="22">
+
+        <Border
+            Background="#FFF"
+            CornerRadius="20"
+            MouseDown="Border_MouseDown">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--  top  -->
+                <TextBlock
+                    Margin="50,0,0,2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Foreground="#4880ff"
+                    Text="Employee Details" />
+                <Icon:PackIconMaterial
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="#4880ff"
+                    Kind="AccountOutline" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btnMinimize"
+                        Margin="0,0,10,2"
+                        Click="btnMinimize_Click"
+                        FontSize="20"
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="Minus" />
+                    </Button>
+
+                    <Button
+                        x:Name="btnExit"
+                        Margin="0,0,0,0"
+                        Click="btnExit_Click"
+                        Content="X"
+                        FontSize="20"
+                        Style="{StaticResource topButton}" />
+                </StackPanel>
+
+                <Border
+                    Grid.Row="1"
+                    Background="#f2f5f8"
+                    CornerRadius="25">
+                    <Grid>
+                        <!--  Header  -->
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Text="Employee Details" />
+                        <!--  Main content  -->
+                        <ScrollViewer
+                            Grid.Row="2"
+                            Margin="0,40,0,0"
+                            VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="10" Orientation="Vertical">
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--  Column 1  -->
+                                    <StackPanel Grid.Column="0" Margin="10">
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="First Name:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding FirstName}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Last Name:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding LastName}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Phone:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Phone}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Email:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Email}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Job Title:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding JobTitle}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Department:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Department}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Job Nature:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding JobNature}" />
+                                    </StackPanel>
+                                    <!--  Column 2  -->
+                                    <StackPanel Grid.Column="1" Margin="10">
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Date of Birth:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding DateOfBirth, StringFormat='{}{0:MM/dd/yyyy}'}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Birth Location:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding BirthLocation}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Address:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Address}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Residence:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Residence}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Family Situation:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding FamilySituation}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Gender:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding Gender}" />
+
+                                        <TextBlock
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="Recruitment Date:" />
+                                        <TextBlock
+                                            Margin="0,0,0,10"
+                                            FontSize="16"
+                                            Text="{Binding RecruitmentDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                                    </StackPanel>
+                                </Grid>
+                                <!--  Optional section  -->
+                                <StackPanel Margin="10,0,10,10">
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="Essential Training:" />
+                                    <TextBlock
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        Text="{Binding EssentialTraining}" />
+
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="Training:" />
+                                    <TextBlock
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        Text="{Binding Training}" />
+
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="Languages Spoken:" />
+                                    <TextBlock
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        Text="{Binding LanguagesSpoken}" />
+
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="Experience (years):" />
+                                    <TextBlock
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        Text="{Binding Experience}" />
+
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="Status:" />
+                                    <TextBlock
+                                        Margin="0,0,0,10"
+                                        FontSize="16"
+                                        Text="{Binding IsActive}" />
+                                </StackPanel>
+                                <!--  Close Button and print  -->
+                                <StackPanel
+                                    Grid.Row="8"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+
+                                    <Button
+                                        Margin="0,40,20,0"
+                                        Click="btnExit_Click"
+                                        Content="Close"
+                                        Style="{StaticResource SecondaryButton}">
+                                        <Button.Effect>
+                                            <DropShadowEffect
+                                                BlurRadius="10"
+                                                Direction="-120"
+                                                Opacity="0.3"
+                                                ShadowDepth="5"
+                                                Color="#4880ff" />
+                                        </Button.Effect>
+                                    </Button>
+
+                                    <Button
+                                        Margin="0,40,20,0"
+                                        Command="{Binding PrintEmployeeDetailCommand}"
+                                        Content="Print"
+                                        Style="{StaticResource mainButton}">
+                                        <Button.Effect>
+                                            <DropShadowEffect
+                                                BlurRadius="10"
+                                                Direction="-120"
+                                                Opacity="0.3"
+                                                ShadowDepth="5"
+                                                Color="#4880ff" />
+                                        </Button.Effect>
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

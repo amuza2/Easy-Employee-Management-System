@@ -17,8 +17,7 @@ namespace EEMS.DataAccess
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            return config.GetConnectionString("DefaultConnection");
-                
+            return config.GetConnectionString("DefaultConnection");   
         }
     }
 }

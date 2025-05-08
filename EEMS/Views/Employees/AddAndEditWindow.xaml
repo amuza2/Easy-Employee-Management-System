@@ -1,0 +1,260 @@
+﻿<Window
+    x:Class="EEMS.UI.Views.Employees.AddAndEditWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:UC="clr-namespace:EEMS.UI.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.Views.Employees"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:EEMS.UI.ViewModels"
+    Title="AddAndEditWindow"
+    Width="1150"
+    Height="790"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:PersonalInformationViewModel}">
+            <UC:PersonalInformationUserControl />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:JobInformationViewModel}">
+            <UC:JobInformationUserControl />
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <Border
+        Background="#fff"
+        CornerRadius="10"
+        MouseDown="Border_MouseDown"
+        MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  exit window  -->
+
+            <TextBlock
+                Margin="50,0,0,2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="16"
+                FontWeight="SemiBold"
+                Foreground="#4880ff"
+                Text="Add New Employee Form" />
+            <Icon:PackIconMaterial
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Foreground="#4880ff"
+                Kind="AccountOutline" />
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="btnMinimize"
+                    Margin="0,0,10,2"
+                    Click="btnMinimize_Click"
+                    FontSize="20"
+                    Style="{StaticResource topButton}">
+                    <Icon:PackIconMaterial Kind="Minus" />
+                </Button>
+
+                <Button
+                    x:Name="btnExit"
+                    Margin="0,0,0,0"
+                    Click="btnExit_Click"
+                    Content="X"
+                    FontSize="20"
+                    Style="{StaticResource topButton}" />
+            </StackPanel>
+
+            <Frame
+                x:Name="sharedWindowFrame"
+                Grid.Row="1"
+                NavigationUIVisibility="Hidden" />
+
+
+            <!--  Right section  -->
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="#4880ff"
+                CornerRadius="0 0 5 0">
+                <StackPanel Margin="60,0,10,0">
+                    <Grid
+                        Width="80"
+                        Height="80"
+                        Margin="0,20,0,0">
+                        <Border Background="#fff" CornerRadius="40" />
+                        <Icon:PackIconMaterial
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="#4880ff"
+                            Kind="Account" />
+                    </Grid>
+
+                    <TextBlock
+                        Margin="40,5,40,20"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="#fff"
+                        Text="Employee Informations"
+                        TextAlignment="Center" />
+
+                    <UC:CardUserControl
+                        Title="Personel Information"
+                        IsActive="{Binding IsPersonalInfoActive}"
+                        Number="1"
+                        Time="3 min" />
+                    <UC:CardUserControl
+                        Title="Job Information"
+                        IsActive="{Binding IsJobInfoActive}"
+                        Number="2"
+                        Time="2 min" />
+
+                </StackPanel>
+            </Border>
+
+            <!--  Left Section  -->
+            <Border
+                Grid.Row="1"
+                Background="#f2f5f8"
+                CornerRadius="0 0 0 5">
+                <Grid Margin="70,0,-60,0" VerticalAlignment="Center">
+
+                    <!--  Background layers  -->
+                    <Border
+                        Height="50"
+                        Margin="40,-30,60,0"
+                        VerticalAlignment="Top"
+                        Background="#f7f8fb"
+                        CornerRadius="7 0 0 0" />
+                    <Border
+                        Height="50"
+                        Margin="20,-15,60,0"
+                        VerticalAlignment="Top"
+                        Background="#f7f8fb"
+                        CornerRadius="7 0 0 0" />
+
+                    <!--  Main Layer  -->
+                    <Border Background="#fff" CornerRadius="7">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="30"
+                                Direction="-150"
+                                Opacity="0.1"
+                                ShadowDepth="5" />
+                        </Border.Effect>
+
+                        <Grid Margin="20,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  Form Title  -->
+                            <StackPanel Margin="20,20,0,0" Orientation="Horizontal">
+                                <Grid Width="50" Height="50">
+                                    <Border
+                                        BorderBrush="#efefef"
+                                        BorderThickness="1.5"
+                                        CornerRadius="50" />
+                                    <Icon:PackIconMaterial
+                                        Width="40"
+                                        Height="40"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="#c2ddfc"
+                                        Kind="FaceManProfile" />
+                                </Grid>
+                                <TextBlock
+                                    Margin="15,0,0,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Foreground="#374655"
+                                    Text="Personal Informations" />
+                            </StackPanel>
+
+                            <Separator
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Height="0.7"
+                                Margin="-20,20"
+                                Background="#e1e6eb" />
+
+                            <!--  inputs  -->
+                            <!--<UC:PersonalInformationUserControl Grid.Row="2" Grid.ColumnSpan="2" />-->
+                            <ContentControl
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                Content="{Binding CurrentView}" />
+                            <!--  Form Bottom Background  -->
+                            <Border
+                                Grid.Row="7"
+                                Grid.ColumnSpan="2"
+                                Height="80"
+                                Margin="-20,40,-20,0"
+                                Background="#f6f6f6"
+                                CornerRadius="0 0 10 10" />
+
+                            <!--  Main button  -->
+                            <Button
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                Margin="0,40,20,0"
+                                HorizontalAlignment="Right"
+                                Command="{Binding NextBtnCommand}"
+                                Content="{Binding NextBtnContent}"
+                                Style="{StaticResource mainButton}">
+                                <Button.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="10"
+                                        Direction="-120"
+                                        Opacity="0.3"
+                                        ShadowDepth="5"
+                                        Color="#4880ff" />
+                                </Button.Effect>
+                            </Button>
+
+                            <!--  Secondary button  -->
+                            <Button
+                                Grid.Row="8"
+                                Width="150"
+                                Margin="20,40,0,0"
+                                HorizontalAlignment="Left"
+                                Command="{Binding BackBtnCommand}"
+                                Content="Back"
+                                Style="{StaticResource SecondaryButton}" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+
+    </Border>
+</Window>

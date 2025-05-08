@@ -1,0 +1,81 @@
+﻿<UserControl
+    x:Class="EEMS.UI.UserControls.CardUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="card"
+    Foreground="#fff">
+
+    <Border
+        Margin="30,4"
+        Background="#598bff"
+        BorderThickness="1"
+        CornerRadius="7">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="#fff" />
+                    </Trigger>
+
+                    <DataTrigger Binding="{Binding ElementName=card, Path=IsActive}" Value="True">
+                        <Setter Property="BorderBrush" Value="#fff" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="135" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+
+            <Border
+                Width="45"
+                Height="45"
+                Margin="20,10"
+                Background="#c2ddfc"
+                CornerRadius="40" />
+
+            <Icon:PackIconMaterial
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#598bff"
+                Kind="AccountOutline" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock FontSize="14" Text="{Binding ElementName=card, Path=Title}" />
+                <TextBlock
+                    FontSize="11"
+                    FontWeight="Light"
+                    Text="{Binding ElementName=card, Path=Time}" />
+            </StackPanel>
+
+            <Border
+                Grid.Column="2"
+                Width="25"
+                Height="25"
+                Margin="0,0,20,0"
+                VerticalAlignment="Center"
+                Background="#4880ff"
+                CornerRadius="40" />
+            <TextBlock
+                Grid.Column="2"
+                Margin="0,0,20,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="10"
+                Foreground="#dbe9fa"
+                Text="{Binding ElementName=card, Path=Number}" />
+        </Grid>
+    </Border>
+</UserControl>

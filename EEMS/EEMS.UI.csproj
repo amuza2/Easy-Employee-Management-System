@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\user.png" />
+    <None Remove="UserControls\Email campaign-rafiki.png" />
+    <None Remove="UserControls\email.png" />
+    <None Remove="UserControls\padlock.png" />
+    <None Remove="UserControls\password.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -23,7 +34,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EEMS.BusinessLogic\EEMS.BusinessLogic.csproj" />
     <ProjectReference Include="..\EEMS.DataAccess\EEMS.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Department\" />
+    <Folder Include="Views\JobNature\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

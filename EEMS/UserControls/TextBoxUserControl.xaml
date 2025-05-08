@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="EEMS.UI.UserControls.TextBoxUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EEMS.UI.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="myTextbox"
+    d:DesignWidth="200"
+    Background="#fff"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Reusable Error Template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder />
+                <TextBlock
+                    Margin="20,-10,0,0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <StackPanel Margin="20,10">
+        <TextBlock
+            Margin="0,0,0,8"
+            FontSize="13"
+            Foreground="#97a5b4"
+            Text="{Binding ElementName=myTextbox, Path=Caption}" />
+
+        <Grid>
+            <TextBlock
+                Margin="13,0"
+                VerticalAlignment="Center"
+                Panel.ZIndex="1"
+                FontSize="14"
+                Foreground="#868686"
+                IsHitTestVisible="False"
+                Text="{Binding ElementName=myTextbox, Path=Hint}"
+                Visibility="{Binding ElementName=textBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+
+            <TextBox
+                x:Name="textBox"
+                Text="{Binding Text, ValidatesOnNotifyDataErrors=True, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" />
+        </Grid>
+    </StackPanel>
+
+
+</UserControl>

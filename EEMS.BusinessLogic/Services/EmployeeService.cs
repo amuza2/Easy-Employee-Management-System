@@ -3,51 +3,74 @@ using EEMS.DataAccess;
 using EEMS.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EEMS.BusinessLogic.Services
+namespace EEMS.BusinessLogic.Services;
+
+public class EmployeeService : IEmployeeService
 {
-    public class EmployeeService : IEmployeeService
+    private readonly IDbContextFactory<EEMSDbContext> _contextFactory;
+
+    public EmployeeService(IDbContextFactory<EEMSDbContext> contextFactory)
     {
-        private readonly EEMSDbContext _context;
+        _contextFactory = contextFactory;
+    }
 
-        public EmployeeService(EEMSDbContext context)
+    public async Task<IEnumerable<Employee>> GetAsync()
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Employee>> GetEmployeesByDepartmentId(int departmentId)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .Where(e => e.DepartmentId == departmentId)
+            .ToListAsync();
+    }
+
+    public async Task<Employee> GetAsync(int id)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        return await context.Employees
+            .Include(a => a.Absences)
+            .Include(b => b.JobNature)
+            .Include(c => c.Department)
+            .FirstAsync(e => e.Id == id);
+    }
+
+    public async Task<int> AddAsync(Employee employee)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        var added = context.Employees.Add(employee);
+        await context.SaveChangesAsync();
+
+        return added.Entity.Id;
+    }
+
+    public async Task UpdateAsync(Employee employee)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        context.Employees.Update(employee);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        await using var context = _contextFactory.CreateDbContext();
+        var emp = await GetAsync(id);
+        if (emp != null)
         {
-            _context = context;
+            context.Employees.Remove(emp);
+            await context.SaveChangesAsync();
+            return true;
         }
-
-        public async Task<IEnumerable<Employee>> GetAsync()
-        {
-            return await _context.jobNature.ToListAsync();
-        }
-
-        public async Task<Employee> GetAsync(int id)
-        {
-            return await _context.jobNature.FindAsync(id);
-        }
-
-        public async Task<int> AddAsync(Employee employee)
-        {
-            var added = _context.jobNature.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return added.Entity.Id;
-        }
-
-        public async Task UpdateAsync(Employee employee)
-        {
-            _context.jobNature.Update(employee);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var emp = await GetAsync(id);
-            if (emp != null)
-            {
-                _context.jobNature.Remove(emp);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        // 
+        return false;
     }
 }
