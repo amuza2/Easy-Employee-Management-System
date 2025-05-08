@@ -216,15 +216,4 @@ public partial class EmployeeViewModel : ObservableObject
             employeeAbsenceWindow.ShowDialog();
         }
     }
-
-    [RelayCommand]
-    private async void GetAllAbsence()
-    {
-        Employees.Clear();
-        var absences = await _employeeManagementService.AbsenceService.GetAsync();
-        foreach (var employee in absences)
-        {
-            Employees.Add(employee.Employee);
-        }
-    }
 }

@@ -631,8 +631,8 @@
 
                             <Button
                                 Margin="20,0"
-                                Command="{Binding RequestAbsenceCommand}"
-                                Content="Request Absence"
+                                Command="{Binding AddAbsenceCommand}"
+                                Content="Add Absence"
                                 Style="{StaticResource SecondaryButton}">
                                 <Button.Effect>
                                     <DropShadowEffect

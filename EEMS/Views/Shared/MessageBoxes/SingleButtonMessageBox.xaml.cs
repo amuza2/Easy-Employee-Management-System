@@ -37,7 +37,7 @@ public partial class SingleButtonMessageBox : Window
 
     private void Border_MouseDown(object sender, MouseButtonEventArgs e)
     {
-
+        if (e.ChangedButton == MouseButton.Left) this.DragMove();
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
