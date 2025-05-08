@@ -435,12 +435,12 @@
                                             Style="{StaticResource CardHeaderText}"
                                             Text="Absence History" />
 
-                                        <ComboBox
-                                            Grid.Column="1"
-                                            Width="120"
-                                            ItemsSource="{Binding YearFilterOptions}"
-                                            SelectedIndex="0"
-                                            SelectedItem="{Binding SelectedYearFilter}" />
+                                        <!--<ComboBox
+                                        Grid.Column="1"
+                                        Width="120"
+                                        ItemsSource="{Binding YearFilterOptions}"
+                                        SelectedIndex="0"
+                                        SelectedItem="{Binding SelectedYearFilter}" />-->
                                     </Grid>
 
                                     <!--  DataGrid for Absences  -->
@@ -545,16 +545,16 @@
                                             Text="{Binding SelectedEmployee.RecruitmentDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
 
                                         <!--  Row 4  -->
+                                        <!--<TextBlock
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        FontWeight="Medium"
+                                        Text="Status:" />
                                         <TextBlock
-                                            Grid.Row="3"
-                                            Grid.Column="0"
-                                            FontWeight="Medium"
-                                            Text="Status:" />
-                                        <TextBlock
-                                            Grid.Row="3"
-                                            Grid.Column="1"
-                                            Margin="0,0,0,10"
-                                            Text="{Binding SelectedEmployee.IsActive}" />
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Margin="0,0,0,10"
+                                        Text="{Binding SelectedEmployee.IsActive}" />-->
 
                                     </Grid>
 
@@ -608,7 +608,6 @@
 
                             <Button
                                 Command="{Binding ShowEmployeeSearchWindowCommand}"
-                                FontWeight="SemiBold"
                                 Foreground="White"
                                 Style="{StaticResource mainButton}">
                                 <Button.Effect>
@@ -625,7 +624,7 @@
                                         Height="20"
                                         Margin="0,1,8,0"
                                         VerticalAlignment="Center"
-                                        Kind="SearchWeb" />
+                                        Kind="Magnify" />
                                     <TextBlock Text="Search Employee" />
                                 </StackPanel>
                             </Button>

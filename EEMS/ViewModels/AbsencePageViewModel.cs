@@ -44,11 +44,11 @@ public partial class AbsencePageViewModel : ObservableObject
     {
         _employeeManagementService = employeeManagementService;
         Absences = new ObservableCollection<DataAccess.Models.Absence>();
-        LoadAbsences();
+        _ = LoadAbsences();
 
     }
 
-    private async void LoadAbsences()
+    private async Task LoadAbsences()
     {
         var absences = await _employeeManagementService.AbsenceService.GetAsync();
         if (absences != null)
@@ -63,7 +63,7 @@ public partial class AbsencePageViewModel : ObservableObject
     partial void OnSelectedDateChanged(DateTime value)
     {
         ShownDate = value.ToString("dd/MM/yyyy");
-        LoadDataGridWithSelectedDate(value);
+        _ = LoadDataGridWithSelectedDate(value);
     }
 
     private async Task LoadDataGridWithSelectedDate(DateTime date)

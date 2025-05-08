@@ -209,18 +209,15 @@ public partial class AddAndEditCondidateViewModel : ObservableValidator
                 $"Condidate added successfully.",
                 "Success",
                 "OK");
-
         }
         else
         {
             // update condidate
         }
 
-
         // close the window
         Window?.Close();
         // update the data grid
         UpdateEmployeeDataGrid?.Invoke();
     }
-
 }

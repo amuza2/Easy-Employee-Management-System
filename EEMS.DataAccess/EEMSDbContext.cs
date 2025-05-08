@@ -33,7 +33,7 @@ public class EEMSDbContext : DbContext
         {
             optionsBuilder.UseSqlServer(ConfigHelper.GetConnectionString());
         }
-        optionsBuilder.UseLazyLoadingProxies();
+        //optionsBuilder.UseLazyLoadingProxies();
         base.OnConfiguring(optionsBuilder);
     }
 

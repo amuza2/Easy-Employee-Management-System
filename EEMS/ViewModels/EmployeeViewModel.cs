@@ -27,23 +27,16 @@ public partial class EmployeeViewModel : ObservableObject
     public ObservableCollection<JobNatureEnum> JobNatureItems { get; set; }
 
     [ObservableProperty] private Employee? _selectedEmployee;
-    //[ObservableProperty] private bool _isEditing;
     [ObservableProperty] private Department _selectedDepartment;
     [ObservableProperty] private string _searchEmployee;
     [ObservableProperty] private JobNatureEnum _selectedJobNature;
 
-    //public bool IsNotEditing => !IsEditing;
+    
 
     private bool CanPerformUserAction(object obj)
     {
         return SelectedEmployee != null;
     }
-
-    //partial void OnIsEditingChanged(bool value)
-    //{
-    //    OnPropertyChanged(nameof(IsNotEditing));
-    //    ViewEmployeeCommand.NotifyCanExecuteChanged();
-    //}
 
     //  raise the CanExecuteChanged event manually when SelectedEmployee changes, so the UI can re-evaluate which buttons should be enabled.
     partial void OnSelectedEmployeeChanged(Employee? value)
