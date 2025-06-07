@@ -42,43 +42,7 @@
                 FontSize="17"
                 Text="Email"
                 TextWrapping="Wrap" />
-            <TextBox
-                Width="278"
-                Height="47"
-                Margin="110,548,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                BorderBrush="#FFC8C8C8"
-                FontSize="17"
-                Foreground="DimGray"
-                Text="Enter Verficiation code"
-                TextWrapping="Wrap" />
-            <Button
-                Width="230"
-                Height="43"
-                Margin="0,616,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="#4880ff"
-                BorderBrush="#FF4880FF"
-                Content="Verfiy"
-                FontSize="16"
-                FontWeight="DemiBold"
-                Foreground="White"
-                RenderTransformOrigin="-0.519,-0.763" />
-            <Button
-                Width="186"
-                Height="23"
-                Margin="0,674,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Content="Sign in"
-                FontSize="16"
-                FontWeight="DemiBold"
-                Foreground="DimGray"
-                RenderTransformOrigin="-0.519,-0.763" />
+
             <Button
                 Width="230"
                 Height="43"

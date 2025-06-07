@@ -1,5 +1,5 @@
 ﻿using EEMS.BusinessLogic.Interfaces;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 
 namespace EEMS.BusinessLogic.Services;
 

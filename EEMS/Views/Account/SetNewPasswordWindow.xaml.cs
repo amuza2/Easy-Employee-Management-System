@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EEMS.UI.Views.Account
 {
     /// <summary>
-    /// Interaction logic for Newpassword.xaml
+    /// Interaction logic for SetNewPasswordWindow.xaml
     /// </summary>
-    public partial class Newpassword : UserControl
+    public partial class SetNewPasswordWindow : Window
     {
-        public Newpassword()
+        public SetNewPasswordWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

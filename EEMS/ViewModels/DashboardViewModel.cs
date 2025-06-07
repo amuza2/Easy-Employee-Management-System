@@ -2,19 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.Views.Absences;
 using EEMS.UI.Views.Dashboard;
 using EEMS.UI.Views.Employees;
 using EEMS.UI.Views.Shared;
 using EEMS.UI.Views.Shared.DocumentPrinting;
 using EEMS.Utilities.Enums;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EEMS.UI.ViewModels;
 

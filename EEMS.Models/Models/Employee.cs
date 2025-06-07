@@ -1,7 +1,7 @@
 ﻿using EEMS.Utilities.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace EEMS.DataAccess.Models;
+namespace EEMS.Models.Models;
 
 public class Employee
 {

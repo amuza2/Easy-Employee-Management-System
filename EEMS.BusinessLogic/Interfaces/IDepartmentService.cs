@@ -1,4 +1,4 @@
-﻿using EEMS.DataAccess.Models;
+﻿using EEMS.Models.Models;
 
 namespace EEMS.BusinessLogic.Interfaces
 {

@@ -1,7 +1,6 @@
 ﻿using EEMS.Utilities.Enums;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace EEMS.DataAccess;
 
@@ -10,7 +9,7 @@ public class EEMSDbContext : DbContext
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<Absence> Absences { get; set; }
-    public DbSet<Account> Accounts { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<Condidate> Condidates { get; set; }
     public DbSet<OpenedJob> Openedjobs { get; set; }
     //public DbSet<AbsenceType> AbsenceTypes { get; set; }
@@ -33,10 +32,8 @@ public class EEMSDbContext : DbContext
         {
             optionsBuilder.UseSqlServer(ConfigHelper.GetConnectionString());
         }
-        //optionsBuilder.UseLazyLoadingProxies();
         base.OnConfiguring(optionsBuilder);
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -55,7 +55,7 @@
                         Click="btnMinimize_Click"
                         FontSize="20"
                         Style="{StaticResource topButton}">
-                        <Icon:PackIconMaterial Kind="Minus" />
+                        <Icon:PackIconMaterial Kind="WindowMinimize" />
                     </Button>
 
                     <Button
@@ -63,9 +63,10 @@
                         Margin="0,0,0,0"
                         VerticalAlignment="Top"
                         Click="btnExit_Click"
-                        Content="X"
                         FontSize="20"
-                        Style="{StaticResource topButton}" />
+                        Style="{StaticResource topButton}">
+                        <Icon:PackIconMaterial Kind="WindowClose" />
+                    </Button>
                 </StackPanel>
 
                 <Border

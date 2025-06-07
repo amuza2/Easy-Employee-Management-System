@@ -1,4 +1,4 @@
-﻿using EEMS.DataAccess.Models;
+﻿using EEMS.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

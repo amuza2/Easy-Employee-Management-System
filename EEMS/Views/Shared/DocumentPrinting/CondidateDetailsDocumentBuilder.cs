@@ -1,4 +1,4 @@
-﻿using model = EEMS.DataAccess.Models;
+﻿using EEMS.Models.Models;
 using EEMS.Utilities.Enums;
 using System.Windows;
 using System.Windows.Documents;
@@ -8,9 +8,9 @@ namespace EEMS.UI.Views.Shared.DocumentPrinting;
 
 public class CondidateDetailsDocumentBuilder : IPrintableDocumentBuilder
 {
-    private readonly model.Condidate _condidate;
+    private readonly Condidate _condidate;
 
-    public CondidateDetailsDocumentBuilder(model.Condidate condidate)
+    public CondidateDetailsDocumentBuilder(Condidate condidate)
     {
         _condidate = condidate;
     }

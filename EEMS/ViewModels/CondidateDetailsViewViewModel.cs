@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.Views.Shared.DocumentPrinting;
 using EEMS.Utilities.Enums;
 
