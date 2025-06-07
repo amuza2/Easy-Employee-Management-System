@@ -1,4 +1,4 @@
-﻿//namespace EEMS.DataAccess.Models;
+﻿//namespace EEMS.Models.Models;
 
 //public class EmployeeDrivingLicense
 //{

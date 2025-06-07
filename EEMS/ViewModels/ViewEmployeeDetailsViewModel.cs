@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.Utilities.Enums;
 using System.Windows.Controls;
 using System.Windows.Documents;

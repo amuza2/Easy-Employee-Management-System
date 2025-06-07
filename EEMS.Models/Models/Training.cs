@@ -1,5 +1,4 @@
-﻿//namespace EEMS.DataAccess.Models;
-
+﻿//namespace EEMS.Models.Models;
 //public class Training
 //{
 //    public int Id { get; set; }

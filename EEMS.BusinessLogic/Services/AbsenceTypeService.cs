@@ -1,6 +1,6 @@
 ﻿//using EEMS.BusinessLogic.Interfaces;
-//using EEMS.DataAccess;
-//using EEMS.DataAccess.Models;
+//using EEMS.Models;
+//using EEMS.Models.Models;
 //using Microsoft.EntityFrameworkCore;
 
 //namespace EEMS.BusinessLogic.Services

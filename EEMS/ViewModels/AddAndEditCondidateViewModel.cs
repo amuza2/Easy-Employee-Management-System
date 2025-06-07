@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.Views.Shared.MessageBoxes;
 using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;

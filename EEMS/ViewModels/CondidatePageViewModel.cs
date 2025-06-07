@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
 using EEMS.BusinessLogic.Services;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.Enums;
 using EEMS.UI.Views.Condidates;
 using EEMS.UI.Views.Shared.DocumentPrinting;

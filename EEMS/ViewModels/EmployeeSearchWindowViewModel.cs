@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.Utilities.Enums;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

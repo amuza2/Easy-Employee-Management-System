@@ -1,4 +1,4 @@
-﻿using model = EEMS.DataAccess.Models;
+﻿using EEMS.Models.Models;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Employees;
 using EEMS.Utilities.Enums;
@@ -16,10 +16,10 @@ public class DocumentBuilderFactory : IDocumentBuilderFactory
     {
         return documentType switch
         {
-            DocumentType.CondidateDetails => new CondidateDetailsDocumentBuilder((model.Condidate)data),
-            DocumentType.EmployeeDetails => new EmployeeDetailsDocumentBuilder((model.Employee)data),
-            DocumentType.WorkCertificate => new EmployeeJobCertificateDocumentBuilder((model.Employee)data),
-            DocumentType.VacationCertificate => new VacationCertificateDocumentBuilder((model.Employee)data),
+            DocumentType.CondidateDetails => new CondidateDetailsDocumentBuilder((Condidate)data),
+            DocumentType.EmployeeDetails => new EmployeeDetailsDocumentBuilder((Employee)data),
+            DocumentType.WorkCertificate => new EmployeeJobCertificateDocumentBuilder((Employee)data),
+            DocumentType.VacationCertificate => new VacationCertificateDocumentBuilder((Employee)data),
             _ => throw new NotSupportedException("Document type not supported")
         };
     }

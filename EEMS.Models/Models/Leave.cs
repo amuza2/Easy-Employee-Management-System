@@ -4,7 +4,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace EEMS.DataAccess.Models
+//namespace EEMS.Models.Models;
 //{
 //    public class Leave
 //    {

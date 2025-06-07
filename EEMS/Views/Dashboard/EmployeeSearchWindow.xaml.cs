@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.ViewModels;
 using EEMS.UI.Views.Shared;
 using System.Windows;

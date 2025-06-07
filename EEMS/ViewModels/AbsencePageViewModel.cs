@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EEMS.BusinessLogic.Interfaces;
-using EEMS.DataAccess.Models;
+using EEMS.Models.Models;
 using EEMS.UI.Views.Absences;
 using System.Collections.ObjectModel;
 
@@ -10,7 +10,7 @@ namespace EEMS.UI.ViewModels;
 public partial class AbsencePageViewModel : ObservableObject
 {
     private readonly IEmployeeManagementService _employeeManagementService;
-    public ObservableCollection<DataAccess.Models.Absence> Absences { get; set; }
+    public ObservableCollection<Absence> Absences { get; set; }
 
     [ObservableProperty] private Absence _selectedAbsence;
     [ObservableProperty] private string _shownDate = DateTime.Today.ToString("dd/MM/yyyy");
@@ -43,7 +43,7 @@ public partial class AbsencePageViewModel : ObservableObject
     public AbsencePageViewModel(IEmployeeManagementService employeeManagementService)
     {
         _employeeManagementService = employeeManagementService;
-        Absences = new ObservableCollection<DataAccess.Models.Absence>();
+        Absences = new ObservableCollection<Absence>();
         _ = LoadAbsences();
 
     }
